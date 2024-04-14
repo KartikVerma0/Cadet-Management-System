@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Michroma&display=swap');
+
+:root {
+    --light-blue: #00AEEF;
+    --dark-blue: #2E3092;
+    --red: #EF1C24;
+    --yellow: #FFCB04;
+}

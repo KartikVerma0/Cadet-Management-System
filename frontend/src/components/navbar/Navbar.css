@@ -1,0 +1,52 @@
+@media screen and (max-width:950px) {
+    .Navbar {
+        flex-direction: column;
+    }
+
+    /* .Navbar .leftSection {} */
+}
+
+.Navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'DM Sans', 'sans serif';
+    margin: 1rem 3rem;
+}
+
+.Navbar .leftSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.Navbar .NavbarLogo {
+    width: 3rem;
+}
+
+.Navbar .NavbarTitle {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.Navbar .NavbarTitle :nth-child(1) {
+    color: var(--red);
+}
+
+.Navbar .NavbarTitle :nth-child(2) {
+    color: var(--dark-blue);
+}
+
+.Navbar .NavbarTitle :nth-child(3) {
+    color: var(--light-blue);
+}
+
+.Navbar .NavLink {
+    background-color: var(--red);
+    padding: 0.5rem 1.5rem;
+    color: white;
+    border-radius: 2rem;
+    text-decoration: none;
+    font-weight: 500;
+}

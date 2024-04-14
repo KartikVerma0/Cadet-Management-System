@@ -1,0 +1,25 @@
+body {
+    background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%), url("src/assets/bgImage.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    min-height: 98vh;
+}
+
+
+
+.IndexPage .creditSection {
+    font-family: 'DM Sans', 'sans serif';
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    bottom: 0rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media screen and (max-width:600px) {
+    .IndexPage .creditSection {
+        font-size: 0.75rem;
+    }
+}
