@@ -6,8 +6,10 @@ export default function Navbar({ loginType }) {
     return (
         <nav className="Navbar">
             <div className="leftSection">
-                <img src="src/assets/nccLogo.png" alt="ncc logo" className="NavbarLogo" />
-                <p className="NavbarTitle"><span>CADET</span> <span>MANAGEMENT</span> <span>SYSTEM</span></p>
+                <Link to="/">
+                    <img src="/src/assets/nccLogo.png" alt="ncc logo" className="NavbarLogo" />
+                    <p className="NavbarTitle"><span>CADET</span> <span>MANAGEMENT</span> <span>SYSTEM</span></p>
+                </Link>
 
             </div>
 
