@@ -2,8 +2,6 @@
     .Navbar {
         flex-direction: column;
     }
-
-    /* .Navbar .leftSection {} */
 }
 
 .Navbar {
@@ -14,11 +12,12 @@
     margin: 1rem 3rem;
 }
 
-.Navbar .leftSection {
+.Navbar .leftSection a {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 2rem;
+    text-decoration: none;
 }
 
 .Navbar .NavbarLogo {
