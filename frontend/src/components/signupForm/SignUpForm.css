@@ -1,0 +1,74 @@
+.SignUpForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
+}
+
+@media screen and (max-width:700px) {
+    .SignUpForm {
+        margin-top: 2rem;
+    }
+}
+
+.SignUpForm .signUpFormTitle {
+    font-family: 'Michroma', 'sans serif';
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+
+.SignUpForm form {
+    background-color: #FFDDDE;
+    border-radius: 10px;
+    padding: 2rem;
+    font-family: 'DM Sans', 'sans serif';
+    width: 25%;
+}
+
+.SignUpForm form div {
+    width: 100%;
+    overflow: clip;
+}
+
+.SignUpForm form label {
+    display: block;
+    color: #7E0000;
+    font-weight: 500;
+}
+
+.SignUpForm form input {
+    border: 0;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    display: block;
+}
+
+.SignUpForm form textarea {
+    border: 0;
+    border-radius: 5px;
+    padding-block: 0.5rem;
+    padding-inline: 0 0.9rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    display: block;
+}
+
+.SignUpForm form button {
+    background-color: var(--red);
+    border: 0;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.SignUpForm form .equalPasswordMessage {
+    color: var(--red);
+}
