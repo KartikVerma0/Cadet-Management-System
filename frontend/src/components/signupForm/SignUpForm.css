@@ -39,6 +39,10 @@
     font-weight: 500;
 }
 
+.SignUpForm form .asterisk {
+    color: var(--red);
+}
+
 .SignUpForm form input {
     border: 0;
     border-radius: 5px;
@@ -69,6 +73,12 @@
     cursor: pointer;
 }
 
-.SignUpForm form .equalPasswordMessage {
+.SignUpForm form .errorMessage {
     color: var(--red);
+    margin-bottom: 0;
+}
+
+.SignUpForm form .successMessage {
+    color: rgb(38, 168, 64);
+    margin-bottom: 0;
 }
