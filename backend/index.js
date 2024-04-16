@@ -11,6 +11,9 @@ dotenv.config();
 
 import authRouter from './routes/authRoutes.js'
 
+import cors from 'cors'
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -29,11 +32,13 @@ const connectToDatabase = async () => {
 }
 connectToDatabase()
 
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", process.env.FRONTEND_BASE_URL);
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next()
-})
+app.use(cors())
+
+// app.use((req, res, next) => {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next()
+// })
 
 
 app.use("/", authRouter)
