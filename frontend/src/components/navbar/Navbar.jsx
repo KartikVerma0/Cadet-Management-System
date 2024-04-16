@@ -7,7 +7,7 @@ export default function Navbar({ loginType }) {
         <nav className="Navbar">
             <div className="leftSection">
                 <Link to="/">
-                    <img src="/src/assets/nccLogo.png" alt="ncc logo" className="NavbarLogo" />
+                    <img src="/nccLogo.png" alt="ncc logo" className="NavbarLogo" />
                     <p className="NavbarTitle"><span>CADET</span> <span>MANAGEMENT</span> <span>SYSTEM</span></p>
                 </Link>
 
