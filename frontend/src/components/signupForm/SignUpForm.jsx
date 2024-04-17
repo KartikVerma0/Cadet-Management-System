@@ -90,43 +90,6 @@ export default function SignUpForm({ role }) {
                     {faultyInput === "name" && <p className='errorMessage'>{inputError}</p>}
                 </div>
 
-                {role !== "ANO_CTO" &&
-                    <div>
-                        <label htmlFor="nationality">Nationality <span className='asterisk'>*</span></label>
-                        <input type="text" id='nationality' {...register("nationality")} />
-                        {faultyInput === "nationality" && <p className='errorMessage'>{inputError}</p>}
-                    </div>
-                }
-                <div>
-                    <label htmlFor="dob">Date of Birth <span className='asterisk'>*</span></label>
-                    <input type="date" id='dob' {...register("dob")} />
-                    {faultyInput === "dob" && <p className='errorMessage'>{inputError}</p>}
-                </div>
-
-                {role !== "ANO_CTO" &&
-                    <div>
-                        <label htmlFor="fatherName">Father&apos;s / Guardian&apos;s Name <span className='asterisk'>*</span></label>
-                        <input type="text" id='fatherName' {...register("fatherName")} />
-                        {faultyInput === "fatherName" && <p className='errorMessage'>{inputError}</p>}
-                    </div>
-                }
-
-                {role !== "ANO_CTO" &&
-                    <div>
-                        <label htmlFor="motherName">Mother&apos;s Name <span className='asterisk'>*</span></label>
-                        <input type="text" id='motherName' {...register("motherName")} />
-                        {faultyInput === "motherName" && <p className='errorMessage'>{inputError}</p>}
-                    </div>
-                }
-
-                {role !== "ANO_CTO" &&
-                    <div>
-                        <label htmlFor="address">Residential Address <span className='asterisk'>*</span></label>
-                        <textarea name="" id="address" placeholder='(Landmark, State, Distt/Taluka, City/Vill, Pin Code)' cols="30" rows="8" {...register("address")}></textarea>
-                        {faultyInput === "address" && <p className='errorMessage'>{inputError}</p>}
-                    </div>
-                }
-
                 <div>
                     <label htmlFor="mobileNumber">Mobile Number <span className='asterisk'>*</span></label>
                     <input type="number" id='mobileNumber' {...register("mobileNumber")} />
@@ -137,91 +100,105 @@ export default function SignUpForm({ role }) {
                     <input type="email" id='email' {...register("email")} />
                     {faultyInput === "email" && <p className='errorMessage'>{inputError}</p>}
                 </div>
+                <div>
+                    <label htmlFor="dob">Date of Birth <span className='asterisk'>*</span></label>
+                    <input type="date" id='dob' {...register("dob")} />
+                    {faultyInput === "dob" && <p className='errorMessage'>{inputError}</p>}
+                </div>
 
                 {role !== "ANO_CTO" &&
-                    <div>
-                        <label htmlFor="bloodGroup">Blood Group <span className='asterisk'>*</span></label>
-                        <input type="text" id='bloodGroup' {...register("bloodGroup")} />
-                        {faultyInput === "bloodGroup" && <p className='errorMessage'>{inputError}</p>}
-                    </div>
-                }
+                    <>
+                        <div>
+                            <label htmlFor="nationality">Nationality <span className='asterisk'>*</span></label>
+                            <input type="text" id='nationality' {...register("nationality")} />
+                            {faultyInput === "nationality" && <p className='errorMessage'>{inputError}</p>}
+                        </div>
 
-                {role !== "ANO_CTO" &&
-                    <div>
-                        <label htmlFor="gender">Gender <span className='asterisk'>*</span></label>
-                        <input type="text" id='gender' {...register("gender")} />
-                        {faultyInput === "gender" && <p className='errorMessage'>{inputError}</p>}
-                    </div>
-                }
+                        <div>
+                            <label htmlFor="fatherName">Father&apos;s / Guardian&apos;s Name <span className='asterisk'>*</span></label>
+                            <input type="text" id='fatherName' {...register("fatherName")} />
+                            {faultyInput === "fatherName" && <p className='errorMessage'>{inputError}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="motherName">Mother&apos;s Name <span className='asterisk'>*</span></label>
+                            <input type="text" id='motherName' {...register("motherName")} />
+                            {faultyInput === "motherName" && <p className='errorMessage'>{inputError}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="address">Residential Address <span className='asterisk'>*</span></label>
+                            <textarea name="" id="address" placeholder='(Landmark, State, Distt/Taluka, City/Vill, Pin Code)' cols="30" rows="8" {...register("address")}></textarea>
+                            {faultyInput === "address" && <p className='errorMessage'>{inputError}</p>}
+                        </div>
 
-                {role !== "ANO_CTO" &&
-                    <div>
-                        <label htmlFor="nearestRailwayStation">Nearest Railway Station <span className='asterisk'>*</span></label>
-                        <input type="text" id='nearestRailwayStation' {...register("nearestRailwayStation")} />
-                        {faultyInput === "nearestRailwayStation" && <p className='errorMessage'>{inputError}</p>}
-                    </div>
-                }
-                {role !== "ANO_CTO" &&
-                    <div>
-                        <label htmlFor="nearestPoliceStation">Nearest Police Station <span className='asterisk'>*</span></label>
-                        <input type="text" id='nearestPoliceStation' {...register("nearestPoliceStation")} />
-                        {faultyInput === "nearestPoliceStation" && <p className='errorMessage'>{inputError}</p>}
-                    </div>
-                }
-                {role !== "ANO_CTO" &&
-                    <div>
-                        <label htmlFor="identificationMark1">Identification Mark (at least two) <span className='asterisk'>*</span></label>
-                        <input type="text" id='identificationMark1' {...register("identificationMark1")} />
-                        {faultyInput === "identificationMark1" && <p className='errorMessage'>{inputError}</p>}
-                        <input type="text" id='identificationMark2' {...register("identificationMark2")} />
-                        {faultyInput === "identificationMark2" && <p className='errorMessage'>{inputError}</p>}
-                    </div>
+                        <div>
+                            <label htmlFor="bloodGroup">Blood Group <span className='asterisk'>*</span></label>
+                            <input type="text" id='bloodGroup' {...register("bloodGroup")} />
+                            {faultyInput === "bloodGroup" && <p className='errorMessage'>{inputError}</p>}
+                        </div>
+
+                        <div>
+                            <label htmlFor="gender">Gender <span className='asterisk'>*</span></label>
+                            <input type="text" id='gender' {...register("gender")} />
+                            {faultyInput === "gender" && <p className='errorMessage'>{inputError}</p>}
+                        </div>
+
+                        <div>
+                            <label htmlFor="nearestRailwayStation">Nearest Railway Station <span className='asterisk'>*</span></label>
+                            <input type="text" id='nearestRailwayStation' {...register("nearestRailwayStation")} />
+                            {faultyInput === "nearestRailwayStation" && <p className='errorMessage'>{inputError}</p>}
+                        </div>
+
+                        <div>
+                            <label htmlFor="nearestPoliceStation">Nearest Police Station <span className='asterisk'>*</span></label>
+                            <input type="text" id='nearestPoliceStation' {...register("nearestPoliceStation")} />
+                            {faultyInput === "nearestPoliceStation" && <p className='errorMessage'>{inputError}</p>}
+                        </div>
+
+                        <div>
+                            <label htmlFor="identificationMark1">Identification Mark (at least two) <span className='asterisk'>*</span></label>
+                            <input type="text" id='identificationMark1' {...register("identificationMark1")} />
+                            {faultyInput === "identificationMark1" && <p className='errorMessage'>{inputError}</p>}
+                            <input type="text" id='identificationMark2' {...register("identificationMark2")} />
+                            {faultyInput === "identificationMark2" && <p className='errorMessage'>{inputError}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="department">Univeristy Department <span className='asterisk'>*</span></label>
+                            <input type="text" id='department' {...register("department")} />
+                            {faultyInput === "department" && <p className='errorMessage'>{inputError}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="rollNumber">University Roll Number <span className='asterisk'>*</span></label>
+                            <input type="text" id='rollNumber' {...register("rollNumber")} />
+                            {faultyInput === "rollNumber" && <p className='errorMessage'>{inputError}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="academicYear">Academic Year <span className='asterisk'>*</span></label>
+                            <input type="text" id='academicYear' {...register("academicYear")} />
+                            {faultyInput === "academicYear" && <p className='errorMessage'>{inputError}</p>}
+                        </div>
+                    </>
                 }
 
                 {role === "CADET" &&
-                    <div>
-                        <label htmlFor="nccUnit">NCC Unit <span className='asterisk'>*</span></label>
-                        <input type="text" id='nccUnit' {...register("nccUnit")} />
-                        {faultyInput === "nccUnit" && <p className='errorMessage'>{inputError}</p>}
-                    </div>
+                    <>
+                        <div>
+                            <label htmlFor="nccUnit">NCC Unit <span className='asterisk'>*</span></label>
+                            <input type="text" id='nccUnit' {...register("nccUnit")} />
+                            {faultyInput === "nccUnit" && <p className='errorMessage'>{inputError}</p>}
+                        </div>
+
+                        <div>
+                            <label htmlFor="enrollmentNumber">Enrollment Number <span className='asterisk'>*</span></label>
+                            <input type="text" id='enrollmentNumber' {...register("enrollmentNumber")} />
+                            {faultyInput === "enrollmentNumber" && <p className='errorMessage'>{inputError}</p>}
+                        </div>
+                    </>
                 }
                 <div>
                     <label htmlFor="nccWing">NCC Wing <span className='asterisk'>*</span></label>
                     <input type="text" id='nccWing' {...register("nccWing")} />
                     {faultyInput === "nccWing" && <p className='errorMessage'>{inputError}</p>}
                 </div>
-
-                {role === "CADET" &&
-                    <div>
-                        <label htmlFor="enrollmentNumber">Enrollment Number <span className='asterisk'>*</span></label>
-                        <input type="text" id='enrollmentNumber' {...register("enrollmentNumber")} />
-                        {faultyInput === "enrollmentNumber" && <p className='errorMessage'>{inputError}</p>}
-                    </div>
-                }
-
-
-
-                {role !== "ANO_CTO" &&
-                    <div>
-                        <label htmlFor="department">Univeristy Department <span className='asterisk'>*</span></label>
-                        <input type="text" id='department' {...register("department")} />
-                        {faultyInput === "department" && <p className='errorMessage'>{inputError}</p>}
-                    </div>
-                }
-                {role !== "ANO_CTO" &&
-                    <div>
-                        <label htmlFor="rollNumber">University Roll Number <span className='asterisk'>*</span></label>
-                        <input type="text" id='rollNumber' {...register("rollNumber")} />
-                        {faultyInput === "rollNumber" && <p className='errorMessage'>{inputError}</p>}
-                    </div>
-                }
-                {role !== "ANO_CTO" &&
-                    <div>
-                        <label htmlFor="academicYear">Academic Year <span className='asterisk'>*</span></label>
-                        <input type="text" id='academicYear' {...register("academicYear")} />
-                        {faultyInput === "academicYear" && <p className='errorMessage'>{inputError}</p>}
-                    </div>
-                }
                 <div>
                     <label htmlFor="password">Password <span className='asterisk'>*</span></label>
                     <input type="password" id='password' {...register("password")} onChange={passwordStateChangeHandler} />
@@ -233,7 +210,6 @@ export default function SignUpForm({ role }) {
                     {password !== cnfPassword && <p className='errorMessage'>Passwords do not Match!</p>}
                 </div>
                 <button type='submit'>SIGN UP</button>
-                {console.log(successLogin)}
                 {successLogin && <p className='successMessage'>Sign Up Successfull!</p>}
                 {errorLogin && <p className='errorMessage'>Sign Up Failed!</p>}
             </form>
