@@ -5,11 +5,6 @@
     margin-top: 4rem;
 }
 
-@media screen and (max-width:700px) {
-    .AuthForm {
-        margin-top: 2rem;
-    }
-}
 
 .AuthForm .authFormTitle {
     font-family: 'Michroma', 'sans serif';
@@ -19,6 +14,16 @@
     text-align: center;
 }
 
+@media screen and (max-width:700px) {
+    .AuthForm {
+        margin-top: 2rem;
+    }
+
+    .AuthForm .authFormTitle {
+        font-size: 2.5rem;
+    }
+}
+
 
 .AuthForm form {
     background-color: #FFDDDE;
@@ -26,6 +31,20 @@
     padding: 2rem;
     font-family: 'DM Sans', 'sans serif';
     width: 25%;
+    margin-bottom: 2rem;
+}
+
+/* configure form width for mobile */
+@media screen and (max-width:700px) {
+    .AuthForm form {
+        width: 35%;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .AuthForm form {
+        width: 45%;
+    }
 }
 
 .AuthForm form div {

@@ -5,12 +5,6 @@
     margin-top: 4rem;
 }
 
-@media screen and (max-width:700px) {
-    .SignUpForm {
-        margin-top: 2rem;
-    }
-}
-
 .SignUpForm .signUpFormTitle {
     font-family: 'Michroma', 'sans serif';
     font-size: 3rem;
@@ -19,6 +13,15 @@
     text-align: center;
 }
 
+@media screen and (max-width:700px) {
+    .SignUpForm {
+        margin-top: 2rem;
+    }
+
+    .SignUpForm .signUpFormTitle {
+        font-size: 2.5rem;
+    }
+}
 
 .SignUpForm form {
     background-color: #FFDDDE;
@@ -26,6 +29,20 @@
     padding: 2rem;
     font-family: 'DM Sans', 'sans serif';
     width: 25%;
+    margin-bottom: 2rem;
+}
+
+/* configure form width for mobile */
+@media screen and (max-width:700px) {
+    .SignUpForm form {
+        width: 35%;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .SignUpForm form {
+        width: 45%;
+    }
 }
 
 .SignUpForm form div {
