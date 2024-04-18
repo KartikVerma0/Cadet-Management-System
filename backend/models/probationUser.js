@@ -78,6 +78,14 @@ const probationUserSchema = new Schema({
     hashedPassword: {
         type: String,
         required: true
+    },
+    permissions: [
+        //add permissions
+    ],
+    accountApproved: {
+        type: Boolean,
+        required: true,
+        default: true
     }
 })
 

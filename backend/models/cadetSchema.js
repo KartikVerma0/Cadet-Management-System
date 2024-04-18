@@ -86,7 +86,16 @@ const cadetSchema = new Schema({
     hashedPassword: {
         type: String,
         required: true
+    },
+    permissions: [
+        //add permissions
+    ],
+    accountApproved: {
+        type: Boolean,
+        required: true,
+        default: false
     }
+    //add allowed boolean to denote if an account is approved or not
 })
 
 const Cadet = mongoose.model("Cadet", cadetSchema);
