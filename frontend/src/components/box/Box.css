@@ -1,0 +1,44 @@
+.Box {
+    padding: 2rem;
+    background-color: var(--dark-blue);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    color: white;
+    border-radius: 0.5rem;
+}
+
+.Box .actions {
+    margin-top: 1rem;
+}
+
+.Box .actions>* {
+    width: 1.75rem;
+    aspect-ratio: 1;
+    margin-right: 0.5rem;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 1.25rem;
+}
+
+
+.Box .actions {
+    display: flex;
+}
+
+.Box .actions button:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--green);
+}
+
+.Box .actions button:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--red);
+}
