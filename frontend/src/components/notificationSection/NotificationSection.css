@@ -1,0 +1,13 @@
+.NotificationSection {
+    font-family: 'DM Sans', 'sans serif';
+    font-weight: 500;
+    margin-inline: 3rem;
+    margin-bottom: 5rem;
+}
+
+.NotificationSection h2 {
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 0;
+}
