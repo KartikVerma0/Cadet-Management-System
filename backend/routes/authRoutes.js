@@ -1,9 +1,9 @@
 import express from 'express'
-const app = express()
 
 import ANO_CTO from '../models/ano_ctoSchema.js'
 import Cadet from '../models/cadetSchema.js'
 import Probationer from '../models/probationUser.js'
+import Attendance from '../models/attendance.js'
 
 import bcrypt from 'bcrypt'
 const router = express.Router();
@@ -43,6 +43,11 @@ router.post("/signup/:role", async (req, res) => {
             })
 
             await newCadet.save()
+            // make attendance document when account is approved
+            let newCadetAttendance = new Attendance({
+                role
+            })
+            await newCadetAttendance.save()
         } else if (role === 'PROBATION') {
             let newProbationer = new Probationer({
                 name, nationality, dob, fatherName, motherName, address,
@@ -53,6 +58,11 @@ router.post("/signup/:role", async (req, res) => {
             })
 
             await newProbationer.save()
+            // make attendance document when account is approved
+            let newProbationerAttendance = new Attendance({
+                role
+            })
+            await newProbationerAttendance.save()
         } else {
             return res.json({ success: false, message: "No matching roles found" })
         }
