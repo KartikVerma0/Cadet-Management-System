@@ -6,4 +6,25 @@
     --dark-blue: #2E3092;
     --red: #EF1C24;
     --yellow: #FFCB04;
+    --green: #41ad49;
+}
+
+.font-red {
+    color: var(--red);
+}
+
+.font-dark-blue {
+    color: var(--dark-blue);
+}
+
+.font-light-blue {
+    color: var(--light-blue);
+}
+
+.font-yellow {
+    color: var(--yellow);
+}
+
+.font-green {
+    color: var(--green);
 }
