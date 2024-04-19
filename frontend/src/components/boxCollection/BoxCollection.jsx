@@ -6,7 +6,7 @@ export default function BoxCollection({ boxes, section }) {
     return (
         <div className='BoxCollection'>
             {boxes.map((box) => (
-                <Box key={box.id} info={box} section={section} />
+                <Box key={box._id} info={box} section={section} />
             ))}
         </div>
     )
