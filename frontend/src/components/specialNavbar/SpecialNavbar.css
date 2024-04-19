@@ -12,13 +12,16 @@
     }
 }
 
-.SpecialNavbar a {
+.SpecialNavbar button {
     color: black;
     text-decoration: none;
     font-family: 'DM Sans', 'sans serif';
     font-weight: 500;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
 }
 
-.SpecialNavbar a:hover {
+.SpecialNavbar button:hover {
     text-decoration: underline;
 }
