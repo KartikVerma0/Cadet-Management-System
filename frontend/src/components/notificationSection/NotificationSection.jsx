@@ -21,7 +21,7 @@ export default function NotificationSection() {
             }
         }
         getData()
-    })
+    }, [])
     return (
         <div className='NotificationSection'>
             <h2>Notifications</h2>

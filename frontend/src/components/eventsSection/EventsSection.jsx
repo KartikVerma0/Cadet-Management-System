@@ -23,7 +23,7 @@ export default function EventsSection() {
             }
         }
         getData()
-    })
+    }, [])
 
     return (
         <div className='EventsSection'>

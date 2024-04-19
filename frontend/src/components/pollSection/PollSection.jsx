@@ -21,7 +21,7 @@ export default function PollSection() {
             }
         }
         getData()
-    })
+    }, [])
 
     return (
         <div className='PollSection'>
