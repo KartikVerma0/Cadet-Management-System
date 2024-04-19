@@ -86,6 +86,9 @@ const probationUserSchema = new Schema({
         type: Boolean,
         required: true,
         default: true
+    },
+    attendanceOverallDetailsId: {
+        type: Schema.Types.ObjectId,
     }
 })
 
