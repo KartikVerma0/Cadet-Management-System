@@ -1,0 +1,78 @@
+.Model {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.7);
+    inset: 0;
+    /* width: 100vw; */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'DM Sans', 'sans serif';
+}
+
+.Model>h3,
+form {
+    width: 50%;
+}
+
+.Model>button {
+    position: fixed;
+    right: 1rem;
+    top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: white;
+    border: 0;
+    cursor: pointer;
+}
+
+.Model h3 {
+    font-size: 2rem;
+    color: var(--yellow);
+    text-decoration: underline wavy rgb(107, 90, 24) 2px;
+
+}
+
+.Model form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.Model form label {
+    color: rgb(229, 204, 16);
+    font-weight: 500;
+    font-size: 1.05rem;
+}
+
+.Model form input,
+textarea {
+    border: 0;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    font-family: inherit;
+}
+
+.Model form button {
+    padding: 0.5rem;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: var(--yellow);
+    border: 0;
+    border-radius: 5px;
+    color: black;
+    cursor: pointer;
+}
+
+
+.Model .errorMessage {
+    color: var(--red);
+}
+
+.Model .successMessage {
+    color: var(--green);
+}
