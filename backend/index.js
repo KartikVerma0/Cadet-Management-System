@@ -10,6 +10,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import authRouter from './routes/authRoutes.js'
+import createRouter from './routes/createRouter.js'
 
 import cors from 'cors'
 
@@ -34,14 +35,9 @@ connectToDatabase()
 
 app.use(cors())
 
-// app.use((req, res, next) => {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     next()
-// })
-
 
 app.use("/", authRouter)
+app.use("/create", createRouter)
 
 
 app.listen(port, () => {
