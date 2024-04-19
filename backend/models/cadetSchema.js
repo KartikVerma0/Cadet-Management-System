@@ -94,6 +94,9 @@ const cadetSchema = new Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    attendanceOverallDetailsId: {
+        type: Schema.Types.ObjectId,
     }
     //add allowed boolean to denote if an account is approved or not
 })
