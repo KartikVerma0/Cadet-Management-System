@@ -6,13 +6,29 @@ import './Box.css'
 export default function Box({ info, section }) {
 
 
-    let { name, date, duration, note } = info;
+    let { name, date, duration, description, startTime } = info;
     return (
         <div className='Box'>
-            <span>{name}</span>
-            <span>{date}</span>
-            <span>{duration}</span>
-            <span>{note}</span>
+            {name && <div>
+                <span className='label'>{section.toUpperCase()} NAME: </span><span>{name}</span>
+            </div>
+            }
+            {date && <div>
+                <span className='label'>{section.toUpperCase()} DATE: </span><span>{date}</span>
+            </div>
+            }
+            {duration && <div>
+                <span className='label'>{section.toUpperCase()} DURATION: </span><span>{duration} minutes</span>
+            </div>
+            }
+            {startTime && <div>
+                <span className='label'>{section.toUpperCase()} START TIME: </span><span>{startTime}</span>
+            </div>
+            }
+            {description && <div>
+                <span className='label'>{section.toUpperCase()} DESCRIPTION: </span><span>{description}</span>
+            </div>
+            }
 
             {(section === "events" || section === "polls") &&
                 <div className='actions'>
