@@ -11,6 +11,7 @@ dotenv.config();
 
 import authRouter from './routes/authRoutes.js'
 import createRouter from './routes/createRouter.js'
+import dataRouter from './routes/dataRouter.js'
 
 import cors from 'cors'
 
@@ -37,6 +38,7 @@ app.use(cors())
 
 
 app.use("/", authRouter)
+app.use("/", dataRouter)
 app.use("/create", createRouter)
 
 
