@@ -67,6 +67,7 @@
     margin-bottom: 1rem;
     width: 100%;
     display: block;
+    font-family: inherit;
 }
 
 .SignUpForm form textarea {
@@ -77,7 +78,27 @@
     margin-bottom: 1rem;
     width: 100%;
     display: block;
+    font-family: inherit;
+    font-size: 0.8rem;
 }
+
+.SignUpForm form textarea::placeholder {
+    font-size: 0.85rem;
+    color: rgba(126, 0, 0, 0.25);
+}
+
+.SignUpForm form select {
+    border: 0;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+
+    margin-bottom: 1rem;
+    width: 100%;
+    font-family: inherit;
+    background-color: white;
+}
+
+
 
 .SignUpForm form button {
     background-color: var(--red);
