@@ -13,18 +13,20 @@ export default function Box({ info, section }) {
                 <span className='label'>{section.toUpperCase()} NAME: </span><span>{name}</span>
             </div>
             }
-            {date && <div>
-                <span className='label'>{section.toUpperCase()} DATE: </span><span>{date}</span>
+            <div className='sideways'>
+                {date && <div>
+                    <span className='label'>{section.toUpperCase()} DATE: </span><span>{date}</span>
+                </div>
+                }
+                {duration && <div>
+                    <span className='label'>{section.toUpperCase()} DURATION: </span><span>{duration} minutes</span>
+                </div>
+                }
+                {startTime && <div>
+                    <span className='label'>{section.toUpperCase()} START TIME: </span><span>{startTime}</span>
+                </div>
+                }
             </div>
-            }
-            {duration && <div>
-                <span className='label'>{section.toUpperCase()} DURATION: </span><span>{duration} minutes</span>
-            </div>
-            }
-            {startTime && <div>
-                <span className='label'>{section.toUpperCase()} START TIME: </span><span>{startTime}</span>
-            </div>
-            }
             {description && <div>
                 <span className='label'>{section.toUpperCase()} DESCRIPTION: </span><span>{description}</span>
             </div>
