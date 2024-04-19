@@ -68,6 +68,10 @@ const attendanceSchema = new Schema({
         required: true,
         enum: ['CADET', 'PROBATION']
     },
+    userId: {
+        type: Schema.Types.ObjectId,
+        required: true
+    },
     attendance: [
         {
             year: {
