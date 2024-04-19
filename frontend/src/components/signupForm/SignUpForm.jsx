@@ -8,16 +8,16 @@ import Joi from 'joi'
 
 const SignUpFormSchema = Joi.object({
     name: Joi.string().required(),
-    nationality: Joi.string(),
-    dob: Joi.date().required(),
-    fatherName: Joi.string(),
-    motherName: Joi.string(),
-    address: Joi.string(),
     mobileNumber: Joi.number()
         .required()
         .min(1000000000)
         .max(9999999999),
     email: Joi.string().email({ tlds: { allow: false } }).required(),
+    dob: Joi.date().required(),
+    nationality: Joi.string(),
+    fatherName: Joi.string(),
+    motherName: Joi.string(),
+    address: Joi.string(),
     bloodGroup: Joi.string(),
     gender: Joi.string()
         .pattern(/^M$|^F$/),
@@ -25,14 +25,14 @@ const SignUpFormSchema = Joi.object({
     nearestPoliceStation: Joi.string(),
     identificationMark1: Joi.string(),
     identificationMark2: Joi.string(),
-    nccUnit: Joi.string(),
-    nccWing: Joi.string().required(),
-    enrollmentNumber: Joi.string(),
     department: Joi.string(),
     rollNumber: Joi.number(),
     academicYear: Joi.number()
         .min(1)
         .max(4),
+    nccUnit: Joi.string(),
+    enrollmentNumber: Joi.string(),
+    nccWing: Joi.string().required(),
     password: Joi.string().required()
 })
 
@@ -72,10 +72,12 @@ export default function SignUpForm({ role }) {
                 setSuccessLogin(true)
                 setErrorLogin(false)
             } else {
+                console.error(response.data.message)
                 setErrorLogin(true)
                 setSuccessLogin(false)
             }
-        } catch {
+        } catch (e) {
+            console.log(e)
             setErrorLogin(true)
             setSuccessLogin(false)
         }
@@ -138,7 +140,11 @@ export default function SignUpForm({ role }) {
 
                         <div>
                             <label htmlFor="gender">Gender <span className='asterisk'>*</span></label>
-                            <input type="text" id='gender' {...register("gender")} />
+                            <select id='gender' {...register("gender")}>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                            </select>
+                            {/* <input type="text" id='gender' {...register("gender")} /> */}
                             {faultyInput === "gender" && <p className='errorMessage'>{inputError}</p>}
                         </div>
 
@@ -173,7 +179,13 @@ export default function SignUpForm({ role }) {
                         </div>
                         <div>
                             <label htmlFor="academicYear">Academic Year <span className='asterisk'>*</span></label>
-                            <input type="text" id='academicYear' {...register("academicYear")} />
+                            <select id='academicYear' {...register("academicYear")}>
+                                <option value="1">1st</option>
+                                <option value="2">2nd</option>
+                                <option value="3">3rd</option>
+                                <option value="4">4th</option>
+                            </select>
+                            {/* <input type="text" id='academicYear' {...register("academicYear")} /> */}
                             {faultyInput === "academicYear" && <p className='errorMessage'>{inputError}</p>}
                         </div>
                     </>
@@ -183,7 +195,11 @@ export default function SignUpForm({ role }) {
                     <>
                         <div>
                             <label htmlFor="nccUnit">NCC Unit <span className='asterisk'>*</span></label>
-                            <input type="text" id='nccUnit' {...register("nccUnit")} />
+                            <select id='nccUnit' {...register("nccUnit")}>
+                                <option value="1 pb nu ncc">1 PB NU NCC, NAYA NANGAL</option>
+                                <option value="5 pb ncc">5 PB NCC, PATIALA</option>
+                                <option value="3 pb air squadron ncc">3 PB AIR SQUADRON NCC, PATIALA</option>
+                            </select>
                             {faultyInput === "nccUnit" && <p className='errorMessage'>{inputError}</p>}
                         </div>
 
@@ -196,7 +212,12 @@ export default function SignUpForm({ role }) {
                 }
                 <div>
                     <label htmlFor="nccWing">NCC Wing <span className='asterisk'>*</span></label>
-                    <input type="text" id='nccWing' {...register("nccWing")} />
+                    <select id='nccWing' {...register("nccWing")}>
+                        <option value="Navy">Navy</option>
+                        <option value="Air">Air</option>
+                        <option value="Army">Army</option>
+                    </select>
+                    {/* <input type="text" id='nccWing' {...register("nccWing")} /> */}
                     {faultyInput === "nccWing" && <p className='errorMessage'>{inputError}</p>}
                 </div>
                 <div>
