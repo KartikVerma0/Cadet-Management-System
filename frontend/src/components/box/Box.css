@@ -9,6 +9,17 @@
     border-radius: 0.5rem;
 }
 
+.Box>div {
+    margin-bottom: 0.75rem;
+}
+
+.Box .label {
+    font-size: 1.05rem;
+    font-weight: 600;
+    display: block;
+    color: var(--light-blue);
+}
+
 .Box .actions {
     margin-top: 1rem;
 }
