@@ -86,5 +86,73 @@ router.post("/signup/:role", async (req, res) => {
     }
 })
 
+router.post('/login/:role', async (req, res) => {
+    const { email, password } = req.body
+    const { role } = req.params
+
+    if (role === 'ANO_CTO') {
+        let ano_cto = undefined
+        try {
+            ano_cto = await ANO_CTO.findOne({ email })
+            if (!ano_cto) {
+                return res.json({ success: false, message: "Username/Password combination incorrect" })
+            }
+        } catch (err) {
+            return res.json({ success: false, message: "Username/Password combination incorrect" })
+        }
+        try {
+            const isValidUser = await bcrypt.compare(password, ano_cto.hashedPassword)
+            if (!isValidUser) {
+                return res.json({ success: false, message: "Username/Password combination incorrect" })
+            }
+            return res.json({ success: true, message: "Successfully logged In" })
+        } catch (err) {
+            return res.json({ success: false, message: "Problem loggin In" })
+        }
+
+    } else if (role === 'CADET') {
+        let cadet = undefined
+        try {
+            cadet = await Cadet.findOne({ email })
+            if (!cadet) {
+                return res.json({ success: false, message: "Username/Password combination incorrect" })
+            }
+        } catch (err) {
+            return res.json({ success: false, message: "Username/Password combination incorrect" })
+        }
+        try {
+            const isValidUser = await bcrypt.compare(password, cadet.hashedPassword)
+            if (!isValidUser) {
+                return res.json({ success: false, message: "Username/Password combination incorrect" })
+            }
+            return res.json({ success: true, message: "Successfully logged In" })
+        } catch (err) {
+            return res.json({ success: false, message: "Problem loggin In" })
+        }
+
+    } else if (role === 'PROBATION') {
+        let probationer = undefined
+        try {
+            probationer = await Probationer.findOne({ email })
+            if (!probationer) {
+                return res.json({ success: false, message: "Username/Password combination incorrect" })
+            }
+        } catch (err) {
+            return res.json({ success: false, message: "Username/Password combination incorrect" })
+        }
+        try {
+            const isValidUser = await bcrypt.compare(password, probationer.hashedPassword)
+            if (!isValidUser) {
+                return res.json({ success: false, message: "Username/Password combination incorrect" })
+            }
+            return res.json({ success: true, message: "Successfully logged In" })
+        } catch (err) {
+            return res.json({ success: false, message: "Problem loggin In" })
+        }
+    }
+    return res.json({ success: false, message: "Problem loggin In" })
+
+})
+
 
 export default router;
