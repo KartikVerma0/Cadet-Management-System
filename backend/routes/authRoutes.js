@@ -6,6 +6,8 @@ import Probationer from '../models/probationUser.js'
 import Attendance from '../models/attendance.js'
 
 import bcrypt from 'bcrypt'
+
+import { generateAccessToken, generateRefreshToken, handleLogout } from '../utils/authToken.js'
 const router = express.Router();
 
 router.post("/signup/:role", async (req, res) => {
@@ -105,7 +107,23 @@ router.post('/login/:role', async (req, res) => {
             if (!isValidUser) {
                 return res.json({ success: false, message: "Username/Password combination incorrect" })
             }
-            return res.json({ success: true, message: "Successfully logged In" })
+            const accessToken = generateAccessToken(ano_cto)
+            const refreshToken = generateRefreshToken(ano_cto)
+            try {
+                ano_cto.refreshToken = refreshToken;
+                await ano_cto.save()
+            } catch (err) {
+                return res.json({ success: false, message: "Problem loggin In" })
+            }
+
+            res.cookie('jwt', refreshToken, {
+                httpOnly: true,
+                sameSite: 'None',
+                secure: true,
+                maxAge: 60 * 60 * 1000
+            })
+
+            return res.json({ success: true, message: "Successfully logged In", accessToken })
         } catch (err) {
             return res.json({ success: false, message: "Problem loggin In" })
         }
@@ -125,7 +143,24 @@ router.post('/login/:role', async (req, res) => {
             if (!isValidUser) {
                 return res.json({ success: false, message: "Username/Password combination incorrect" })
             }
-            return res.json({ success: true, message: "Successfully logged In" })
+            const accessToken = generateAccessToken(cadet)
+            const refreshToken = generateRefreshToken(cadet)
+
+            try {
+                cadet.refreshToken = refreshToken;
+                await cadet.save()
+            } catch (err) {
+                return res.json({ success: false, message: "Problem loggin In" })
+            }
+
+            res.cookie('jwt', refreshToken, {
+                httpOnly: true,
+                sameSite: 'None',
+                secure: true,
+                maxAge: 60 * 60 * 1000
+            })
+
+            return res.json({ success: true, message: "Successfully logged In", accessToken })
         } catch (err) {
             return res.json({ success: false, message: "Problem loggin In" })
         }
@@ -145,7 +180,24 @@ router.post('/login/:role', async (req, res) => {
             if (!isValidUser) {
                 return res.json({ success: false, message: "Username/Password combination incorrect" })
             }
-            return res.json({ success: true, message: "Successfully logged In" })
+            const accessToken = generateAccessToken(probationer)
+            const refreshToken = generateRefreshToken(probationer)
+
+            try {
+                probationer.refreshToken = refreshToken;
+                await probationer.save()
+            } catch (err) {
+                return res.json({ success: false, message: "Problem loggin In" })
+            }
+
+            res.cookie('jwt', refreshToken, {
+                httpOnly: true,
+                sameSite: 'None',
+                secure: true,
+                maxAge: 60 * 60 * 1000
+            })
+
+            return res.json({ success: true, message: "Successfully logged In", accessToken })
         } catch (err) {
             return res.json({ success: false, message: "Problem loggin In" })
         }
@@ -154,5 +206,9 @@ router.post('/login/:role', async (req, res) => {
 
 })
 
+
+router.get("/logout", async (req, res) => {
+    await handleLogout()
+})
 
 export default router;
