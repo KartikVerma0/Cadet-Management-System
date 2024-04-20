@@ -97,6 +97,9 @@ const cadetSchema = new Schema({
     },
     attendanceOverallDetailsId: {
         type: Schema.Types.ObjectId,
+    },
+    refreshToken: {
+        type: String
     }
     //add allowed boolean to denote if an account is approved or not
 })

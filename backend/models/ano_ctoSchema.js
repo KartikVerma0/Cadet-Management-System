@@ -34,6 +34,9 @@ const ano_ctoSchema = new Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    refreshToken: {
+        type: String
     }
 })
 

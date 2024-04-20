@@ -89,6 +89,9 @@ const probationUserSchema = new Schema({
     },
     attendanceOverallDetailsId: {
         type: Schema.Types.ObjectId,
+    },
+    refreshToken: {
+        type: String
     }
 })
 
