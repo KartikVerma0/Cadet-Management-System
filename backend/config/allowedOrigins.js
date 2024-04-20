@@ -1,0 +1,4 @@
+export const allowedOrigins = [
+    'https://chitkara-ncc-cms.vercel.app',
+    'http://localhost:5173'
+]
