@@ -1,16 +1,25 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import BoxCollection from '../boxCollection/BoxCollection'
 import { BACKEND_BASE_STRING } from '../../env'
+
+import AuthContext from '../../context/AuthContext'
+
+
 import './PollSection.css'
 
 export default function PollSection() {
     const [polls, setPolls] = useState([])
+    const { auth } = useContext(AuthContext);
 
     useEffect(() => {
         const getData = async () => {
             try {
-                let response = await axios.get(`${BACKEND_BASE_STRING}/poll`)
+                let response = await axios.get(`${BACKEND_BASE_STRING}/poll`, {
+                    headers: {
+                        Authorization: `BEARER ${auth.accessToken}`
+                    }
+                })
                 if (response.data.success) {
                     setPolls(response.data.data)
                 } else {

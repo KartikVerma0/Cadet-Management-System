@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types'
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios'
 import Joi from 'joi'
 import { BACKEND_BASE_STRING } from '../../env'
+
+import AuthContext from '../../context/AuthContext'
+
 
 
 import "./Model.css"
@@ -40,6 +43,9 @@ export default function Model({ closeButtonHandler, topic }) {
     const [errorSubmit, setErrorSubmit] = useState(false)
     const { register, handleSubmit } = useForm()
 
+    const { auth } = useContext(AuthContext);
+
+
     const submitHandler = async (data) => {
         try {
             await ModelSchema.validateAsync(data)
@@ -53,7 +59,11 @@ export default function Model({ closeButtonHandler, topic }) {
         setFaultyInput("")
         setInputError("")
         try {
-            let response = await axios.post(`${BACKEND_BASE_STRING}/create/${topic.toLowerCase()}`, data)
+            let response = await axios.post(`${BACKEND_BASE_STRING}/create/${topic.toLowerCase()}`, data, {
+                headers: {
+                    Authorization: `BEARER ${auth.accessToken}`
+                }
+            })
             if (response.data.success) {
                 setSuccessSubmit(true)
                 setErrorSubmit(false)
