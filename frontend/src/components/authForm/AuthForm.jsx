@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form'
-import { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { BACKEND_BASE_STRING } from '../../env'
 import axios from 'axios'
-import AuthContext from '../../context/AuthContext'
+import useAuth from '../../hooks/useAuth'
 
 import PropTypes from 'prop-types'
 import "./AuthForm.css"
@@ -11,8 +11,12 @@ import "./AuthForm.css"
 export default function AuthForm({ role, authType }) {
     const { register, handleSubmit } = useForm()
     const [errMsg, setErrMsg] = useState('')
-    const [successLogin, setSuccessLogin] = useState(false)
-    const { setAuth } = useContext(AuthContext);
+    const { setAuth } = useAuth()
+
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || "/dashboard"
+
     const submitHandler = async (data) => {
 
         try {
@@ -21,19 +25,26 @@ export default function AuthForm({ role, authType }) {
             })
             if (response.data.success) {
                 const accessToken = response.data.accessToken
+                const info = {
+                    name: response.data.additionalInfo.name,
+                    mobileNumber: response.data.additionalInfo.mobileNumber,
+                    email: response.data.additionalInfo.email,
+                    nccWing: response.data.additionalInfo.nccWing,
+                    permissions: response.data.additionalInfo.permissions,
+                    accountApproved: response.data.additionalInfo.accountApproved,
+                    role: response.data.additionalInfo.role
+                }
                 // console.log(accessToken)
                 //const roles = response.data.roles
                 //add roles in setAuth later
-                setAuth({ ...data, accessToken })
-                setSuccessLogin(true)
+                setAuth({ ...info, accessToken })
                 setErrMsg('')
+                navigate(from, { replace: true })
             } else {
                 setErrMsg(response.data.message)
-                setSuccessLogin(false)
             }
         } catch (err) {
             setErrMsg(err.message)
-            setSuccessLogin(false)
         }
 
     }
@@ -52,8 +63,6 @@ export default function AuthForm({ role, authType }) {
                 <button type='submit'>{authType.toUpperCase()}</button>
             </form>
             {errMsg && <p className='errorMessage font-red'>{errMsg.toString()}</p>}
-            {successLogin && <p className='successMessage font-green'>Successfully logged in</p>}
-            <Link to="/dashboard">dash</Link>
         </div>
     )
 }
