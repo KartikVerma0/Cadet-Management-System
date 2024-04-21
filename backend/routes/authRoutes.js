@@ -123,7 +123,16 @@ router.post('/login/:role', async (req, res) => {
                 maxAge: 60 * 60 * 1000
             })
 
-            return res.json({ success: true, message: "Successfully logged In", accessToken })
+            const additionalInfo = {
+                name: ano_cto.name,
+                mobileNumber: ano_cto.mobileNumber,
+                email: ano_cto.email, nccWing: ano_cto.nccWing,
+                permissions: ano_cto.permissions,
+                accountApproved: ano_cto.accountApproved,
+                role: 'ANO_CTO'
+            }
+
+            return res.json({ success: true, message: "Successfully logged In", accessToken, additionalInfo })
         } catch (err) {
             return res.json({ success: false, message: "Problem loggin In" })
         }
@@ -160,7 +169,15 @@ router.post('/login/:role', async (req, res) => {
                 maxAge: 60 * 60 * 1000
             })
 
-            return res.json({ success: true, message: "Successfully logged In", accessToken })
+            const additionalInfo = {
+                name: cadet.name,
+                mobileNumber: cadet.mobileNumber,
+                email: cadet.email, nccWing: cadet.nccWing,
+                permissions: cadet.permissions, accountApproved: cadet.accountApproved,
+                role: 'CADET'
+            }
+
+            return res.json({ success: true, message: "Successfully logged In", accessToken, additionalInfo })
         } catch (err) {
             return res.json({ success: false, message: "Problem loggin In" })
         }
@@ -197,7 +214,15 @@ router.post('/login/:role', async (req, res) => {
                 maxAge: 60 * 60 * 1000
             })
 
-            return res.json({ success: true, message: "Successfully logged In", accessToken })
+            const additionalInfo = {
+                name: probationer.name,
+                mobileNumber: probationer.mobileNumber,
+                email: probationer.email, nccWing: probationer.nccWing,
+                permissions: probationer.permissions, accountApproved: probationer.accountApproved,
+                role: 'PROBATION'
+            }
+
+            res.json({ success: true, message: "Successfully logged In", accessToken, additionalInfo })
         } catch (err) {
             return res.json({ success: false, message: "Problem loggin In" })
         }
@@ -207,8 +232,6 @@ router.post('/login/:role', async (req, res) => {
 })
 
 
-router.get("/logout", async (req, res) => {
-    await handleLogout()
-})
+router.get("/logout/:role", handleLogout)
 
 export default router;
