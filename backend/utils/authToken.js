@@ -41,9 +41,7 @@ export const refreshAccessToken = async (req, res) => {
     if (!cookies?.jwt) return res.sendStatus(401)
     const refreshToken = cookies.jwt
 
-
     const { role } = req.params;
-
     if (role === 'ANO_CTO') {
         let ano_cto = undefined
         try {
@@ -66,10 +64,10 @@ export const refreshAccessToken = async (req, res) => {
                     },
                     process.env.ACCESS_TOKEN_SECRET,
                     {
-                        expiresIn: '30s'
+                        expiresIn: '10m'
                     }
                 )
-                res.json({ accessToken })
+                return res.json({ accessToken })
             })
         } catch (err) {
             return res.sendStatus(403)
@@ -97,7 +95,7 @@ export const refreshAccessToken = async (req, res) => {
                     },
                     process.env.ACCESS_TOKEN_SECRET,
                     {
-                        expiresIn: '30s'
+                        expiresIn: '10m'
                     }
                 )
                 res.json({ accessToken })
@@ -128,7 +126,7 @@ export const refreshAccessToken = async (req, res) => {
                     },
                     process.env.ACCESS_TOKEN_SECRET,
                     {
-                        expiresIn: '30s'
+                        expiresIn: '10m'
                     }
                 )
                 res.json({ accessToken })
@@ -139,16 +137,13 @@ export const refreshAccessToken = async (req, res) => {
     }
 }
 
-export const handleLogout = async () => {
-
-    //On client, also delete the accessToken
+export const handleLogout = async (req, res) => {
 
     const cookies = req.cookies;
     if (!cookies?.jwt) return res.sendStatus(204)
     const refreshToken = cookies.jwt
 
-
-    const { role } = req.params;
+    const { role } = req.params
 
     if (role === 'ANO_CTO') {
         let ano_cto = undefined
