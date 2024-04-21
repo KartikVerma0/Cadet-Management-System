@@ -1,27 +1,26 @@
 import { Link } from 'react-router-dom'
-import { useEffect, useState, useContext } from 'react'
-import axios from 'axios'
+import { useEffect, useState } from 'react'
+import useAxiosPrivate from '../../hooks/useAxiosPrivate.js'
 import BoxCollection from '../boxCollection/BoxCollection'
-import { BACKEND_BASE_STRING } from '../../env'
-
-import AuthContext from '../../context/AuthContext'
-
+import useAuth from '../../hooks/useAuth'
 
 import './EventsSection.css'
 
 export default function EventsSection() {
     const [events, setEvents] = useState([])
-    const { auth } = useContext(AuthContext);
-    // console.log(auth)
+    const { auth } = useAuth();
+
+    const axiosPrivate = useAxiosPrivate()
 
 
     useEffect(() => {
         const getData = async () => {
             try {
-                let response = await axios.get(`${BACKEND_BASE_STRING}/event`, {
+                let response = await axiosPrivate.get(`/event`, {
                     headers: {
                         Authorization: `BEARER ${auth.accessToken}`
-                    }
+                    },
+                    withCredentials: true
                 })
                 if (response.data.success) {
                     setEvents(response.data.data)
