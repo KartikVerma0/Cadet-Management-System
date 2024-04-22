@@ -5,6 +5,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { BACKEND_BASE_STRING } from '../../env'
 import Joi from 'joi'
+import { useNavigate } from 'react-router-dom'
 
 const SignUpFormSchema = Joi.object({
     name: Joi.string().required(),
@@ -45,6 +46,8 @@ export default function SignUpForm({ role }) {
     const [errorLogin, setErrorLogin] = useState(false)
     const { register, handleSubmit } = useForm()
 
+    const navigate = useNavigate()
+
     const passwordStateChangeHandler = (e) => {
         setPassword(e.target.value)
     }
@@ -69,6 +72,7 @@ export default function SignUpForm({ role }) {
         try {
             let response = await axios.post(`${BACKEND_BASE_STRING}/signup/${role}`, data)
             if (response.data.success) {
+                navigate(`/login/${role}`)
                 setSuccessLogin(true)
                 setErrorLogin(false)
             } else {
