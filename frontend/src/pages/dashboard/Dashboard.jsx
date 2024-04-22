@@ -5,18 +5,29 @@ import EventsSection from '../../components/eventsSection/EventsSection'
 import PollSection from '../../components/pollSection/PollSection'
 import NotificationSection from '../../components/notificationSection/NotificationSection'
 import "./Dashboard.css"
+import { useLocation, Navigate } from 'react-router-dom'
+import useAuth from '../../hooks/useAuth'
 
 export default function Dashboard() {
 
-    return (
-        <div className="Dashboard">
-            <Navbar loginType='logout' />
-            {/* only show special navbar to people that have permissions */}
-            <SpecialNavbar />
-            <AttendanceSection />
-            <EventsSection />
-            <PollSection />
-            <NotificationSection />
-        </div>
-    )
+    const { auth } = useAuth();
+    const location = useLocation()
+
+    if (auth.accessToken === undefined) {
+        return (
+            <Navigate to="/" state={{ from: location }} replace />
+        )
+    } else {
+        return (
+            <div className="Dashboard">
+                <Navbar loginType='logout' />
+                {/* only show special navbar to people that have permissions */}
+                <SpecialNavbar />
+                <AttendanceSection />
+                <EventsSection />
+                <PollSection />
+                <NotificationSection />
+            </div>
+        )
+    }
 }
