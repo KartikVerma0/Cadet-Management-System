@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types'
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import Joi from 'joi'
 
 import useAuth from '../../hooks/useAuth';
+
+import EventContext from '../../context/EventContext.jsx';
+import PollContext from '../../context/PollContext.jsx';
+import NotificationContext from '../../context/NotificationContext.jsx';
 
 import "./Model.css"
 
@@ -53,6 +57,62 @@ export default function Model({ closeButtonHandler, topic }) {
         hideSpinner
     } = useSpinner()
 
+    const { setEvents } = useContext(EventContext)
+    const { setPolls } = useContext(PollContext)
+    const { setNotifications } = useContext(NotificationContext)
+
+    const refreshData = async () => {
+        if (topic === 'Poll') {
+            try {
+                let response = await axiosPrivate.get(`/poll`, {
+                    headers: {
+                        Authorization: `BEARER ${auth.accessToken}`
+                    },
+                    withCredentials: true
+                })
+                if (response.data.success) {
+                    setPolls(response.data.data)
+                } else {
+                    console.error(response.data.message)
+                }
+            } catch (e) {
+                console.log(e.message)
+            }
+        } else if (topic === 'Event') {
+            try {
+                let response = await axiosPrivate.get(`/event`, {
+                    headers: {
+                        Authorization: `BEARER ${auth.accessToken}`
+                    },
+                    withCredentials: true
+                })
+                if (response.data.success) {
+                    setEvents(response.data.data)
+                } else {
+                    console.error(response.data.message)
+                }
+            } catch (e) {
+                console.log(e.message)
+            }
+        } else if (topic === 'Notification') {
+            try {
+                let response = await axiosPrivate.get(`/notification`, {
+                    headers: {
+                        Authorization: `BEARER ${auth.accessToken}`
+                    },
+                    withCredentials: true
+                })
+                if (response.data.success) {
+                    setNotifications(response.data.data)
+                } else {
+                    console.error(response.data.message)
+                }
+            } catch (e) {
+                console.log(e.message)
+            }
+        }
+    }
+
 
     const submitHandler = async (data) => {
         showSpinner()
@@ -89,6 +149,7 @@ export default function Model({ closeButtonHandler, topic }) {
             setErrorSubmit(true)
             setSuccessSubmit(false)
         }
+        refreshData()
         hideSpinner()
     }
 
