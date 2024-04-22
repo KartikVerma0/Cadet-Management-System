@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate.js'
 import BoxCollection from '../boxCollection/BoxCollection'
-
+import PollContext from '../../context/PollContext.jsx'
 
 import useAuth from '../../hooks/useAuth'
 
@@ -9,8 +9,8 @@ import useAuth from '../../hooks/useAuth'
 import './PollSection.css'
 
 export default function PollSection() {
-    const [polls, setPolls] = useState([])
     const { auth } = useAuth();
+    const { polls, setPolls } = useContext(PollContext)
 
     const axiosPrivate = useAxiosPrivate()
 

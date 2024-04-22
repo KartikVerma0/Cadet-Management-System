@@ -1,14 +1,18 @@
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useContext } from 'react'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate.js'
 import BoxCollection from '../boxCollection/BoxCollection'
 import useAuth from '../../hooks/useAuth'
 
+import EventContext from '../../context/EventContext.jsx'
+
 import './EventsSection.css'
 
 export default function EventsSection() {
-    const [events, setEvents] = useState([])
     const { auth } = useAuth();
+
+    const { events, setEvents } = useContext(EventContext)
+
 
     const axiosPrivate = useAxiosPrivate()
 

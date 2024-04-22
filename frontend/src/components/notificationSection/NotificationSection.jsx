@@ -1,15 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate.js'
 import BoxCollection from '../boxCollection/BoxCollection'
 
 import useAuth from '../../hooks/useAuth'
 
+import NotificationContext from '../../context/NotificationContext.jsx'
 
 import './NotificationSection.css'
 
 export default function NotificationSection() {
-    const [notifications, setNotifications] = useState([])
     const { auth } = useAuth();
+
+    const { notifications, setNotifications } = useContext(NotificationContext)
+
 
     const axiosPrivate = useAxiosPrivate()
 

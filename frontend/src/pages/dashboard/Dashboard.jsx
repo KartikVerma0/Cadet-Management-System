@@ -7,6 +7,9 @@ import NotificationSection from '../../components/notificationSection/Notificati
 import "./Dashboard.css"
 import { useLocation, Navigate } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
+import { PollProvider } from '../../context/PollContext'
+import { EventProvider } from '../../context/EventContext'
+import { NotificationProvider } from '../../context/NotificationContext'
 
 export default function Dashboard() {
 
@@ -21,13 +24,20 @@ export default function Dashboard() {
         return (
             <div className="Dashboard">
                 <Navbar loginType='logout' />
-                {/* only show special navbar to people that have permissions */}
-                <SpecialNavbar />
-                <AttendanceSection />
-                <EventsSection />
-                <PollSection />
-                <NotificationSection />
-            </div>
+                <NotificationProvider>
+                    <PollProvider>
+                        <EventProvider>
+                            {/* only show special navbar to people that have permissions */}
+                            <SpecialNavbar />
+                            <AttendanceSection />
+                            <EventsSection />
+                        </EventProvider>
+
+                        <PollSection />
+                    </PollProvider>
+                    <NotificationSection />
+                </NotificationProvider>
+            </div >
         )
     }
 }
