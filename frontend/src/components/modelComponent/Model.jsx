@@ -9,8 +9,13 @@ import useAuth from '../../hooks/useAuth';
 
 import "./Model.css"
 
+//spinner component related imports
+import { spinner } from '../../hooks/useSpinner.jsx'
+import useSpinner from '../../hooks/useSpinner.jsx'
+
 
 export default function Model({ closeButtonHandler, topic }) {
+
     let ModelSchema = undefined;
     if (topic === "Event") {
         ModelSchema = Joi.object({
@@ -43,8 +48,14 @@ export default function Model({ closeButtonHandler, topic }) {
     const { auth } = useAuth();
     const axiosPrivate = useAxiosPrivate()
 
+    const { spinnerVisible,
+        showSpinner,
+        hideSpinner
+    } = useSpinner()
+
 
     const submitHandler = async (data) => {
+        showSpinner()
         try {
             await ModelSchema.validateAsync(data)
 
@@ -52,6 +63,7 @@ export default function Model({ closeButtonHandler, topic }) {
             console.error("Invalid input data :", e.message)
             setFaultyInput(e.message.split("\"")[1])
             setInputError(e.message);
+            hideSpinner()
             return;
         }
         setFaultyInput("")
@@ -66,6 +78,7 @@ export default function Model({ closeButtonHandler, topic }) {
             if (response.data.success) {
                 setSuccessSubmit(true)
                 setErrorSubmit(false)
+
             } else {
                 console.error(response.data.message)
                 setErrorSubmit(true)
@@ -76,6 +89,7 @@ export default function Model({ closeButtonHandler, topic }) {
             setErrorSubmit(true)
             setSuccessSubmit(false)
         }
+        hideSpinner()
     }
 
     return (
@@ -102,7 +116,7 @@ export default function Model({ closeButtonHandler, topic }) {
                 <label htmlFor={`${topic}_description`} >{topic} description:</label>
                 <textarea name="" id={`${topic}_description`} cols="30" rows="10" {...register(`${topic}_description`)}></textarea>
                 {faultyInput === `${topic}_description` && <p className='errorMessage'>{inputError}</p>}
-                <button>Submit</button>
+                <button>{spinnerVisible ? spinner("rgba(150, 100, 0, 1)") : 'Submit'}</button>
             </form>
             {successSubmit && <p className='successMessage'>Successfull Submition!</p>}
             {errorSubmit && <p className='errorMessage'>Failed Submition!</p>}
