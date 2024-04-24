@@ -29,6 +29,13 @@
     font-weight: bold;
 }
 
+@media screen and (max-width:500px) {
+    .Navbar .NavbarTitle {
+        font-size: 1.5rem;
+
+    }
+}
+
 .Navbar .NavbarTitle :nth-child(1) {
     color: var(--red);
 }
