@@ -15,6 +15,7 @@ import authRouter from './routes/authRoutes.js'
 import refreshRouter from './routes/refresh.js'
 import createRouter from './routes/createRouter.js'
 import dataRouter from './routes/dataRouter.js'
+import responseRouter from './routes/responseRouter.js'
 
 import { credentials } from './middleware/middleware.js';
 import { corsOptions } from './config/corsOptions.js';
@@ -52,6 +53,7 @@ app.use("/refresh", refreshRouter)
 app.use(verifyJWT)
 app.use("/", dataRouter)
 app.use("/create", createRouter)
+app.use("/response", responseRouter)
 
 
 app.listen(port, () => {
