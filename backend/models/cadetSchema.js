@@ -29,11 +29,13 @@ const cadetSchema = new Schema({
     },
     mobileNumber: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     bloodGroup: {
         type: String,
@@ -69,7 +71,8 @@ const cadetSchema = new Schema({
     },
     enrollmentNumber: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     department: {
         type: String,
@@ -77,7 +80,8 @@ const cadetSchema = new Schema({
     },
     rollNumber: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
     },
     academicYear: {
         type: Number,
@@ -87,9 +91,9 @@ const cadetSchema = new Schema({
         type: String,
         required: true
     },
-    permissions: [
-        //add permissions
-    ],
+    permissions: {
+        type: [Number]
+    },
     accountApproved: {
         type: Boolean,
         required: true,
@@ -101,7 +105,7 @@ const cadetSchema = new Schema({
     refreshToken: {
         type: String
     }
-    //add allowed boolean to denote if an account is approved or not
+
 })
 
 const Cadet = mongoose.model("Cadet", cadetSchema);

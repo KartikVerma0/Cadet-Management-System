@@ -29,11 +29,13 @@ const probationUserSchema = new Schema({
     },
     mobileNumber: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     bloodGroup: {
         type: String,
@@ -69,7 +71,8 @@ const probationUserSchema = new Schema({
     },
     rollNumber: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
     },
     academicYear: {
         type: Number,
@@ -79,9 +82,9 @@ const probationUserSchema = new Schema({
         type: String,
         required: true
     },
-    permissions: [
-        //add permissions
-    ],
+    permissions: {
+        type: [Number]
+    },
     accountApproved: {
         type: Boolean,
         required: true,

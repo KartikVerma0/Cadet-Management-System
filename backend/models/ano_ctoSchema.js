@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import permissionsMapping from "../config/permissionsMapping.js";
 
 const { Schema } = mongoose;
 
@@ -13,11 +14,13 @@ const ano_ctoSchema = new Schema({
     },
     mobileNumber: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     nccWing: {
         type: String,
@@ -27,9 +30,10 @@ const ano_ctoSchema = new Schema({
         type: String,
         required: true
     },
-    permissions: [
-        //add permissions
-    ],
+    permissions: {
+        type: [Number],
+        default: [permissionsMapping.canCreateEvent, permissionsMapping.canCreatePoll, permissionsMapping.canCreateNotification]
+    },
     accountApproved: {
         type: Boolean,
         required: true,
