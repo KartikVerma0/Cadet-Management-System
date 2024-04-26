@@ -3,6 +3,8 @@ import SignUpRouterPage from "./pages/signUpRouterPage/SignUpRouterPage"
 import LoginPage from "./pages/loginPage/LoginPage"
 import SignUpPage from "./pages/signupPage/SignUpPage"
 import Dashboard from "./pages/dashboard/Dashboard"
+import ResponsesList from "./components/responsesList/ResponsesList"
+import FourOFourPage from "./pages/404Page/FourOFourPage"
 
 import { Analytics } from "@vercel/analytics/react"
 
@@ -22,7 +24,8 @@ function App() {
         <Route path="/signup/:role" element={<SignUpPage />} />
         {/* if logged in then show dashboard */}
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="*" element={<h1>404 error</h1>} />
+        <Route path="/responses/:section/:dataId" element={<ResponsesList />} />
+        <Route path="*" element={<FourOFourPage />} />
       </Routes>
     </>
   )
