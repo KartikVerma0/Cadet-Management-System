@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128+Text&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+.FourOFour section {
+    margin-top: 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-inline: 3rem;
+    text-align: center;
+}
+
+.FourOFour .errorCode {
+    font-family: 'Libre Barcode 128 Text', 'sans serif';
+    font-size: 12rem;
+}
+
+@media screen and (max-width:650px) {
+    .FourOFour .errorCode {
+        font-size: 8rem;
+    }
+}
+
+.FourOFour .errorCode span:nth-child(1) {
+    color: var(--red);
+}
+
+.FourOFour .errorCode span:nth-child(2) {
+    color: var(--dark-blue);
+}
+
+.FourOFour .errorCode span:nth-child(3) {
+    color: var(--light-blue);
+}
+
+.FourOFour section p {
+    font-size: 1.25rem;
+    font-family: 'JetBrains Mono', 'sans serif';
+}
+
+@media screen and (max-width:650px) {
+    .FourOFour section p {
+        font-size: 1rem;
+    }
+}
+
+.FourOFour section p span {
+    display: block;
+}
+
+.FourOFour section p span:nth-child(1) {
+    color: var(--red);
+}
+
+.FourOFour section p span:nth-child(2) {
+    color: var(--dark-blue);
+}
+
+.FourOFour section p span:nth-child(3) {
+    color: var(--light-blue);
+}
