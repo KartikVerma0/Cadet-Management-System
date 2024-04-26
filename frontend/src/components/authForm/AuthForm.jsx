@@ -40,6 +40,7 @@ export default function AuthForm({ role, authType }) {
                     mobileNumber: response.data.additionalInfo.mobileNumber,
                     email: response.data.additionalInfo.email,
                     nccWing: response.data.additionalInfo.nccWing,
+                    enrollmentNumber: response.data.additionalInfo.enrollmentNumber,
                     permissions: response.data.additionalInfo.permissions,
                     accountApproved: response.data.additionalInfo.accountApproved,
                     role: response.data.additionalInfo.role
