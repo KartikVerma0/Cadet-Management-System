@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import permissionsMapping from "../config/permissionsMapping.js";
 
 const { Schema } = mongoose;
 
@@ -83,7 +84,8 @@ const probationUserSchema = new Schema({
         required: true
     },
     permissions: {
-        type: [Number]
+        type: [Number],
+        default: [permissionsMapping.canRespondToEvent, permissionsMapping.canRespondToPoll]
     },
     accountApproved: {
         type: Boolean,

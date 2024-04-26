@@ -32,7 +32,12 @@ const ano_ctoSchema = new Schema({
     },
     permissions: {
         type: [Number],
-        default: [permissionsMapping.canCreateEvent, permissionsMapping.canCreatePoll, permissionsMapping.canCreateNotification]
+        default: [permissionsMapping.canCreateEvent,
+        permissionsMapping.canCreatePoll,
+        permissionsMapping.canCreateNotification,
+        permissionsMapping.canSeeEventResponses,
+        permissionsMapping.canSeePollResponses
+        ]
     },
     accountApproved: {
         type: Boolean,
