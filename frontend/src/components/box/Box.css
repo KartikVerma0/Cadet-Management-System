@@ -1,6 +1,6 @@
 .Box {
     padding: 2rem;
-    background-color: var(--dark-blue);
+    background-image: linear-gradient(180deg, rgba(46, 48, 146, 1) 0%, rgba(14, 14, 44, 1) 100%);
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -58,4 +58,18 @@
     justify-content: center;
     align-items: center;
     background-color: var(--red);
+}
+
+.Box .actions .notSelected {
+    background-color: gray !important;
+}
+
+.Box .responses {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    color: #F59191;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-top: 2rem;
 }
