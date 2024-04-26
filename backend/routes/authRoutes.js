@@ -126,7 +126,8 @@ router.post('/login/:role', async (req, res) => {
             const additionalInfo = {
                 name: ano_cto.name,
                 mobileNumber: ano_cto.mobileNumber,
-                email: ano_cto.email, nccWing: ano_cto.nccWing,
+                email: ano_cto.email,
+                nccWing: ano_cto.nccWing,
                 permissions: ano_cto.permissions,
                 accountApproved: ano_cto.accountApproved,
                 role: 'ANO_CTO'
@@ -172,7 +173,9 @@ router.post('/login/:role', async (req, res) => {
             const additionalInfo = {
                 name: cadet.name,
                 mobileNumber: cadet.mobileNumber,
-                email: cadet.email, nccWing: cadet.nccWing,
+                email: cadet.email,
+                nccWing: cadet.nccWing,
+                enrollmentNumber: cadet.enrollmentNumber,
                 permissions: cadet.permissions, accountApproved: cadet.accountApproved,
                 role: 'CADET'
             }
