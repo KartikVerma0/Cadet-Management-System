@@ -43,6 +43,9 @@ export default function AuthForm({ role, authType }) {
                     enrollmentNumber: response.data.additionalInfo.enrollmentNumber,
                     permissions: response.data.additionalInfo.permissions,
                     accountApproved: response.data.additionalInfo.accountApproved,
+                    address: response.data.additionalInfo.address,
+                    gender: response.data.additionalInfo.gender, department: response.data.additionalInfo.department,
+                    rollNumber: response.data.additionalInfo.rollNumber, academicYear: response.data.additionalInfo.academicYear,
                     role: response.data.additionalInfo.role
                 }
                 //const roles = response.data.roles

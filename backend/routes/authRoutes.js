@@ -177,6 +177,9 @@ router.post('/login/:role', async (req, res) => {
                 nccWing: cadet.nccWing,
                 enrollmentNumber: cadet.enrollmentNumber,
                 permissions: cadet.permissions, accountApproved: cadet.accountApproved,
+                address: cadet.address,
+                gender: cadet.gender, department: cadet.department,
+                rollNumber: cadet.rollNumber, academicYear: cadet.academicYear,
                 role: 'CADET'
             }
 
@@ -222,6 +225,9 @@ router.post('/login/:role', async (req, res) => {
                 mobileNumber: probationer.mobileNumber,
                 email: probationer.email, nccWing: probationer.nccWing,
                 permissions: probationer.permissions, accountApproved: probationer.accountApproved,
+                address: probationer.address,
+                gender: probationer.gender, department: probationer.department,
+                rollNumber: probationer.rollNumber, academicYear: probationer.academicYear,
                 role: 'PROBATION'
             }
 
