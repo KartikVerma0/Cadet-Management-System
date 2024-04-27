@@ -113,9 +113,64 @@ export default function Model({ closeButtonHandler, topic }) {
         }
     }
 
+    const [isValidFile, setIsValidFile] = useState(true)
+    const [invalidFileError, setInvalidFileError] = useState('')
+    const [previewSource, setPreviewSource] = useState([])
+
+    const handleValidFileInput = (files) => {
+
+        const isValidPromise = new Promise((resolve, reject) => {
+            const keys = Object.keys(files)
+            if (keys.length > 2) {
+                reject(new Error("Maximum file upload limit is 2"))
+            }
+            for (let index = 0; index < keys.length; index++) {
+                if (files[`${index}`].type.indexOf(`image/`) === -1) {
+                    console.log("not image", files[`${index}`].name)
+                    reject(new Error("Invalid file type (only images allowed)"))
+                }
+            }
+            resolve(true)
+        })
+        return isValidPromise;
+    }
+
+    const previewFiles = (files) => {
+        const keys = Object.keys(files)
+        for (let index = 0; index < keys.length; index++) {
+            const reader = new FileReader();
+            reader.readAsDataURL(files[`${index}`])
+            reader.onloadend = () => {
+                setPreviewSource((previousSource) => {
+                    return [...previousSource, reader.result]
+                })
+            }
+        }
+    }
+
+    const handleFileChange = async (e) => {
+        setIsValidFile(true)
+        setInvalidFileError('')
+        setPreviewSource([])
+        const files = e.target.files;
+        try {
+            await handleValidFileInput(files);
+            previewFiles(files)
+        } catch (err) {
+            console.error(err)
+            setInvalidFileError(err.message)
+            setIsValidFile(false)
+            return
+        }
+    }
+
 
     const submitHandler = async (data) => {
         showSpinner()
+        setFaultyInput("")
+        setInputError("")
+        setSuccessSubmit(false)
+        setErrorSubmit(false)
         try {
             await ModelSchema.validateAsync(data)
 
@@ -126,10 +181,14 @@ export default function Model({ closeButtonHandler, topic }) {
             hideSpinner()
             return;
         }
-        setFaultyInput("")
-        setInputError("")
+
+        if (!isValidFile) {
+            hideSpinner()
+            return
+        }
+
         try {
-            let response = await axiosPrivate.post(`/create/${topic.toLowerCase()}`, data, {
+            let response = await axiosPrivate.post(`/create/${topic.toLowerCase()}`, { ...data, previewSource }, {
                 headers: {
                     Authorization: `BEARER ${auth.accessToken}`
                 },
@@ -175,7 +234,16 @@ export default function Model({ closeButtonHandler, topic }) {
                     </>
                 }
                 <label htmlFor={`${topic}_description`} >{topic} description:</label>
-                <textarea name="" id={`${topic}_description`} cols="30" rows="10" {...register(`${topic}_description`)}></textarea>
+                <textarea name="" id={`${topic}_description`} cols="30" rows="6" {...register(`${topic}_description`)}></textarea>
+                <label htmlFor={`${topic}_file`}>Upload images:</label>
+                <input type="file" id={`${topic}_file`} multiple onChange={handleFileChange} />
+                <p className='errorMessage'>You can upload images of total 5mb</p>
+                <section className='previewImagesContainer'>
+                    {previewSource.length > 0 && previewSource.map((source, index) =>
+                        <img key={index} src={source} className='previewImage' />
+                    )}
+                </section>
+                {!isValidFile && <p className='errorMessage'>{invalidFileError}</p>}
                 {faultyInput === `${topic}_description` && <p className='errorMessage'>{inputError}</p>}
                 <button>{spinnerVisible ? spinner("rgba(150, 100, 0, 1)") : 'Submit'}</button>
             </form>
