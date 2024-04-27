@@ -29,8 +29,8 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.urlencoded({ limit: '5mb', extended: true }));
+app.use(express.json({ limit: '5mb' }));
 app.use(cookieParser())
 
 const connectToDatabase = async () => {
@@ -55,6 +55,9 @@ app.use("/", dataRouter)
 app.use("/create", createRouter)
 app.use("/response", responseRouter)
 
+app.use("*", (req, res) => {
+    return res.json({ success: false, message: "Error Route" }).status(404)
+})
 
 app.listen(port, () => {
     console.log("Server running on server " + port);
