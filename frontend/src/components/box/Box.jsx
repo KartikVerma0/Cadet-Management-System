@@ -16,7 +16,7 @@ import permissionsMapping from '../../permissionsMapping.js';
 import useAuth from '../../hooks/useAuth'
 import './Box.css'
 
-export default function Box({ info, section }) {
+export default function Box({ info, section, showResponseLink = true }) {
 
 
     let { name, date, duration, description, startTime, _id } = info;
@@ -33,7 +33,7 @@ export default function Box({ info, section }) {
 
 
     useEffect(() => {
-        if (section !== 'notifications') {
+        if (section !== 'notifications' && (auth.permissions.includes(permissionsMapping.canRespondToPoll) || auth.permissions.includes(permissionsMapping.canRespondToEvent))) {
             const getResponse = async () => {
                 try {
                     const res = await axiosPrivate.get(`/response/${section}?dataId=${_id}&email=${auth.email}`)
@@ -53,7 +53,7 @@ export default function Box({ info, section }) {
     const handleResponse = async (response) => {
         showSpinner()
         setHasResponded(false)
-        const data = { dataId: _id, userEmail: auth.email, enrollmentNumber: auth.enrollmentNumber, nccWing: auth.nccWing, response };
+        const data = { dataId: _id, userName: auth.name, userEmail: auth.email, enrollmentNumber: auth.enrollmentNumber, nccWing: auth.nccWing, address: auth.address, mobileNumber: auth.mobileNumber, gender: auth.gender, department: auth.department, rollNumber: auth.rollNumber, academicYear: auth.academicYear, response };
         let result = undefined;
         try {
             if (section === "polls") {
@@ -125,8 +125,8 @@ export default function Box({ info, section }) {
                     {spinnerVisible && spinner("rgba(0, 174, 239, 1)")}
                 </>
             }
-            {auth.permissions.includes(permissionsMapping.canSeeEventResponses) && (section === "events") && <Link to={`/responses/events/${_id}`} className='responses'><span>Responses</span><EastIcon /></Link>}
-            {auth.permissions.includes(permissionsMapping.canSeePollResponses) && (section === "polls") && <Link to={`/responses/polls/${_id}`} className='responses'><span>Responses</span><EastIcon /></Link>}
+            {showResponseLink && auth.permissions.includes(permissionsMapping.canSeeEventResponses) && (section === "events") && <Link to={`/responses/events/${_id}`} className='responses'><span>Responses</span><EastIcon /></Link>}
+            {showResponseLink && auth.permissions.includes(permissionsMapping.canSeePollResponses) && (section === "polls") && <Link to={`/responses/polls/${_id}`} className='responses'><span>Responses</span><EastIcon /></Link>}
             {hasResponded && <MessageModal closeButtonHandler={setHasResponded} message={responseMessage} hasError={hasError} />}
         </div>
     )
@@ -134,5 +134,6 @@ export default function Box({ info, section }) {
 
 Box.propTypes = {
     info: PropTypes.object.isRequired,
-    section: PropTypes.string
+    section: PropTypes.string,
+    showResponseLink: PropTypes.bool
 }
