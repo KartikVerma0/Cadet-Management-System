@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import "./Navbar.css"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 //spinner component related imports
 import { spinner } from '../../hooks/useSpinner.jsx'
@@ -20,6 +20,8 @@ export default function Navbar({ loginType }) {
         hideSpinner
     } = useSpinner()
 
+    const navigate = useNavigate()
+
     const handleLogout = async () => {
         showSpinner()
         try {
@@ -27,6 +29,8 @@ export default function Navbar({ loginType }) {
                 withCredentials: true
             })
             setAuth({})
+            navigate("/", { replace: true })
+            hideSpinner()
 
         } catch (err) {
             console.log(err)
