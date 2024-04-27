@@ -9,24 +9,20 @@ const pollSchema = new Schema({
     description: {
         type: String,
     },
+    images: [{
+        url: {
+            type: String,
+            required: true
+        },
+        publicId: {
+            type: String,
+            required: true
+        }
+    }],
     postedDate: {
         type: String,
         default: new Date().toLocaleString({ timeZone: 'Asia/Kolkata' })
     },
-    responses: [
-        {
-            email: {
-                type: String,
-                required: true,
-                unique: true
-            },
-            response: {
-                type: Boolean,
-                required: true
-            },
-            _id: false,
-        }
-    ]
 })
 
 const Poll = mongoose.model("Poll", pollSchema);

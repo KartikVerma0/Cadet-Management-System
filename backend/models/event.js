@@ -20,6 +20,16 @@ const eventSchema = new Schema({
     description: {
         type: String,
     },
+    images: [{
+        url: {
+            type: String,
+            required: true
+        },
+        publicId: {
+            type: String,
+            required: true
+        }
+    }],
     postedDate: {
         type: String,
         default: new Date().toLocaleString({ timeZone: 'Asia/Kolkata' })
