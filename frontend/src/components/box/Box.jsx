@@ -2,10 +2,13 @@ import PropTypes from 'prop-types'
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import EastIcon from '@mui/icons-material/East';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import EditIcon from '@mui/icons-material/Edit';
 import MessageModal from '../messageModal/MessageModal';
 import { axiosPrivate } from '../../api/axios'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom'
+
 
 //spinner component related imports
 import { spinner } from '../../hooks/useSpinner.jsx'
@@ -14,6 +17,10 @@ import useSpinner from '../../hooks/useSpinner.jsx'
 import permissionsMapping from '../../permissionsMapping.js';
 
 import useAuth from '../../hooks/useAuth'
+
+import EventContext from '../../context/EventContext.jsx'
+import PollContext from '../../context/PollContext.jsx'
+import NotificationContext from '../../context/NotificationContext.jsx'
 import './Box.css'
 
 export default function Box({ info, section, showResponseLink = true }) {
@@ -47,7 +54,70 @@ export default function Box({ info, section, showResponseLink = true }) {
 
     }, [])
 
+    const [isExtraOptionsPermitted, setIsExtraOptionsPermitted] = useState(false)
 
+    useEffect(() => {
+        const showExtraOptions = () => {
+            if (section === "events" && (auth.permissions.includes(permissionsMapping.canDeleteEvent) || auth.permissions.includes(permissionsMapping.canEditEvent))) {
+                setIsExtraOptionsPermitted(true)
+            }
+            else if (section === "polls" && (auth.permissions.includes(permissionsMapping.canDeletePoll) || auth.permissions.includes(permissionsMapping.canEditPoll))) {
+                setIsExtraOptionsPermitted(true)
+            }
+            else if (section === "notifications" && (auth.permissions.includes(permissionsMapping.canDeleteNotification) || auth.permissions.includes(permissionsMapping.canEditNotification))) {
+                setIsExtraOptionsPermitted(true)
+            }
+        }
+        showExtraOptions()
+    }, [])
+
+    const [extraOptionsVisible, setExtraOptionsVisible] = useState(false)
+
+    const [hasErrorDeleting, setHasErrorDeleting] = useState(false)
+    const [hasErrorDeletingMessage, setHasErrorDeletingMessage] = useState('')
+
+    const { events, setEvents } = useContext(EventContext)
+    const { polls, setPolls } = useContext(PollContext)
+    const { notifications, setNotifications } = useContext(NotificationContext)
+
+    const handleDeleteBox = async () => {
+        setHasErrorDeletingMessage('')
+        try {
+            const response = await axiosPrivate.delete(`/delete/${section}?${section}Id=${_id}`)
+            if (!response.data.success) {
+                setHasErrorDeleting(true)
+                setHasErrorDeletingMessage(response.data.message)
+            }
+
+            if (section === "polls") {
+                const newPolls = polls.filter((poll) => {
+                    return poll._id !== _id
+                })
+                setPolls(newPolls)
+            }
+            else if (section === "events") {
+                const newEvents = events.filter((event) => {
+                    return event._id !== _id
+                })
+                setEvents(newEvents)
+            }
+            else if (section === "notifications") {
+                const newNotifications = notifications.filter((notification) => {
+                    return notification._id !== _id
+                })
+                setNotifications(newNotifications)
+            }
+
+        } catch (err) {
+            console.error(err)
+            setHasErrorDeleting(true)
+            setHasErrorDeletingMessage(err.message)
+        }
+    }
+
+    const handleEditBox = () => {
+
+    }
 
 
     const handleResponse = async (response) => {
@@ -84,6 +154,21 @@ export default function Box({ info, section, showResponseLink = true }) {
 
     return (
         <div className='Box'>
+            {isExtraOptionsPermitted && <button className='extraOptionsBtn' onClick={() => { setExtraOptionsVisible(prev => !prev) }}>...</button>}
+            {
+                extraOptionsVisible &&
+                <>
+                    <div className='extraOptions'>
+                        {section === "events" && (auth.permissions.includes(permissionsMapping.canDeleteEvent)) && <span className='delete' onClick={handleDeleteBox}><DeleteOutlineIcon />Delete Event</span>}
+                        {section === "events" && (auth.permissions.includes(permissionsMapping.canEditEvent)) && <span className='edit' onClick={handleEditBox}><EditIcon />Edit Event</span>}
+                        {section === "polls" && (auth.permissions.includes(permissionsMapping.canDeletePoll)) && <span className='delete' onClick={handleDeleteBox}><DeleteOutlineIcon />Delete Poll</span>}
+                        {section === "polls" && (auth.permissions.includes(permissionsMapping.canEditPoll)) && <span className='edit' onClick={handleEditBox}><EditIcon />Edit Poll</span>}
+                        {section === "notifications" && (auth.permissions.includes(permissionsMapping.canDeleteNotification)) && <span className='delete' onClick={handleDeleteBox}><DeleteOutlineIcon />Delete Notification</span>}
+                        {section === "notifications" && (auth.permissions.includes(permissionsMapping.canEditNotification)) && <span className='edit' onClick={handleEditBox}><EditIcon />Edit Notification</span>}
+                    </div>
+                    {hasErrorDeleting && <MessageModal closeButtonHandler={setHasErrorDeleting} message={hasErrorDeletingMessage} hasError={hasErrorDeleting} />}
+                </>
+            }
             {name && <div>
                 <span className='label'>{section.toUpperCase()} NAME: </span><span>{name}</span>
             </div>
