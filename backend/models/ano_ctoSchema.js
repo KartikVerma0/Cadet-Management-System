@@ -39,7 +39,10 @@ const ano_ctoSchema = new Schema({
         permissionsMapping.canSeePollResponses,
         permissionsMapping.canDeleteEvent,
         permissionsMapping.canDeletePoll,
-        permissionsMapping.canDeleteNotification
+        permissionsMapping.canDeleteNotification,
+        permissionsMapping.canEditEvent,
+        permissionsMapping.canEditPoll,
+        permissionsMapping.canEditNotification
         ]
     },
     accountApproved: {
