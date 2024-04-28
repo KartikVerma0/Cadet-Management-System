@@ -3,23 +3,11 @@ import Event from '../models/event.js';
 import Poll from '../models/poll.js';
 import Notification from '../models/notification.js';
 
+import getEventData from '../controllers/getEventData.js';
+
 const Router = express.Router();
 
-Router.get("/eventdata", async (req, res) => {
-    const { eventId } = req.query;
-    let eventInfo = undefined;
-    try {
-        eventInfo = await Event.findById(eventId)
-    } catch (err) {
-        return res.json({ success: false, message: "Server Error" }).status(500)
-    }
-
-    if (eventInfo) {
-        return res.json({ success: true, eventInfo })
-    }
-
-    return res.json({ success: false, message: "Invalid event selected" }).status(404)
-})
+Router.get("/eventdata", getEventData)
 
 Router.get("/event", async (req, res) => {
     const events = await Event.find()
