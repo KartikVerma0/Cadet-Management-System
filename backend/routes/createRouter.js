@@ -18,7 +18,8 @@ Router.post("/event", verifyPermissions(permissionsMapping.canCreateEvent), uplo
         date: Event_date,
         startTime: start_time,
         duration: Event_duration,
-        description: Event_description
+        description: Event_description,
+        images: req.files
     })
     try {
         await newEvent.save()
