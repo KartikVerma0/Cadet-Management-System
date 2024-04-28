@@ -6,6 +6,9 @@ import EventResponse from '../models/eventResponse.js'
 import permissionsMapping from '../config/permissionsMapping.js'
 import verifyPermissions from '../middleware/verifyPermissions.js'
 
+import respondToEvent from '../controllers/respondToEvent.js';
+import respondToPoll from '../controllers/respondToPoll.js';
+
 const Router = express.Router()
 
 Router.get("/allpollresponses", verifyPermissions(permissionsMapping.canSeePollResponses), async (req, res) => {
@@ -40,43 +43,7 @@ Router.get("/polls", async (req, res) => {
 
 })
 
-Router.post("/polls", verifyPermissions(permissionsMapping.canRespondToPoll), async (req, res) => {
-    const { dataId, userName, userEmail, enrollmentNumber, nccWing, address, mobileNumber, gender, department, rollNumber, academicYear, response } = req.body;
-    let selectedPoll = undefined;
-    try {
-        selectedPoll = await Poll.findById(dataId)
-    } catch (err) {
-        return res.json({ success: false, message: "Invalid Poll Selected" })
-    }
-    // console.log(selectedPoll)
-    try {
-
-        const selectedPollResponse = await PollResponse.findOne({ pollId: dataId, email: userEmail })
-
-        if (selectedPollResponse) {
-            selectedPollResponse.response = response
-            await selectedPollResponse.save()
-        } else {
-            const newResponse = new PollResponse({
-                pollId: dataId,
-                name: userName,
-                email: userEmail,
-                enrollmentNumber,
-                nccWing,
-                address, mobileNumber,
-                gender, department,
-                rollNumber, academicYear,
-                response
-            })
-            await newResponse.save()
-        }
-    } catch (err) {
-        console.log(err)
-        return res.json({ success: false, message: "Problem recording your response, Error: \n" + err })
-    }
-
-    return res.json({ success: true, message: "Successfully recorded your response" })
-})
+Router.post("/polls", verifyPermissions(permissionsMapping.canRespondToPoll), respondToPoll)
 
 
 Router.get("/alleventresponses", async (req, res) => {
@@ -111,40 +78,5 @@ Router.get("/events", async (req, res) => {
 
 })
 
-Router.post("/events", verifyPermissions(permissionsMapping.canRespondToEvent), async (req, res) => {
-    const { dataId, userName, userEmail, enrollmentNumber, nccWing, address, mobileNumber, gender, department, rollNumber, academicYear, response } = req.body;
-    let selectedEvent = undefined;
-    try {
-        selectedEvent = await Event.findById(dataId)
-    } catch (err) {
-        return res.json({ success: false, message: "Invalid Event Selected" })
-    }
-    try {
-
-        const selectedEventResponse = await EventResponse.findOne({ eventId: dataId, email: userEmail })
-
-        if (selectedEventResponse) {
-            selectedEventResponse.response = response
-            await selectedEventResponse.save()
-        } else {
-            const newResponse = new EventResponse({
-                eventId: dataId,
-                name: userName,
-                email: userEmail,
-                enrollmentNumber,
-                nccWing,
-                address, mobileNumber,
-                gender, department,
-                rollNumber, academicYear,
-                response
-            })
-            await newResponse.save()
-        }
-    } catch (err) {
-        console.log(err)
-        return res.json({ success: false, message: "Problem recording your response, Error: \n" + err })
-    }
-
-    return res.json({ success: true, message: "Successfully recorded your response" })
-})
+Router.post("/events", verifyPermissions(permissionsMapping.canRespondToEvent), respondToEvent)
 export default Router
