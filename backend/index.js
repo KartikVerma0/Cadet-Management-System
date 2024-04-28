@@ -16,6 +16,7 @@ import refreshRouter from './routes/refresh.js'
 import createRouter from './routes/createRouter.js'
 import dataRouter from './routes/dataRouter.js'
 import responseRouter from './routes/responseRouter.js'
+import deleteRouter from './routes/deleteRouter.js'
 
 import { credentials } from './middleware/middleware.js';
 import { corsOptions } from './config/corsOptions.js';
@@ -54,6 +55,7 @@ app.use(verifyJWT)
 app.use("/", dataRouter)
 app.use("/create", createRouter)
 app.use("/response", responseRouter)
+app.use("/delete", deleteRouter)
 
 app.use("*", (req, res) => {
     return res.json({ success: false, message: "Error Route" }).status(404)
