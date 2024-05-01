@@ -11,6 +11,9 @@ const permissionsMapping = {
     canDeleteNotification: 3414,
     canEditEvent: 355,
     canEditPoll: 3516,
-    canEditNotification: 3514
+    canEditNotification: 3514,
+    canSeeEnrolledCadets: 31953,
+    canSeeProbationCadets: 319163,
+    canUploadStudyMaterial: 3211913
 }
 export default permissionsMapping
