@@ -17,6 +17,7 @@ import createRouter from './routes/createRouter.js'
 import dataRouter from './routes/dataRouter.js'
 import responseRouter from './routes/responseRouter.js'
 import deleteRouter from './routes/deleteRouter.js'
+import userRouter from './routes/userRouter.js'
 
 import { credentials } from './middleware/middleware.js';
 import { corsOptions } from './config/corsOptions.js';
@@ -30,8 +31,8 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.urlencoded({ limit: '5mb', extended: true }));
-app.use(express.json({ limit: '5mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
+app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser())
 
 const connectToDatabase = async () => {
@@ -53,6 +54,7 @@ app.use("/refresh", refreshRouter)
 
 app.use(verifyJWT)
 app.use("/", dataRouter)
+app.use("/", userRouter)
 app.use("/create", createRouter)
 app.use("/response", responseRouter)
 app.use("/delete", deleteRouter)
