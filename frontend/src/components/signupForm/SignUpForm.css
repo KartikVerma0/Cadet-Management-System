@@ -26,7 +26,7 @@
 .SignUpForm form {
     background-color: #FFDDDE;
     border-radius: 10px;
-    padding: 2rem;
+    padding: 1rem 2rem 2rem;
     font-family: 'DM Sans', 'sans serif';
     width: 25%;
     margin-bottom: 2rem;
@@ -54,7 +54,9 @@
     display: block;
     color: #7E0000;
     font-weight: 500;
+    margin-top: 1rem;
 }
+
 
 .SignUpForm form .asterisk {
     color: var(--red);
@@ -64,7 +66,6 @@
     border: 0;
     border-radius: 5px;
     padding: 0.5rem 1rem;
-    margin-bottom: 1rem;
     width: 100%;
     display: block;
     font-family: inherit;
@@ -109,6 +110,7 @@
     color: white;
     font-weight: 600;
     cursor: pointer;
+    margin-top: 1rem;
 }
 
 .SignUpForm form .errorMessage {

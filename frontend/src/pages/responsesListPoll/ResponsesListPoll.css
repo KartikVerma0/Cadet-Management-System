@@ -41,6 +41,7 @@
     margin-inline: 3rem;
     font-family: 'EB Garamond', 'serif';
     overflow: scroll;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .ResponsesListPoll table thead * {
