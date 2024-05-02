@@ -1,5 +1,6 @@
 import Navbar from '../../components/navbar/Navbar'
 import SpecialNavbar from '../../components/specialNavbar/SpecialNavbar'
+import CommonInfoNavbar from '../../components/commonInfoNavbar/CommonInfoNavbar'
 import AttendanceSection from '../../components/attendanceSection/AttendanceSection'
 import EventsSection from '../../components/eventsSection/EventsSection'
 import PollSection from '../../components/pollSection/PollSection'
@@ -29,6 +30,7 @@ export default function Dashboard() {
                         <EventProvider>
                             {/* only show special navbar to people that have permissions */}
                             <SpecialNavbar />
+                            <CommonInfoNavbar />
                             <AttendanceSection />
                             <EventsSection />
                         </EventProvider>
