@@ -1,0 +1,45 @@
+.CommonInfoNavbar {
+    background-color: var(--dark-blue);
+    color: var(--yellow);
+    margin-inline: 3rem;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+@media screen and (max-width:620px) {
+    .CommonInfoNavbar {
+        flex-direction: column;
+    }
+}
+
+.CommonInfoNavbar div {
+    display: flex;
+    gap: 1rem;
+}
+
+.CommonInfoNavbar a {
+    color: inherit;
+    text-decoration: none;
+    font-family: 'DM Sans', 'sans serif';
+    font-weight: 500;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+}
+
+@media screen and (max-width:620px) {
+
+    .CommonInfoNavbar div,
+    a {
+        flex-direction: column;
+    }
+}
+
+.CommonInfoNavbar button:hover {
+    text-decoration: underline;
+}
