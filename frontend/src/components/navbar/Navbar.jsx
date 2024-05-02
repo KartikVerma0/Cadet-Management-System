@@ -41,7 +41,7 @@ export default function Navbar({ loginType }) {
     return (
         <nav className="Navbar">
             <div className="leftSection">
-                <Link to="/">
+                <Link to={auth.accessToken ? "/dashboard" : "/"}>
                     <img src="/nccLogo.png" alt="ncc logo" className="NavbarLogo" />
                     <p className="NavbarTitle"><span>CADET</span> <span>MANAGEMENT</span> <span>SYSTEM</span></p>
                 </Link>
