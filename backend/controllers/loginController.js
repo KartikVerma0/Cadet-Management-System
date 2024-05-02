@@ -25,8 +25,8 @@ export default async function loginController(req, res) {
             if (!isValidUser) {
                 return res.json({ success: false, message: "Username/Password combination incorrect" })
             }
-            const accessToken = generateAccessToken(ano_cto)
-            const refreshToken = generateRefreshToken(ano_cto)
+            const accessToken = generateAccessToken(ano_cto, role)
+            const refreshToken = generateRefreshToken(ano_cto, role)
             try {
                 ano_cto.refreshToken = refreshToken;
                 await ano_cto.save()
@@ -71,7 +71,7 @@ export default async function loginController(req, res) {
             if (!isValidUser) {
                 return res.json({ success: false, message: "Username/Password combination incorrect" })
             }
-            const accessToken = generateAccessToken(cadet)
+            const accessToken = generateAccessToken(cadet, role)
             const refreshToken = generateRefreshToken(cadet)
 
             try {
@@ -121,7 +121,7 @@ export default async function loginController(req, res) {
             if (!isValidUser) {
                 return res.json({ success: false, message: "Username/Password combination incorrect" })
             }
-            const accessToken = generateAccessToken(probationer)
+            const accessToken = generateAccessToken(probationer, role)
             const refreshToken = generateRefreshToken(probationer)
 
             try {
@@ -149,7 +149,7 @@ export default async function loginController(req, res) {
                 role: 'PROBATION'
             }
 
-            res.json({ success: true, message: "Successfully logged In", accessToken, additionalInfo })
+            return res.json({ success: true, message: "Successfully logged In", accessToken, additionalInfo })
         } catch (err) {
             return res.json({ success: false, message: "Problem loggin In" })
         }
