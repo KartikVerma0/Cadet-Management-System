@@ -2,8 +2,7 @@ import { useForm } from 'react-hook-form'
 import PropTypes from 'prop-types'
 import "./SignUpForm.css"
 import { useState } from 'react'
-import axios from 'axios'
-import { BACKEND_BASE_STRING } from '../../env'
+import axios from '../../api/axios.js'
 import Joi from 'joi'
 import { useNavigate } from 'react-router-dom'
 
@@ -55,8 +54,29 @@ export default function SignUpForm({ role }) {
         setCnfPassword(e.target.value)
     }
 
+    const checkUniqueEmail = async (email) => {
+        const response = await axios.get(`/check?email=${email}`)
+        return response.data
+    }
 
     const submitHandler = async (data) => {
+        setFaultyInput("")
+        setInputError("")
+        try {
+            const response = await checkUniqueEmail(data.email)
+            if (!response.success) {
+                console.error(response.message)
+                setFaultyInput('email')
+                setInputError("Enter a unique email ID");
+                return
+            }
+        } catch (err) {
+            console.error(err)
+            setFaultyInput('email')
+            setInputError("Enter a unique email ID");
+            return
+        }
+
         if (password !== cnfPassword) return;
         try {
             await SignUpFormSchema.validateAsync(data)
@@ -67,10 +87,9 @@ export default function SignUpForm({ role }) {
             setInputError(e.message);
             return;
         }
-        setFaultyInput("")
-        setInputError("")
+
         try {
-            let response = await axios.post(`${BACKEND_BASE_STRING}/signup/${role}`, data)
+            let response = await axios.post(`/signup/${role}`, data)
             if (response.data.success) {
                 navigate(`/login/${role}`)
                 setSuccessLogin(true)
@@ -186,8 +205,12 @@ export default function SignUpForm({ role }) {
                             <select id='academicYear' {...register("academicYear")}>
                                 <option value="1">1st</option>
                                 <option value="2">2nd</option>
-                                <option value="3">3rd</option>
-                                <option value="4">4th</option>
+                                {role !== "PROBATION" &&
+                                    <>
+                                        <option value="3">3rd</option>
+                                        <option value="4">4th</option>
+                                    </>
+                                }
                             </select>
                             {/* <input type="text" id='academicYear' {...register("academicYear")} /> */}
                             {faultyInput === "academicYear" && <p className='errorMessage'>{inputError}</p>}
