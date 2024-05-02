@@ -5,6 +5,7 @@ import Notification from '../models/notification.js';
 
 import getEventData from '../controllers/getEventData.js';
 import getPollData from '../controllers/getPollData.js';
+import getStudyMaterial from '../controllers/getStudyMaterial.js'
 
 const Router = express.Router();
 
@@ -35,6 +36,8 @@ Router.get("/notification", async (req, res) => {
         data: notifications
     })
 })
+
+Router.get("/studymaterial", getStudyMaterial)
 
 
 export default Router
