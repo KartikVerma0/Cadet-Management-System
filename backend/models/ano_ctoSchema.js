@@ -15,7 +15,9 @@ const ano_ctoSchema = new Schema({
     mobileNumber: {
         type: Number,
         required: true,
-        unique: true
+        unique: true,
+        min: 1000000000,
+        max: 9999999999
     },
     email: {
         type: String,
@@ -42,7 +44,10 @@ const ano_ctoSchema = new Schema({
         permissionsMapping.canDeleteNotification,
         permissionsMapping.canEditEvent,
         permissionsMapping.canEditPoll,
-        permissionsMapping.canEditNotification
+        permissionsMapping.canEditNotification,
+        permissionsMapping.canSeeEnrolledCadets,
+        permissionsMapping.canSeeProbationCadets,
+        permissionsMapping.canUploadStudyMaterial
         ]
     },
     accountApproved: {
