@@ -4,14 +4,15 @@ import ANO_CTO from '../models/ano_ctoSchema.js'
 import Cadet from '../models/cadetSchema.js'
 import Probationer from '../models/probationUser.js'
 
-export const generateAccessToken = (user) => {
+export const generateAccessToken = (user, role) => {
     const { name, mobileNumber, email, nccWing, permissions, accountApproved } = user;
     const payload = {
         "UserInfo": {
             name,
             mobileNumber,
             email, nccWing,
-            permissions, accountApproved
+            permissions, accountApproved,
+            role
         }
     }
     return jwt.sign(payload,
@@ -22,12 +23,13 @@ export const generateAccessToken = (user) => {
     )
 }
 export const generateRefreshToken = (user) => {
-    const { name, mobileNumber, email, nccWing, permissions, accountApproved } = user;
+    const { name, mobileNumber, email, nccWing, permissions, accountApproved, role } = user;
     const payload = {
         name,
         mobileNumber,
         email, nccWing,
-        permissions, accountApproved
+        permissions, accountApproved,
+        role
     }
     return jwt.sign(payload,
         process.env.REFRESH_TOKEN_SECRET,
@@ -63,7 +65,8 @@ export const refreshAccessToken = async (req, res) => {
                             name: decoded.name,
                             mobileNumber: decoded.mobileNumber,
                             email: decoded.email, nccWing: decoded.nccWing,
-                            permissions: decoded.permissions, accountApproved: decoded.accountApproved
+                            permissions: decoded.permissions, accountApproved: decoded.accountApproved,
+                            role: decoded.role
                         }
                     },
                     process.env.ACCESS_TOKEN_SECRET,
@@ -96,7 +99,8 @@ export const refreshAccessToken = async (req, res) => {
                             name: decoded.name,
                             mobileNumber: decoded.mobileNumber,
                             email: decoded.email, nccWing: decoded.nccWing,
-                            permissions: decoded.permissions, accountApproved: decoded.accountApproved
+                            permissions: decoded.permissions, accountApproved: decoded.accountApproved,
+                            role: decoded.role
                         }
                     },
                     process.env.ACCESS_TOKEN_SECRET,
@@ -129,7 +133,8 @@ export const refreshAccessToken = async (req, res) => {
                             name: decoded.name,
                             mobileNumber: decoded.mobileNumber,
                             email: decoded.email, nccWing: decoded.nccWing,
-                            permissions: decoded.permissions, accountApproved: decoded.accountApproved
+                            permissions: decoded.permissions, accountApproved: decoded.accountApproved,
+                            role: decoded.role
                         }
                     },
                     process.env.ACCESS_TOKEN_SECRET,
