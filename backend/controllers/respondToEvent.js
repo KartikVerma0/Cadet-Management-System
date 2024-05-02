@@ -1,5 +1,6 @@
 import Event from '../models/event.js'
 import EventResponse from '../models/eventResponse.js'
+import Excuse from '../models/excuse.js';
 
 export default async function respondToEvent(req, res) {
     const { dataId, userName, userEmail, enrollmentNumber, nccWing, address, mobileNumber, gender, department, rollNumber, academicYear, response } = req.body;
@@ -12,7 +13,9 @@ export default async function respondToEvent(req, res) {
     try {
 
         const selectedEventResponse = await EventResponse.findOne({ eventId: dataId, email: userEmail })
-
+        if (response === true) {
+            await Excuse.findOneAndDelete({ eventId: dataId, userEmail })
+        }
         if (selectedEventResponse) {
             selectedEventResponse.response = response
             await selectedEventResponse.save()
