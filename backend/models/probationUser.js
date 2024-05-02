@@ -31,7 +31,9 @@ const probationUserSchema = new Schema({
     mobileNumber: {
         type: Number,
         required: true,
-        unique: true
+        unique: true,
+        min: 1000000000,
+        max: 9999999999
     },
     email: {
         type: String,
