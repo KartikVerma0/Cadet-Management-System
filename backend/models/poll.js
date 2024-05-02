@@ -19,6 +19,10 @@ const pollSchema = new Schema({
             required: true
         }
     }],
+    createdBy: {
+        type: String,
+        required: true
+    },
     postedDate: {
         type: String,
         default: new Date().toLocaleString({ timeZone: 'Asia/Kolkata' })
