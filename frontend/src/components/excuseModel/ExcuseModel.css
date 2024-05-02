@@ -1,0 +1,131 @@
+.ExcuseModel {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.7);
+    inset: 0;
+    /* width: 100vw; */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'DM Sans', 'sans serif';
+    z-index: 2;
+}
+
+.ExcuseModel>h3,
+form {
+    width: 50%;
+}
+
+@media screen and (max-width:500px) {
+    .ExcuseModel>h3 {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+.ExcuseModel>button {
+    position: fixed;
+    right: 1rem;
+    top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: white;
+    border: 0;
+    cursor: pointer;
+}
+
+.ExcuseModel h3 {
+    font-size: 2rem;
+    color: var(--yellow);
+    text-decoration: underline wavy rgb(107, 90, 24) 2px;
+
+}
+
+.ExcuseModel form {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.ExcuseModel form label {
+    color: rgb(229, 204, 16);
+    font-weight: 500;
+    font-size: 1.05rem;
+    margin-top: 1rem;
+}
+
+.ExcuseModel form textarea {
+    border: 0;
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-family: inherit;
+}
+
+@media screen and (max-width:500px) {
+    .ExcuseModel form textarea {
+        height: 2.5rem;
+    }
+
+    .ExcuseModel form label {
+        margin-top: 0.35rem;
+    }
+}
+
+.ExcuseModel form input[type=file] {
+    padding-left: 0;
+    color: var(--yellow);
+    margin-bottom: 0.25rem;
+}
+
+.ExcuseModel form input[type=file]::file-selector-button,
+.ExcuseModel form input[type=file]::-webkit-file-upload-button {
+    font-family: 'DM Sans', 'sans serif';
+    background: var(--yellow);
+    border: 0;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.ExcuseModel form input[type=file]::file-selector-button:hover {
+    background: rgb(230, 184, 2);
+}
+
+.ExcuseModel form input[type=file]::-webkit-file-upload-button:hover {
+    background: rgb(230, 184, 2);
+}
+
+.ExcuseModel form select {
+    border: 0;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    font-family: inherit;
+    background-color: white;
+}
+
+.ExcuseModel form button {
+    padding: 0.5rem;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: var(--yellow);
+    border: 0;
+    border-radius: 5px;
+    color: black;
+    cursor: pointer;
+}
+
+
+.ExcuseModel .errorMessage {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: var(--red);
+}
+
+.ExcuseModel .successMessage {
+    color: var(--green);
+}

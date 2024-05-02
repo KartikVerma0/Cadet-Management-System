@@ -5,6 +5,7 @@ import EastIcon from '@mui/icons-material/East';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import MessageModal from '../messageModal/MessageModal';
+import ExcuseModel from '../excuseModel/ExcuseModel.jsx';
 import { axiosPrivate } from '../../api/axios'
 import { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom'
@@ -115,6 +116,7 @@ export default function Box({ info, section, showResponseLink = true }) {
         }
     }
 
+
     const handleEditBox = () => {
 
     }
@@ -150,6 +152,14 @@ export default function Box({ info, section, showResponseLink = true }) {
             console.error(err.message)
         }
 
+    }
+
+    const [excuseSubmitted, setExcuseSubmitted] = useState(false)
+    const [isExcuseModelOpen, setIsExcuseModelOpen] = useState(false)
+
+
+    const handleExcuse = () => {
+        setIsExcuseModelOpen(true)
     }
 
     return (
@@ -195,8 +205,8 @@ export default function Box({ info, section, showResponseLink = true }) {
             {auth.permissions.includes(permissionsMapping.canRespondToEvent) && (section === "events") &&
                 <>
                     <div className='actions'>
-                        <button onClick={() => { handleResponse(true) }} className={selectedResponse !== '' ? (selectedResponse === true ? '' : 'notSelected') : ''}><CheckIcon /></button>
-                        <button onClick={() => { handleResponse(false) }} className={selectedResponse !== '' ? (selectedResponse === false ? '' : 'notSelected') : ''}><CloseIcon /></button>
+                        <button onClick={() => { handleResponse(true) }} className={selectedResponse !== '' ? (selectedResponse === true ? '' : 'notSelected') : 'notSelected'}><CheckIcon /></button>
+                        <button onClick={() => { handleExcuse() }} className={selectedResponse !== '' ? (selectedResponse === false ? '' : 'notSelected') : 'notSelected'}><CloseIcon /></button>
                     </div>
                     {spinnerVisible && spinner("rgba(0, 174, 239, 1)")}
                 </>
@@ -213,6 +223,7 @@ export default function Box({ info, section, showResponseLink = true }) {
             {showResponseLink && auth.permissions.includes(permissionsMapping.canSeeEventResponses) && (section === "events") && <Link to={`/responses/events/${_id}`} className='responses'><span>Responses</span><EastIcon /></Link>}
             {showResponseLink && auth.permissions.includes(permissionsMapping.canSeePollResponses) && (section === "polls") && <Link to={`/responses/polls/${_id}`} className='responses'><span>Responses</span><EastIcon /></Link>}
             {hasResponded && <MessageModal closeButtonHandler={setHasResponded} message={responseMessage} hasError={hasError} />}
+            {auth.permissions.includes(permissionsMapping.canRespondToEvent) && isExcuseModelOpen && <ExcuseModel closeButtonHandler={setIsExcuseModelOpen} isExcuseSubmitted={setExcuseSubmitted} setResponse={setSelectedResponse} eventId={_id} />}
         </div>
     )
 }
