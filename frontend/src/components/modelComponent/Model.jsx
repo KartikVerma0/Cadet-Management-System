@@ -27,17 +27,23 @@ export default function Model({ closeButtonHandler, topic }) {
             Event_date: Joi.date().required(),
             start_time: Joi.string().required(),
             Event_duration: Joi.allow(),
-            Event_description: Joi.allow()
+            Event_description: Joi.string().allow('').optional()
         })
     } else if (topic === "Poll") {
         ModelSchema = Joi.object({
             Poll_name: Joi.string().required(),
-            Poll_description: Joi.string().required()
+            Poll_description: Joi.string().allow('').optional()
         })
     } else if (topic === "Notification") {
         ModelSchema = Joi.object({
             Notification_name: Joi.string().required(),
-            Notification_description: Joi.string().required()
+            Notification_description: Joi.string().allow('').optional()
+        })
+    } else if (topic === "Study_Material") {
+        ModelSchema = Joi.object({
+            Study_Material_name: Joi.string().required(),
+            Study_Material_description: Joi.string().allow('').optional(),
+            nccWing: Joi.string().required()
         })
     }
 
@@ -125,9 +131,15 @@ export default function Model({ closeButtonHandler, topic }) {
                 reject(new Error("Maximum file upload limit is 2"))
             }
             for (let index = 0; index < keys.length; index++) {
-                if (files[`${index}`].type.indexOf(`image/`) === -1) {
+                if (topic !== "Study_Material" && files[`${index}`].type.indexOf(`image/`) === -1) {
                     console.log("not image", files[`${index}`].name)
                     reject(new Error("Invalid file type (only images allowed)"))
+                } else if (topic !== "Study_Material" && files[`${index}`].size > 5 * 1024 * 1024) {
+                    console.log("file too large", files[`${index}`].name);
+                    reject(new Error("File size exceeds the limit of 5 MB"));
+                } else if (topic === "Study_Material" && files[`${index}`].size > 10 * 1024 * 1024) {
+                    console.log("file too large", files[`${index}`].name);
+                    reject(new Error("File size exceeds the limit of 10 MB"));
                 }
             }
             resolve(true)
@@ -187,8 +199,9 @@ export default function Model({ closeButtonHandler, topic }) {
             return
         }
 
+        let createdBy = auth.name
         try {
-            let response = await axiosPrivate.post(`/create/${topic.toLowerCase()}`, { ...data, previewSource }, {
+            let response = await axiosPrivate.post(`/create/${topic.toLowerCase()}`, { ...data, previewSource, createdBy }, {
                 headers: {
                     Authorization: `BEARER ${auth.accessToken}`
                 },
@@ -235,16 +248,29 @@ export default function Model({ closeButtonHandler, topic }) {
                 }
                 <label htmlFor={`${topic}_description`} >{topic} description:</label>
                 <textarea name="" id={`${topic}_description`} cols="30" rows="6" {...register(`${topic}_description`)}></textarea>
-                <label htmlFor={`${topic}_file`}>Upload images:</label>
-                <input type="file" id={`${topic}_file`} multiple onChange={handleFileChange} />
-                <p className='errorMessage'>You can upload images of total 5mb</p>
-                <section className='previewImagesContainer'>
-                    {previewSource.length > 0 && previewSource.map((source, index) =>
-                        <img key={index} src={source} className='previewImage' />
-                    )}
-                </section>
-                {!isValidFile && <p className='errorMessage'>{invalidFileError}</p>}
                 {faultyInput === `${topic}_description` && <p className='errorMessage'>{inputError}</p>}
+                {topic === "Study_Material" &&
+                    <>
+                        <label htmlFor="nccWing">Select Wing:</label>
+                        <select id='nccWing'  {...register("nccWing")}>
+                            <option value="All">All</option>
+                            <option value="Navy">Navy</option>
+                            <option value="Air">Air</option>
+                            <option value="Army">Army</option>
+                        </select>
+                    </>
+                }
+                <label htmlFor={`${topic}_file`}>Upload {topic !== "Study_Material" ? 'images' : 'files'}:</label>
+                <input type="file" id={`${topic}_file`} multiple onChange={handleFileChange} />
+                {!isValidFile && <p className='errorMessage'>{invalidFileError}</p>}
+                {isValidFile && <p className='errorMessage'>Note: You can upload {topic !== "Study_Material" ? 'images' : 'files'} of total {topic !== "Study_Material" ? '5' : '10'}mb</p>}
+                {topic !== "Study_Material" &&
+                    <section className='previewImagesContainer'>
+                        {previewSource.length > 0 && previewSource.map((source, index) =>
+                            <img key={index} src={source} className='previewImage' />
+                        )}
+                    </section>
+                }
                 <button>{spinnerVisible ? spinner("rgba(150, 100, 0, 1)") : 'Submit'}</button>
             </form>
             {successSubmit && <p className='successMessage'>Successfull Submition!</p>}

@@ -54,14 +54,14 @@ form {
     color: rgb(229, 204, 16);
     font-weight: 500;
     font-size: 1.05rem;
+    margin-top: 1rem;
 }
 
 .Model form input,
-textarea {
+.Model form textarea {
     border: 0;
     border-radius: 5px;
     padding: 0.5rem;
-    margin-bottom: 1rem;
     font-family: inherit;
 }
 
@@ -70,14 +70,15 @@ textarea {
         height: 2.5rem;
     }
 
-    .Model form input {
-        margin-bottom: 0.35rem;
+    .Model form label {
+        margin-top: 0.35rem;
     }
 }
 
 .Model form input[type=file] {
     padding-left: 0;
     color: var(--yellow);
+    margin-bottom: 0.25rem;
 }
 
 .Model form input[type=file]::file-selector-button,
@@ -96,6 +97,16 @@ textarea {
 
 .Model form input[type=file]::-webkit-file-upload-button:hover {
     background: rgb(230, 184, 2);
+}
+
+.Model form select {
+    border: 0;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    font-family: inherit;
+    background-color: white;
 }
 
 .Model form button {
@@ -125,6 +136,7 @@ textarea {
 
 .Model .errorMessage {
     margin-top: 0;
+    margin-bottom: 0.5rem;
     color: var(--red);
 }
 
