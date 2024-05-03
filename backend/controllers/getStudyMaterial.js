@@ -4,8 +4,7 @@ export default async function getStudyMaterial(req, res) {
     const { nccWing } = req.query;
     let studyMaterials = undefined;
     try {
-        studyMaterials = nccWing === "All" ? await StudyMaterial.find() :
-            await StudyMaterial.find({ nccWing })
+        studyMaterials = await StudyMaterial.find({ nccWing })
     } catch (err) {
         return res.json({ success: false, message: "Server Error" }).status(500)
     }
