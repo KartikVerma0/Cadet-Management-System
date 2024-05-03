@@ -1,7 +1,7 @@
 import Cadet from "../models/cadetSchema.js";
 import Probationer from "../models/probationUser.js";
 import express from "express";
-import permissionsMapping from "../../frontend/src/permissionsMapping.js";
+import permissionsMapping from "../config/permissionsMapping.js";
 import verifyPermissions from "../middleware/verifyPermissions.js";
 
 const Router = express.Router()
