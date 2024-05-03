@@ -1,13 +1,13 @@
-import Navbar from '../../components/navbar/Navbar'
-import Box from '../../components/box/Box'
-import { useParams } from 'react-router-dom'
-import './ResponsesListPoll.css'
-import { useEffect, useState } from 'react'
-import useAxiosPrivate from '../../hooks/useAxiosPrivate'
-import useAuth from '../../hooks/useAuth'
-
-import * as XLSX from 'xlsx'
-import { saveAs } from 'file-saver'
+import "./ResponsesListPoll.css";
+import * as XLSX from "xlsx";
+import Box from "../../components/box/Box";
+import Navbar from "../../components/navbar/Navbar";
+import Table from "../../components/table/Table";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { saveAs } from "file-saver";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export default function ResponsesListPoll() {
     const axiosPrivate = useAxiosPrivate()
@@ -78,12 +78,15 @@ export default function ResponsesListPoll() {
     }, [])
 
     const exportData = () => {
-        // console.log(pollResponses)
-        const data = pollResponses.map((pollResponse) => {
+        const data = pollResponses.map((pollResponse, index) => {
             return {
-                name: pollResponse.name, email: pollResponse.email, wing: pollResponse.nccWing, enrollmentNumber: pollResponse.enrollmentNumber, address: pollResponse.address, mobileNumber: pollResponse.mobileNumber.toString(),
-                gender: pollResponse.gender, department: pollResponse.department,
-                rollNumber: pollResponse.rollNumber.toString(), academicYear: pollResponse.academicYear, response: pollResponse.response ? 'YES' : 'NO'
+                "S. No.": index + 1,
+                Name: pollResponse.name, Email: pollResponse.email, Wing: pollResponse.nccWing,
+                "Enrollment Number": pollResponse.enrollmentNumber.toUpperCase(),
+                Address: pollResponse.address, "Mobile Number": pollResponse.mobileNumber.toString(),
+                Gender: pollResponse.gender, Department: pollResponse.department.toUpperCase(),
+                "Roll Number": pollResponse.rollNumber.toString(), "Academic Year": pollResponse.academicYear,
+                Response: pollResponse.response ? 'YES' : 'NO'
             }
         })
         const fileName = "PollResponse.xlsx"
@@ -103,33 +106,8 @@ export default function ResponsesListPoll() {
             <h1>Responses:</h1>
             {!hasErrorFetchingPollResponses ?
                 <>
-                    {/* <a href=""> */}
                     <button className='exportButton' onClick={exportData}>Export to Excel</button>
-                    {/* </a> */}
-                    <table>
-                        <thead>
-                            <tr className='headingRow'>
-                                <th className='redGradient'>S. No.</th>
-                                <th className='darkBlueGradient'>Name</th>
-                                <th className='lightBlueGradient'>Wing</th>
-                                <th className='redGradient'>Enrollment No.</th>
-                                <th className='darkBlueGradient'>Email</th>
-                                <th className='lightBlueGradient'>Response</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {pollResponses.map((pollResponse, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{pollResponse.name}</td>
-                                    <td>{pollResponse.nccWing}</td>
-                                    <td>{pollResponse.enrollmentNumber}</td>
-                                    <td>{pollResponse.email}</td>
-                                    <td className={pollResponse.response ? 'font-green' : 'font-red'}>{pollResponse.response ? 'YES' : 'NO'}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    {pollResponses && pollResponses.length > 0 && <Table tableData={pollResponses} />}
                 </>
                 :
                 <p className='errorMessage'>{hasErrorFetchingPollResponsesMessage}</p>

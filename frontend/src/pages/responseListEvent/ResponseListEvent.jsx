@@ -1,13 +1,13 @@
-import Navbar from '../../components/navbar/Navbar'
-import Box from '../../components/box/Box'
-import { useParams } from 'react-router-dom'
-import './ResponseListEvent.css'
-import { useEffect, useState } from 'react'
-import useAxiosPrivate from '../../hooks/useAxiosPrivate'
-import useAuth from '../../hooks/useAuth'
-
-import * as XLSX from 'xlsx'
-import { saveAs } from 'file-saver'
+import "./ResponseListEvent.css";
+import * as XLSX from "xlsx";
+import Box from "../../components/box/Box";
+import Navbar from "../../components/navbar/Navbar";
+import Table from "../../components/table/Table";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { saveAs } from "file-saver";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export default function ResponsesListEvent() {
     const axiosPrivate = useAxiosPrivate()
@@ -78,11 +78,15 @@ export default function ResponsesListEvent() {
     }, [])
 
     const exportData = () => {
-        const data = eventResponses.map((eventResponse) => {
+        const data = eventResponses.map((eventResponse, index) => {
             return {
-                name: eventResponse.name, email: eventResponse.email, wing: eventResponse.nccWing, enrollmentNumber: eventResponse.enrollmentNumber, address: eventResponse.address, mobileNumber: eventResponse.mobileNumber.toString(),
-                gender: eventResponse.gender, department: eventResponse.department,
-                rollNumber: eventResponse.rollNumber.toString(), academicYear: eventResponse.academicYear, response: eventResponse.response ? 'YES' : 'NO'
+                "S. No.": index + 1,
+                Name: eventResponse.name, Email: eventResponse.email, Wing: eventResponse.nccWing,
+                "Enrollment Number": eventResponse.enrollmentNumber.toUpperCase(),
+                Address: eventResponse.address, "Mobile Number": eventResponse.mobileNumber.toString(),
+                Gender: eventResponse.gender, Department: eventResponse.department.toUpperCase(),
+                "Roll Number": eventResponse.rollNumber.toString(), "Academic Year": eventResponse.academicYear,
+                Response: eventResponse.response ? 'YES' : 'NO'
             }
         })
         const fileName = "EventResponse.xlsx"
@@ -102,33 +106,8 @@ export default function ResponsesListEvent() {
             <h1>Responses:</h1>
             {!hasErrorFetchingEventResponses ?
                 <>
-                    {/* <a href=""> */}
                     <button className='exportButton' onClick={exportData}>Export to Excel</button>
-                    {/* </a> */}
-                    <table>
-                        <thead>
-                            <tr className='headingRow'>
-                                <th className='redGradient'>S. No.</th>
-                                <th className='darkBlueGradient'>Name</th>
-                                <th className='lightBlueGradient'>Wing</th>
-                                <th className='redGradient'>Enrollment No.</th>
-                                <th className='darkBlueGradient'>Email</th>
-                                <th className='lightBlueGradient'>Response</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {eventResponses.map((eventResponse, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{eventResponse.name}</td>
-                                    <td>{eventResponse.nccWing}</td>
-                                    <td>{eventResponse.enrollmentNumber}</td>
-                                    <td>{eventResponse.email}</td>
-                                    <td className={eventResponse.response ? 'font-green' : 'font-red'}>{eventResponse.response ? 'YES' : 'NO'}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    {eventResponses && eventResponses.length > 0 && <Table tableData={eventResponses} />}
                 </>
                 :
                 <p className='errorMessage'>{hasErrorFetchingEventResponsesMessage}</p>
