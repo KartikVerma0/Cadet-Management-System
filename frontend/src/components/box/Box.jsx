@@ -234,7 +234,22 @@ export default function Box({ info, section, showResponseLink = true }) {
             {showResponseLink && auth.permissions.includes(permissionsMapping.canSeeEventResponses) && (section === "events") && <Link to={`/responses/events/${_id}`} className='responses'><span>Responses</span><EastIcon /></Link>}
             {showResponseLink && auth.permissions.includes(permissionsMapping.canSeePollResponses) && (section === "polls") && <Link to={`/responses/polls/${_id}`} className='responses'><span>Responses</span><EastIcon /></Link>}
             {hasResponded && <MessageModal closeButtonHandler={setHasResponded} message={responseMessage} hasError={hasError} />}
-            {auth.permissions.includes(permissionsMapping.canRespondToEvent) && isExcuseModelOpen && <ExcuseModel closeButtonHandler={setIsExcuseModelOpen} isExcuseSubmitted={setExcuseSubmitted} setResponse={setSelectedResponse} eventId={_id} />}
+            {auth.permissions.includes(permissionsMapping.canRespondToEvent) &&
+                isExcuseModelOpen &&
+                <ExcuseModel closeButtonHandler={setIsExcuseModelOpen}
+                    isExcuseSubmitted={setExcuseSubmitted}
+                    setResponse={setSelectedResponse}
+                    eventId={_id} userData={{
+                        userName: auth.name,
+                        userEmail: auth.email,
+                        enrollmentNumber: auth.enrollmentNumber,
+                        nccWing: auth.nccWing, address: auth.address,
+                        mobileNumber: auth.mobileNumber,
+                        gender: auth.gender,
+                        department: auth.department,
+                        rollNumber: auth.rollNumber,
+                        academicYear: auth.academicYear,
+                    }} />}
         </div>
     )
 }

@@ -85,7 +85,7 @@ Router.post("/study_material", verifyPermissions(permissionsMapping.canUploadStu
 })
 
 Router.post("/excuse", verifyPermissions(permissionsMapping.canRespondToEvent), uploadFiles(), async (req, res) => {
-    const { Excuse_description, reasonCategory, createdBy, eventId, userEmail, role, nccWing } = req.body;
+    const { Excuse_description, reasonCategory, createdBy, eventId, userEmail, role, nccWing, userData } = req.body;
 
     try {
         await Excuse.findOneAndDelete({ eventId, userEmail })
@@ -102,6 +102,7 @@ Router.post("/excuse", verifyPermissions(permissionsMapping.canRespondToEvent), 
         role,
         files: req.files,
         eventId,
+        userData
     })
     try {
         await newExcuse.save()

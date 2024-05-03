@@ -18,6 +18,7 @@ import dataRouter from './routes/dataRouter.js'
 import responseRouter from './routes/responseRouter.js'
 import deleteRouter from './routes/deleteRouter.js'
 import userRouter from './routes/userRouter.js'
+import excuseRouter from './routes/excuseRouter.js'
 
 import { credentials } from './middleware/middleware.js';
 import { corsOptions } from './config/corsOptions.js';
@@ -58,6 +59,7 @@ app.use("/", userRouter)
 app.use("/create", createRouter)
 app.use("/response", responseRouter)
 app.use("/delete", deleteRouter)
+app.use("/excuse", excuseRouter)
 
 app.use("*", (req, res) => {
     return res.json({ success: false, message: "Error Route" }).status(404)

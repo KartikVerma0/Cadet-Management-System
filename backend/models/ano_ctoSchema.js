@@ -47,7 +47,8 @@ const ano_ctoSchema = new Schema({
         permissionsMapping.canEditNotification,
         permissionsMapping.canSeeEnrolledCadets,
         permissionsMapping.canSeeProbationCadets,
-        permissionsMapping.canUploadStudyMaterial
+        permissionsMapping.canUploadStudyMaterial,
+        permissionsMapping.canApprovePendingExcuses
         ]
     },
     accountApproved: {

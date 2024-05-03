@@ -23,7 +23,8 @@ export default function SpecialNavbar() {
                     permissions.includes(permissionsMapping.canCreateNotificationCode) ||
                     permissions.includes(permissionsMapping.canSeeEnrolledCadets) ||
                     permissions.includes(permissionsMapping.canSeeProbationCadets) ||
-                    permissions.includes(permissionsMapping.canUploadStudyMaterial)
+                    permissions.includes(permissionsMapping.canUploadStudyMaterial) ||
+                    permissions.includes(permissionsMapping.canApprovePendingExcuses)
                     ?
                     <>
                         <section className='SpecialNavbar'>
@@ -33,6 +34,7 @@ export default function SpecialNavbar() {
                             {permissions.includes(permissionsMapping.canUploadStudyMaterial) ? <button onClick={() => handleClick("Study_Material")}>Upload Study Material</button> : ''}
                             {permissions.includes(permissionsMapping.canSeeEnrolledCadets) ? <Link to="/enrolled/cadets">Enrolled Cadets</Link> : ''}
                             {permissions.includes(permissionsMapping.canSeeProbationCadets) ? <Link to="/enrolled/probation">Probation Cadets</Link> : ''}
+                            {permissions.includes(permissionsMapping.canApprovePendingExcuses) ? <Link to="/pendingexcuses">Pending Excuses</Link> : ''}
                         </section>
                         {selectedButton !== "" && <Model closeButtonHandler={setSelectedButton} topic={selectedButton} />}
                     </>

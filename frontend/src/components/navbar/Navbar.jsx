@@ -51,7 +51,7 @@ export default function Navbar({ loginType }) {
 
             {loginType === "login" && <Link to="/" className="NavLink">LOGIN</Link>}
             {loginType === "signup" && <Link to="/signup" className="NavLink">SIGNUP</Link>}
-            {loginType === "logout" && <button className="NavLink" onClick={handleLogout}>{spinnerVisible ? spinner("rgba(172, 57, 70, 1)") : "LOGOUT"}</button>}
+            {loginType === "logout" && <button className="NavLink" onClick={handleLogout}>{spinnerVisible ? spinner("rgba(172, 57, 70, 1)", 70) : "LOGOUT"}</button>}
 
         </nav >
     )

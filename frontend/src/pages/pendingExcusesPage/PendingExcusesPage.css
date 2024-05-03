@@ -1,0 +1,48 @@
+.PendingExcusesPage {
+    font-family: 'DM Sans', 'sans serif';
+}
+
+.PendingExcusesPage h1 {
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    font-family: 'DM Sans', 'sans serif';
+    font-weight: 400;
+    margin: 4rem 3rem 0;
+}
+
+.PendingExcusesPage form {
+    margin: 1rem 3rem;
+    width: 6rem;
+}
+
+.PendingExcusesPage form label {
+    display: block;
+}
+
+.PendingExcusesPage form select {
+    font-family: inherit;
+    width: 100%;
+    background-color: #ECECEC;
+    border: 0;
+    padding: 0.5rem;
+}
+
+.PendingExcusesPage .redBg {
+    background: rgba(239, 28, 36, 0.1);
+}
+
+.PendingExcusesPage .darkBlueBg {
+    background: rgba(46, 48, 146, 0.1);
+}
+
+.PendingExcusesPage .lightBlueBg {
+    background: rgba(0, 174, 239, 0.1);
+}
+
+.PendingExcusesPage .errorMessage {
+    margin-inline: 3rem;
+    margin-top: 1rem;
+    color: var(--red);
+    text-decoration: underline wavy 2px var(--red);
+}

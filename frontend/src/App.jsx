@@ -8,6 +8,7 @@ import ResponsesListEvent from "./pages/responseListEvent/ResponseListEvent"
 import AccountPage from "./pages/accountPage/AccountPage"
 import FourOFourPage from "./pages/404Page/FourOFourPage"
 import StudyMaterialPage from "./pages/studyMaterialPage/StudyMaterialPage"
+import PendingExcusesPage from "./pages/pendingExcusesPage/PendingExcusesPage"
 
 import { Analytics } from "@vercel/analytics/react"
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         {auth.accessToken && auth.permissions.includes(permissionsMapping.canSeePollResponses) && <Route path="/responses/polls/:dataId" element={<ResponsesListPoll />} />}
         {auth.accessToken && auth.permissions.includes(permissionsMapping.canSeeEventResponses) && <Route path="/responses/events/:dataId" element={<ResponsesListEvent />} />}
+        {auth.accessToken && auth.permissions.includes(permissionsMapping.canApprovePendingExcuses) && <Route path="/pendingexcuses" element={<PendingExcusesPage />} />}
         {auth.accessToken && <Route path="/account" element={<AccountPage />} />}
         {auth.accessToken && <Route path="/studymaterial" element={<StudyMaterialPage />} />}
         <Route path="*" element={<FourOFourPage />} />
