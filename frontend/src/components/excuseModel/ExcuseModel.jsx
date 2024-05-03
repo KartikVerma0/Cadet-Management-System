@@ -13,7 +13,7 @@ import Joi from 'joi'
 
 import './ExcuseModel.css'
 
-export default function ExcuseModel({ closeButtonHandler, isExcuseSubmitted, setResponse, eventId }) {
+export default function ExcuseModel({ closeButtonHandler, isExcuseSubmitted, setResponse, eventId, userData }) {
 
     const { spinnerVisible,
         showSpinner,
@@ -105,7 +105,7 @@ export default function ExcuseModel({ closeButtonHandler, isExcuseSubmitted, set
 
         let createdBy = auth.name
         try {
-            let response = await axiosPrivate.post(`/create/excuse`, { ...data, previewSource, createdBy, eventId, userEmail: auth.email, role: auth.role, nccWing: auth.nccWing }, {
+            let response = await axiosPrivate.post(`/create/excuse`, { ...data, previewSource, createdBy, eventId, userEmail: auth.email, role: auth.role, nccWing: auth.nccWing, userData }, {
                 headers: {
                     Authorization: `BEARER ${auth.accessToken}`
                 },
