@@ -6,7 +6,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import MessageModal from '../messageModal/MessageModal';
 import ExcuseModel from '../excuseModel/ExcuseModel.jsx';
-import { axiosPrivate } from '../../api/axios'
+import useAxiosPrivate from '../../hooks/useAxiosPrivate.js';
 import { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom'
 
@@ -25,7 +25,7 @@ import NotificationContext from '../../context/NotificationContext.jsx'
 import './Box.css'
 
 export default function Box({ info, section, showResponseLink = true }) {
-
+    const axiosPrivate = useAxiosPrivate()
 
     let { name, date, duration, description, startTime, _id } = info;
     const { auth } = useAuth()
@@ -125,7 +125,18 @@ export default function Box({ info, section, showResponseLink = true }) {
     const handleResponse = async (response) => {
         showSpinner()
         setHasResponded(false)
-        const data = { dataId: _id, userName: auth.name, userEmail: auth.email, enrollmentNumber: auth.enrollmentNumber, nccWing: auth.nccWing, address: auth.address, mobileNumber: auth.mobileNumber, gender: auth.gender, department: auth.department, rollNumber: auth.rollNumber, academicYear: auth.academicYear, response };
+        const data = {
+            dataId: _id, userName: auth.name,
+            userEmail: auth.email,
+            enrollmentNumber: auth.enrollmentNumber,
+            nccWing: auth.nccWing, address: auth.address,
+            mobileNumber: auth.mobileNumber,
+            gender: auth.gender,
+            department: auth.department,
+            rollNumber: auth.rollNumber,
+            academicYear: auth.academicYear,
+            response
+        };
         let result = undefined;
         try {
             if (section === "polls") {

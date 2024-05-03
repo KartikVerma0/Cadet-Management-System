@@ -3,13 +3,14 @@ import Box from '../../components/box/Box'
 import { useParams } from 'react-router-dom'
 import './ResponsesListPoll.css'
 import { useEffect, useState } from 'react'
-import { axiosPrivate } from '../../api/axios'
+import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 import useAuth from '../../hooks/useAuth'
 
 import * as XLSX from 'xlsx'
 import { saveAs } from 'file-saver'
 
 export default function ResponsesListPoll() {
+    const axiosPrivate = useAxiosPrivate()
     const { dataId } = useParams()
     const { auth } = useAuth({})
     const [pollInfo, setPollInfo] = useState()
