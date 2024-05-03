@@ -1,16 +1,12 @@
-import { useForm } from 'react-hook-form'
-import { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import { BACKEND_BASE_STRING } from '../../env'
-import axios from 'axios'
-import useAuth from '../../hooks/useAuth'
-
-//spinner component related imports
-import { spinner } from '../../hooks/useSpinner.jsx'
-import useSpinner from '../../hooks/useSpinner.jsx'
-
-import PropTypes from 'prop-types'
-import "./AuthForm.css"
+import "./AuthForm.css";
+import PropTypes from "prop-types";
+import axios from "axios";
+import useAuth from "../../hooks/useAuth";
+import useSpinner from "../../hooks/useSpinner.jsx";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
+import { spinner } from "../../hooks/useSpinner.jsx";
 
 export default function AuthForm({ role, authType }) {
     const { register, handleSubmit } = useForm()
@@ -30,7 +26,7 @@ export default function AuthForm({ role, authType }) {
         setErrMsg('')
         showSpinner()
         try {
-            const response = await axios.post(`${BACKEND_BASE_STRING}/login/${role}`, data, {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASE_STRING}/login/${role}`, data, {
                 withCredentials: true
             })
             if (response.data.success) {

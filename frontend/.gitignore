@@ -23,6 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-#custom env file
-/src/env.js
+
+.env
 .vercel

@@ -1,12 +1,11 @@
-import axios from 'axios'
-import { BACKEND_BASE_STRING } from '../env.js'
+import axios from "axios";
 
 export default axios.create({
-    baseURL: BACKEND_BASE_STRING
+    baseURL: import.meta.env.VITE_BACKEND_BASE_STRING
 })
 
 export const axiosPrivate = axios.create({
-    baseURL: BACKEND_BASE_STRING,
+    baseURL: import.meta.env.VITE_BACKEND_BASE_STRING,
     headers: {
         'Content-Type': 'application/json'
     },
