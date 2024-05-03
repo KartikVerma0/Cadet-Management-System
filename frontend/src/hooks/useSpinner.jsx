@@ -21,8 +21,8 @@ export default function useSpinner() {
 
 }
 
-export const spinner = (primaryColor) => {
+export const spinner = (primaryColor, width = 40) => {
     return (
-        <SpinnerInfinity size={40} thickness={140} speed={100} color={primaryColor} secondaryColor="rgba(255, 255, 255, 0.7)" />
+        <SpinnerInfinity size={width} thickness={140} speed={100} color={primaryColor} secondaryColor="rgba(255, 255, 255, 0.7)" />
     )
 }
