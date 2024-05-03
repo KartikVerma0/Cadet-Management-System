@@ -31,7 +31,7 @@ const Table = ({ tableData }) => {
                             {data.nccUnit && <td>{data.nccUnit.toUpperCase()}</td>}
                             {data.enrollmentNumber && <td>{data.enrollmentNumber.toUpperCase()}</td>}
                             {data.email && <td>{data.email}</td>}
-                            {data.response && <td className={data.response ? 'font-green' : 'font-red'}>{data.response ? 'YES' : 'NO'}</td>}
+                            {data.response !== undefined && <td className={data.response ? 'font-green' : 'font-red'}>{data.response ? 'YES' : 'NO'}</td>}
                         </tr>
                     )
                 })}
