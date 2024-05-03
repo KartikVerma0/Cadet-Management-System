@@ -1,30 +1,32 @@
-import express, { json } from 'express'
+import authRouter from "./routes/authRoutes.js";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import createRouter from "./routes/createRouter.js";
+import dataRouter from "./routes/dataRouter.js";
+import deleteRouter from "./routes/deleteRouter.js";
+import dotenv from "dotenv";
+import enrolledUserRouter from "./routes/enrolledUserRouter.js";
+import excuseRouter from "./routes/excuseRouter.js";
+import express, { json } from "express";
+import mongoose from "mongoose";
+import path from "path";
+import refreshRouter from "./routes/refresh.js";
+import responseRouter from "./routes/responseRouter.js";
+import userRouter from "./routes/userRouter.js";
+import { fileURLToPath } from "url";
+import { corsOptions } from "./config/corsOptions.js";
+import { credentials } from "./middleware/middleware.js";
+import { verifyJWT } from "./middleware/verifyJWT.js";
+
 const app = express();
 const port = 5003;
 
-import { fileURLToPath } from 'url';
-import path from 'path';
 
-import cookieParser from 'cookie-parser';
 
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 dotenv.config();
 
-import authRouter from './routes/authRoutes.js'
-import refreshRouter from './routes/refresh.js'
-import createRouter from './routes/createRouter.js'
-import dataRouter from './routes/dataRouter.js'
-import responseRouter from './routes/responseRouter.js'
-import deleteRouter from './routes/deleteRouter.js'
-import userRouter from './routes/userRouter.js'
-import excuseRouter from './routes/excuseRouter.js'
 
-import { credentials } from './middleware/middleware.js';
-import { corsOptions } from './config/corsOptions.js';
-import cors from 'cors'
 
-import { verifyJWT } from './middleware/verifyJWT.js'
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -60,6 +62,7 @@ app.use("/create", createRouter)
 app.use("/response", responseRouter)
 app.use("/delete", deleteRouter)
 app.use("/excuse", excuseRouter)
+app.use("/enrolled", enrolledUserRouter)
 
 app.use("*", (req, res) => {
     return res.json({ success: false, message: "Error Route" }).status(404)
