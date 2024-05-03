@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import StudyMaterialBox from '../../components/studyMaterialBox/StudyMaterialBox'
 import useAuth from '../../hooks/useAuth'
-import { axiosPrivate } from '../../api/axios'
+import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 import './StudyMaterialPage.css'
 
 export default function StudyMaterialPage() {
     const { auth } = useAuth()
     const [nccWing, setNccWing] = useState(auth.nccWing)
     const [studyMaterials, setStudyMaterials] = useState([])
+    const axiosPrivate = useAxiosPrivate()
 
     useEffect(() => {
         const getData = async () => {

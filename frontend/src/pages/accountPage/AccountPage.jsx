@@ -5,7 +5,7 @@ import Navbar from '../../components/navbar/Navbar'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import useAuth from '../../hooks/useAuth';
-import { axiosPrivate } from '../../api/axios';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate.js';
 import './AccountPage.css'
 
 //spinner component related imports
@@ -13,6 +13,7 @@ import { spinner } from '../../hooks/useSpinner.jsx'
 import useSpinner from '../../hooks/useSpinner.jsx'
 
 export default function AccountPage() {
+    const axiosPrivate = useAxiosPrivate()
     const [activeSection, setActiveSection] = useState('profile');
     const [userData, setUserData] = useState({})
     const { auth, setAuth } = useAuth()
