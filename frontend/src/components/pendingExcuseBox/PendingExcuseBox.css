@@ -1,0 +1,80 @@
+.PendingExcuseBox {
+    margin-inline: 3rem;
+    display: flex;
+    padding: 1rem 2rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.PendingExcuseBox .title {
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.PendingExcuseBox .eventDate {
+    font-family: inherit;
+    font-size: 0.85rem;
+    color: #858585;
+}
+
+.PendingExcuseBox .excuseBy {
+    font-family: inherit;
+    font-size: 0.75rem;
+    color: #858585;
+    font-weight: 500;
+}
+
+.PendingExcuseBox .description {
+    font-family: inherit;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+.PendingExcuseBox .downloadLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.PendingExcuseBox .downloadLink {
+    background-color: var(--yellow);
+    color: black;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    border-radius: 5px;
+}
+
+.PendingExcuseBox .actions {
+    display: flex;
+}
+
+.PendingExcuseBox .actions>* {
+    width: 1.75rem;
+    aspect-ratio: 1;
+    margin-right: 0.5rem;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 1.25rem;
+}
+
+.PendingExcuseBox .actions button:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--green);
+}
+
+.PendingExcuseBox .actions button:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--red);
+}
+
+.PendingExcuseBox .actions .notSelected {
+    background-color: gray !important;
+}
