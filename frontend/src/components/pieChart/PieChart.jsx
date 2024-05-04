@@ -17,7 +17,7 @@ export default function PieChart({ data }) {
     const values = data.map((info) => {
         return info[valueGroup]
     })
-    const colors = ["#1A4D2E", "#4F6F52", "#E8DFCA", "#F5EFE6"]
+    const colors = ["#0F1035", "#365486", "#7FC7D9", "#DCF2F1"]
     const [chartData, setChartData] = useState({
         labels: labels,
         datasets: [
