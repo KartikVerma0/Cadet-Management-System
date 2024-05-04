@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form'
-
-import Navbar from '../../components/navbar/Navbar'
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import useAuth from '../../hooks/useAuth';
-import useAxiosPrivate from '../../hooks/useAxiosPrivate.js';
-import './AccountPage.css'
+import "./AccountPage.css";
+import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
+import FeedbackForm from "../../components/feedbackForm/FeedbackForm.jsx";
+import Navbar from "../../components/navbar/Navbar";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
+import useSpinner from "../../hooks/useSpinner.jsx";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { spinner } from "../../hooks/useSpinner.jsx";
 
 //spinner component related imports
-import { spinner } from '../../hooks/useSpinner.jsx'
-import useSpinner from '../../hooks/useSpinner.jsx'
 
 export default function AccountPage() {
     const axiosPrivate = useAxiosPrivate()
@@ -246,6 +246,7 @@ export default function AccountPage() {
                     {activeSection === 'feedback' &&
                         <>
                             <h1>Feedback</h1>
+                            <FeedbackForm />
                         </>
                     }
                 </div>
