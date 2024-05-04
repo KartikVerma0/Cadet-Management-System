@@ -41,7 +41,7 @@
 .ProbationCadets .errorMessage {
     margin-inline: 3rem;
     font-family: 'DM Sans', 'sans serif';
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: var(--red);
     text-decoration: underline wavy 1.5px red;
 }
