@@ -6,6 +6,7 @@ import FourOFourPage from "./pages/404Page/FourOFourPage";
 import IndexPage from "./pages/indexPage/IndexPage";
 import LoginPage from "./pages/loginPage/LoginPage";
 import PendingExcusesPage from "./pages/pendingExcusesPage/PendingExcusesPage";
+import ProbationCadets from "./pages/probationCadetsPage/ProbationCadets";
 import ResponsesListEvent from "./pages/responseListEvent/ResponseListEvent";
 import ResponsesListPoll from "./pages/responsesListPoll/ResponsesListPoll";
 import SignUpPage from "./pages/signupPage/SignUpPage";
@@ -34,7 +35,7 @@ function App() {
         {auth.accessToken && auth.permissions.includes(permissionsMapping.canSeeEventResponses) && <Route path="/responses/events/:dataId" element={<ResponsesListEvent />} />}
         {auth.accessToken && auth.permissions.includes(permissionsMapping.canApprovePendingExcuses) && <Route path="/pendingexcuses" element={<PendingExcusesPage />} />}
         {auth.accessToken && auth.permissions.includes(permissionsMapping.canSeeEnrolledCadets) && <Route path="/enrolled/cadets" element={<EnrolledCadets />} />}
-        {auth.accessToken && auth.permissions.includes(permissionsMapping.canSeeProbationCadets) && <Route path="/enrolled/probation" element={<PendingExcusesPage />} />}
+        {auth.accessToken && auth.permissions.includes(permissionsMapping.canSeeProbationCadets) && <Route path="/enrolled/probation" element={<ProbationCadets />} />}
         {auth.accessToken && <Route path="/account" element={<AccountPage />} />}
         {auth.accessToken && <Route path="/studymaterial" element={<StudyMaterialPage />} />}
         <Route path="*" element={<FourOFourPage />} />

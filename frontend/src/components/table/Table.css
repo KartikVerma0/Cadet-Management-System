@@ -1,6 +1,6 @@
 .Table {
     width: 90%;
-    margin-inline: 3rem;
+    margin: 0 3rem 2rem;
     font-family: 'EB Garamond', 'serif';
     overflow: scroll;
     background-color: rgba(0, 0, 0, 0.1);
@@ -54,19 +54,22 @@
 
 .Table .headingRow th:nth-child(1),
 .Table .headingRow th:nth-child(4),
-.Table .headingRow th:nth-child(7) {
+.Table .headingRow th:nth-child(7),
+.Table .headingRow th:nth-child(10) {
     background-image: linear-gradient(0deg, rgba(239, 28, 36, 1) 0%, rgba(137, 16, 21, 1) 100%);
 }
 
 .Table .headingRow th:nth-child(2),
 .Table .headingRow th:nth-child(5),
-.Table .headingRow th:nth-child(8) {
+.Table .headingRow th:nth-child(8),
+.Table .headingRow th:nth-child(11) {
     background-image: linear-gradient(0deg, rgba(46, 48, 146, 1) 0%, rgba(14, 14, 44, 1) 100%);
 }
 
 .Table .headingRow th:nth-child(3),
 .Table .headingRow th:nth-child(6),
-.Table .headingRow th:nth-child(9) {
+.Table .headingRow th:nth-child(9),
+.Table .headingRow th:nth-child(12) {
     background-image: linear-gradient(0deg, rgba(0, 174, 239, 1) 0%, rgba(0, 100, 137, 1) 100%);
 }
 

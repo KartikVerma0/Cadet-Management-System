@@ -1,4 +1,4 @@
-import "./EnrolledCadets.css";
+import "./ProbationCadets.css";
 import * as XLSX from "xlsx";
 import Navbar from "../../components/navbar/Navbar";
 import PieChart from "../../components/pieChart/PieChart";
@@ -8,61 +8,60 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { saveAs } from "file-saver";
 import { useEffect, useState } from "react";
 
-export default function EnrolledCadets() {
+export default function ProbationCadets() {
     const axiosPrivate = useAxiosPrivate()
     const { auth } = useAuth({})
-    const [enrolledCadets, setEnrolledCadets] = useState([])
-    const [hasErrorFetchingEnrolledCadets, setHasErrorFetchingEnrolledCadets] = useState(false)
-    const [hasErrorFetchingEnrolledCadetsMessage, setHasErrorFetchingEnrolledCadetsMessage] = useState('')
+    const [probationCadets, setProbationCadets] = useState([])
+    const [hasErrorFetchingProbationCadets, setHasErrorFetchingProbationCadets] = useState(false)
+    const [hasErrorFetchingProbationCadetsMessage, setHasErrorFetchingProbationCadetsMessage] = useState('')
 
     const [academicYearAnalyticalData, setAcademicYearAnalyticalData] = useState([])
     const [genderAnalyticalData, setGenderAnalyticalData] = useState([])
     const [wingAnalyticalData, setWingAnalyticalData] = useState([])
 
     useEffect(() => {
-        const getEnrolledCadets = async () => {
+        const getProbationCadets = async () => {
             try {
-                const response = await axiosPrivate.get('/enrolled/cadets', {
+                const response = await axiosPrivate.get('/enrolled/probation', {
                     headers: {
                         Authorization: `BEARER ${auth.accessToken}`
                     },
                     withCredentials: true
                 })
                 if (!response) {
-                    setHasErrorFetchingEnrolledCadets(true)
+                    setHasErrorFetchingProbationCadets(true)
                     return
                 }
 
                 if (response.data.success) {
-                    setEnrolledCadets(response.data.enrolledCadets)
+                    setProbationCadets(response.data.probationCadets)
                     setAcademicYearAnalyticalData(response.data.academicYearAnalyticalData)
                     setGenderAnalyticalData(response.data.genderAnalyticalData)
                     setWingAnalyticalData(response.data.wingAnalyticalData)
                 } else {
-                    setHasErrorFetchingEnrolledCadets(true)
-                    setHasErrorFetchingEnrolledCadetsMessage(response.data.message)
+                    setHasErrorFetchingProbationCadets(true)
+                    setHasErrorFetchingProbationCadetsMessage(response.data.message)
                 }
 
             } catch (err) {
-                setHasErrorFetchingEnrolledCadets(true)
-                setHasErrorFetchingEnrolledCadetsMessage(err)
+                setHasErrorFetchingProbationCadets(true)
+                setHasErrorFetchingProbationCadetsMessage(err)
             }
         }
-        getEnrolledCadets()
+        getProbationCadets()
     }, [])
 
     const exportData = () => {
-        const data = enrolledCadets.map((cadet, index) => {
+        const data = probationCadets.map((user, index) => {
             return {
                 "S. No.": index + 1,
-                Name: cadet.name, Email: cadet.email, Wing: cadet.nccWing,
-                "Enrollment Number": cadet.enrollmentNumber.toUpperCase(),
-                Address: cadet.address, "Mobile Number": cadet.mobileNumber.toString(),
-                Gender: cadet.gender, Department: cadet.department.toUpperCase(),
-                "Roll Number": cadet.rollNumber.toString(), "Academic Year": cadet.academicYear
+                Name: user.name, Email: user.email, Wing: user.nccWing,
+                Address: user.address, "Mobile Number": user.mobileNumber.toString(),
+                Gender: user.gender, Department: user.department.toUpperCase(),
+                "Roll Number": user.rollNumber.toString(), "Academic Year": user.academicYear
             }
         })
-        const fileName = "EnrolledCadets.xlsx"
+        const fileName = "ProbationCadets.xlsx"
         const worksheet = XLSX.utils.json_to_sheet(data)
         const workbook = XLSX.utils.book_new()
         XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1")
@@ -72,29 +71,30 @@ export default function EnrolledCadets() {
     }
 
     return (
-        <div className='EnrolledCadets'>
+        <div className='ProbationCadets'>
             <Navbar loginType='logout' />
-            <h1>Enrolled Cadets:</h1>
-            {enrolledCadets && enrolledCadets.length > 0 ?
+            <h1>Probation Cadets:</h1>
+            {probationCadets && probationCadets.length > 0 ?
                 <>
                     <div className="AnalyticSection">
                         {academicYearAnalyticalData && academicYearAnalyticalData.length > 0 && <PieChart data={academicYearAnalyticalData} />}
                         {genderAnalyticalData && genderAnalyticalData.length > 0 && <PieChart data={genderAnalyticalData} />}
                         {wingAnalyticalData && wingAnalyticalData.length > 0 && <PieChart data={wingAnalyticalData} />}
                     </div>
-                    {!hasErrorFetchingEnrolledCadets ?
+                    {!hasErrorFetchingProbationCadets ?
                         <>
-                            {enrolledCadets && enrolledCadets.length > 0 &&
+                            {probationCadets && probationCadets.length > 0 &&
                                 <>
                                     <button className='exportButton' onClick={exportData}>Export to Excel</button>
-                                    <Table tableData={enrolledCadets} />
-                                </>}
+                                    <Table tableData={probationCadets} />
+                                </>
+                            }
                         </>
                         :
-                        <p className='errorMessage'>{hasErrorFetchingEnrolledCadetsMessage}</p>
+                        <p className='errorMessage'>{hasErrorFetchingProbationCadetsMessage}</p>
                     }
                 </> :
-                <p className='errorMessage'>No Enrolled cadet found!</p>
+                <p className='errorMessage'>No Probation cadet found!</p>
             }
         </div>
     )

@@ -27,6 +27,7 @@
 .Navbar .NavbarTitle {
     font-size: 2rem;
     font-weight: bold;
+    text-align: center;
 }
 
 @media screen and (max-width:500px) {
