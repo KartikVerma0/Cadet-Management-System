@@ -75,18 +75,26 @@ export default function EnrolledCadets() {
         <div className='EnrolledCadets'>
             <Navbar loginType='logout' />
             <h1>Enrolled Cadets:</h1>
-            <div className="AnalyticSection">
-                {academicYearAnalyticalData && academicYearAnalyticalData.length > 0 && <PieChart data={academicYearAnalyticalData} />}
-                {genderAnalyticalData && genderAnalyticalData.length > 0 && <PieChart data={genderAnalyticalData} />}
-                {wingAnalyticalData && wingAnalyticalData.length > 0 && <PieChart data={wingAnalyticalData} />}
-            </div>
-            {!hasErrorFetchingEnrolledCadets ?
+            {enrolledCadets && enrolledCadets.length > 0 ?
                 <>
-                    <button className='exportButton' onClick={exportData}>Export to Excel</button>
-                    {enrolledCadets && enrolledCadets.length > 0 && <Table tableData={enrolledCadets} />}
-                </>
-                :
-                <p className='errorMessage'>{hasErrorFetchingEnrolledCadetsMessage}</p>
+                    <div className="AnalyticSection">
+                        {academicYearAnalyticalData && academicYearAnalyticalData.length > 0 && <PieChart data={academicYearAnalyticalData} />}
+                        {genderAnalyticalData && genderAnalyticalData.length > 0 && <PieChart data={genderAnalyticalData} />}
+                        {wingAnalyticalData && wingAnalyticalData.length > 0 && <PieChart data={wingAnalyticalData} />}
+                    </div>
+                    {!hasErrorFetchingEnrolledCadets ?
+                        <>
+                            {enrolledCadets && enrolledCadets.length > 0 &&
+                                <>
+                                    <button className='exportButton' onClick={exportData}>Export to Excel</button>
+                                    <Table tableData={enrolledCadets} />
+                                </>}
+                        </>
+                        :
+                        <p className='errorMessage'>{hasErrorFetchingEnrolledCadetsMessage}</p>
+                    }
+                </> :
+                <p className='errorMessage'>No Enrolled cadet found!</p>
             }
         </div>
     )

@@ -74,18 +74,27 @@ export default function ProbationCadets() {
         <div className='ProbationCadets'>
             <Navbar loginType='logout' />
             <h1>Probation Cadets:</h1>
-            <div className="AnalyticSection">
-                {academicYearAnalyticalData && academicYearAnalyticalData.length > 0 && <PieChart data={academicYearAnalyticalData} />}
-                {genderAnalyticalData && genderAnalyticalData.length > 0 && <PieChart data={genderAnalyticalData} />}
-                {wingAnalyticalData && wingAnalyticalData.length > 0 && <PieChart data={wingAnalyticalData} />}
-            </div>
-            {!hasErrorFetchingProbationCadets ?
+            {probationCadets && probationCadets.length > 0 ?
                 <>
-                    <button className='exportButton' onClick={exportData}>Export to Excel</button>
-                    {probationCadets && probationCadets.length > 0 && <Table tableData={probationCadets} />}
-                </>
-                :
-                <p className='errorMessage'>{hasErrorFetchingProbationCadetsMessage}</p>
+                    <div className="AnalyticSection">
+                        {academicYearAnalyticalData && academicYearAnalyticalData.length > 0 && <PieChart data={academicYearAnalyticalData} />}
+                        {genderAnalyticalData && genderAnalyticalData.length > 0 && <PieChart data={genderAnalyticalData} />}
+                        {wingAnalyticalData && wingAnalyticalData.length > 0 && <PieChart data={wingAnalyticalData} />}
+                    </div>
+                    {!hasErrorFetchingProbationCadets ?
+                        <>
+                            {probationCadets && probationCadets.length > 0 &&
+                                <>
+                                    <button className='exportButton' onClick={exportData}>Export to Excel</button>
+                                    <Table tableData={probationCadets} />
+                                </>
+                            }
+                        </>
+                        :
+                        <p className='errorMessage'>{hasErrorFetchingProbationCadetsMessage}</p>
+                    }
+                </> :
+                <p className='errorMessage'>No Probation cadet found!</p>
             }
         </div>
     )
