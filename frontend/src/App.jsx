@@ -9,6 +9,7 @@ import PendingExcusesPage from "./pages/pendingExcusesPage/PendingExcusesPage";
 import ProbationCadets from "./pages/probationCadetsPage/ProbationCadets";
 import ResponsesListEvent from "./pages/responseListEvent/ResponseListEvent";
 import ResponsesListPoll from "./pages/responsesListPoll/ResponsesListPoll";
+import SettingsPage from "./pages/settingsPage/SettingsPage";
 import SignUpPage from "./pages/signupPage/SignUpPage";
 import SignUpRouterPage from "./pages/signUpRouterPage/SignUpRouterPage";
 import StudyMaterialPage from "./pages/studyMaterialPage/StudyMaterialPage";
@@ -37,6 +38,7 @@ function App() {
         {auth.accessToken && auth.permissions.includes(permissionsMapping.canSeeEnrolledCadets) && <Route path="/enrolled/cadets" element={<EnrolledCadets />} />}
         {auth.accessToken && auth.permissions.includes(permissionsMapping.canSeeProbationCadets) && <Route path="/enrolled/probation" element={<ProbationCadets />} />}
         {auth.accessToken && <Route path="/account" element={<AccountPage />} />}
+        {auth.accessToken && <Route path="/settings" element={<SettingsPage />} />}
         {auth.accessToken && <Route path="/studymaterial" element={<StudyMaterialPage />} />}
         <Route path="*" element={<FourOFourPage />} />
       </Routes>
