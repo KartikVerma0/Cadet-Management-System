@@ -1,0 +1,40 @@
+.CampDetailsPage {
+    font-family: 'DM Sans', 'sans serif';
+}
+
+.CampDetailsPage h1 {
+    font-size: 3rem;
+    letter-spacing: 2px;
+    font-family: 'DM Sans', 'sans serif';
+    font-weight: 400;
+    margin: 4rem 3rem 0;
+}
+
+.CampDetailsPage section {
+    margin: 2rem 3rem;
+
+}
+
+.CampDetailsPage section div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.CampDetailsPage h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.CampDetailsPage .redBg {
+    background: rgba(239, 28, 36, 0.1);
+}
+
+.CampDetailsPage .darkBlueBg {
+    background: rgba(46, 48, 146, 0.1);
+}
+
+.CampDetailsPage .lightBlueBg {
+    background: rgba(0, 174, 239, 0.1);
+}
