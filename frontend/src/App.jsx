@@ -1,5 +1,6 @@
 import "./App.css";
 import AccountPage from "./pages/accountPage/AccountPage";
+import CampDetailsPage from "./pages/campDetailsPage/CampDetailsPage";
 import Dashboard from "./pages/dashboard/Dashboard";
 import EnrolledCadets from "./pages/enrolledCadets/EnrolledCadets";
 import FourOFourPage from "./pages/404Page/FourOFourPage";
@@ -40,6 +41,7 @@ function App() {
         {auth.accessToken && <Route path="/account" element={<AccountPage />} />}
         {auth.accessToken && <Route path="/settings" element={<SettingsPage />} />}
         {auth.accessToken && <Route path="/studymaterial" element={<StudyMaterialPage />} />}
+        {auth.accessToken && <Route path="/campdetails" element={<CampDetailsPage />} />}
         <Route path="*" element={<FourOFourPage />} />
       </Routes>
     </>
