@@ -1,11 +1,11 @@
-import express from 'express'
-import Event from '../models/event.js';
-import Poll from '../models/poll.js';
-import Notification from '../models/notification.js';
-
-import getEventData from '../controllers/getEventData.js';
-import getPollData from '../controllers/getPollData.js';
-import getStudyMaterial from '../controllers/getStudyMaterial.js'
+import Event from "../models/event.js";
+import Notification from "../models/notification.js";
+import Poll from "../models/poll.js";
+import express from "express";
+import getCampData from "../controllers/getCampData.js";
+import getEventData from "../controllers/getEventData.js";
+import getPollData from "../controllers/getPollData.js";
+import getStudyMaterial from "../controllers/getStudyMaterial.js";
 
 const Router = express.Router();
 
@@ -38,6 +38,8 @@ Router.get("/notification", async (req, res) => {
 })
 
 Router.get("/studymaterial", getStudyMaterial)
+
+Router.get("/camp", getCampData)
 
 
 export default Router

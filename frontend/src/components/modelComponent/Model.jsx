@@ -1,22 +1,16 @@
-import PropTypes from 'prop-types'
-import CloseIcon from '@mui/icons-material/Close';
-import { useForm } from 'react-hook-form'
-import { useState, useContext } from 'react';
-import useAxiosPrivate from '../../hooks/useAxiosPrivate';
-import Joi from 'joi'
-
-import useAuth from '../../hooks/useAuth';
-
-import EventContext from '../../context/EventContext.jsx';
-import PollContext from '../../context/PollContext.jsx';
-import NotificationContext from '../../context/NotificationContext.jsx';
-
-import "./Model.css"
-
-//spinner component related imports
-import { spinner } from '../../hooks/useSpinner.jsx'
-import useSpinner from '../../hooks/useSpinner.jsx'
-
+import "./Model.css";
+import CloseIcon from "@mui/icons-material/Close";
+import EventContext from "../../context/EventContext.jsx";
+import Joi from "joi";
+import NotificationContext from "../../context/NotificationContext.jsx";
+import PollContext from "../../context/PollContext.jsx";
+import PropTypes from "prop-types";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useSpinner from "../../hooks/useSpinner.jsx";
+import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import { spinner } from "../../hooks/useSpinner.jsx";
 
 export default function Model({ closeButtonHandler, topic }) {
 
@@ -44,6 +38,14 @@ export default function Model({ closeButtonHandler, topic }) {
             Study_Material_name: Joi.string().required(),
             Study_Material_description: Joi.string().allow('').optional(),
             nccWing: Joi.string().required()
+        })
+    } else if (topic === "New_Camp") {
+        ModelSchema = Joi.object({
+            New_Camp_name: Joi.string().required(),
+            New_Camp_startDate: Joi.date().required(),
+            New_Camp_endDate: Joi.date().required(),
+            New_Camp_location: Joi.string().required(),
+            New_Camp_description: Joi.string().allow('').optional(),
         })
     }
 
@@ -246,6 +248,20 @@ export default function Model({ closeButtonHandler, topic }) {
                         {faultyInput === `${topic}_duration` && <p className='errorMessage'>{inputError}</p>}
                     </>
                 }
+                {topic === "New_Camp" &&
+                    <>
+                        <label htmlFor={`${topic}_startDate`} >Camp Start Date:</label>
+                        <input type="date" id={`${topic}_startDate`} {...register(`${topic}_startDate`)}></input>
+                        {faultyInput === `${topic}_startDate` && <p className='errorMessage'>{inputError}</p>}
+                        <label htmlFor={`${topic}_endDate`} >Camp End Date:</label>
+                        <input type="date" id={`${topic}_endDate`} {...register(`${topic}_endDate`)}></input>
+                        {faultyInput === `${topic}_endDate` && <p className='errorMessage'>{inputError}</p>}
+                        <label htmlFor={`${topic}_location`} >Camp Location:</label>
+                        <input type="text" id={`${topic}_location`} {...register(`${topic}_location`)}></input>
+                        {faultyInput === `${topic}_location` && <p className='errorMessage'>{inputError}</p>}
+                    </>
+                }
+
                 <label htmlFor={`${topic}_description`} >{topic} description:</label>
                 <textarea name="" id={`${topic}_description`} cols="30" rows="6" {...register(`${topic}_description`)}></textarea>
                 {faultyInput === `${topic}_description` && <p className='errorMessage'>{inputError}</p>}
@@ -260,10 +276,14 @@ export default function Model({ closeButtonHandler, topic }) {
                         </select>
                     </>
                 }
-                <label htmlFor={`${topic}_file`}>Upload {topic !== "Study_Material" ? 'images' : 'files'}:</label>
-                <input type="file" id={`${topic}_file`} multiple onChange={handleFileChange} />
+                {topic !== "New_Camp" &&
+                    <>
+                        <label htmlFor={`${topic}_file`}>Upload {topic !== "Study_Material" ? 'images' : 'files'}:</label>
+                        <input type="file" id={`${topic}_file`} multiple onChange={handleFileChange} />
+                    </>
+                }
                 {!isValidFile && <p className='errorMessage'>{invalidFileError}</p>}
-                {isValidFile && <p className='errorMessage'>Note: You can upload {topic !== "Study_Material" ? 'images' : 'files'} of total {topic !== "Study_Material" ? '5' : '10'}mb</p>}
+                {isValidFile && topic !== "New_Camp" && <p className='errorMessage'>Note: You can upload {topic !== "Study_Material" ? 'images' : 'files'} of total {topic !== "Study_Material" ? '5' : '10'}mb</p>}
                 {topic !== "Study_Material" &&
                     <section className='previewImagesContainer'>
                         {previewSource.length > 0 && previewSource.map((source, index) =>

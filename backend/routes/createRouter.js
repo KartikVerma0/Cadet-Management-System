@@ -1,17 +1,15 @@
-import express from 'express'
-
-import permissionsMapping from '../config/permissionsMapping.js';
-import verifyPermissions from '../middleware/verifyPermissions.js';
-
-import Event from '../models/event.js';
-import Poll from '../models/poll.js';
-import Notification from '../models/notification.js';
-import StudyMaterial from '../models/studyMaterial.js';
-import Excuse from '../models/excuse.js';
-import EventResponse from '../models/eventResponse.js'
-
-import uploadImages from '../middleware/uploadImages.js';
-import uploadFiles from '../middleware/uploadFiles.js';
+import Camp from "../models/camp.js";
+import Event from "../models/event.js";
+import EventResponse from "../models/eventResponse.js";
+import Excuse from "../models/excuse.js";
+import Notification from "../models/notification.js";
+import Poll from "../models/poll.js";
+import StudyMaterial from "../models/studyMaterial.js";
+import express from "express";
+import permissionsMapping from "../config/permissionsMapping.js";
+import uploadFiles from "../middleware/uploadFiles.js";
+import uploadImages from "../middleware/uploadImages.js";
+import verifyPermissions from "../middleware/verifyPermissions.js";
 
 const Router = express.Router();
 
@@ -113,4 +111,23 @@ Router.post("/excuse", verifyPermissions(permissionsMapping.canRespondToEvent), 
     }
 })
 
+
+Router.post("/new_camp", verifyPermissions(permissionsMapping.canRespondToEvent), uploadFiles(), async (req, res) => {
+    const { New_Camp_name, New_Camp_startDate, New_Camp_endDate, New_Camp_location, New_Camp_description } = req.body;
+    const { email } = req
+    const newCamp = new Camp({
+        title: New_Camp_name,
+        startDate: New_Camp_startDate,
+        endDate: New_Camp_endDate,
+        location: New_Camp_location,
+        description: New_Camp_description,
+        email
+    })
+    try {
+        await newCamp.save()
+        return res.json({ success: true, message: "Successfully saved new camp data" })
+    } catch (err) {
+        return res.json({ success: false, message: "Problem saving new camp data, Error:\n" + err.message }).status(500)
+    }
+})
 export default Router
