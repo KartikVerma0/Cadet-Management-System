@@ -7,7 +7,7 @@ import deleteRouter from "./routes/deleteRouter.js";
 import dotenv from "dotenv";
 import enrolledUserRouter from "./routes/enrolledUserRouter.js";
 import excuseRouter from "./routes/excuseRouter.js";
-import express, { json } from "express";
+import express from "express";
 import mongoose from "mongoose";
 import path from "path";
 import refreshRouter from "./routes/refresh.js";
