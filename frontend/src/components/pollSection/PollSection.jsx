@@ -1,12 +1,11 @@
-import { useEffect, useContext } from 'react'
-import useAxiosPrivate from '../../hooks/useAxiosPrivate.js'
-import BoxCollection from '../boxCollection/BoxCollection'
-import PollContext from '../../context/PollContext.jsx'
-
-import useAuth from '../../hooks/useAuth'
-
-
-import './PollSection.css'
+import "./PollSection.css";
+import BoxCollection from "../boxCollection/BoxCollection";
+import EastIcon from "@mui/icons-material/East";
+import PollContext from "../../context/PollContext.jsx";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
+import { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function PollSection() {
     const { auth } = useAuth();
@@ -38,8 +37,13 @@ export default function PollSection() {
 
     return (
         <div className='PollSection'>
-            <h2>Polls</h2>
+            {auth.role === 'ANO_CTO'
+                ?
+                <Link to={'/polls'}><h2><span>Polls</span><EastIcon /></h2></Link>
+                :
+                <h2><span>Polls</span></h2>
+            }
             <BoxCollection boxes={polls} section="polls" />
-        </div>
+        </div >
     )
 }
