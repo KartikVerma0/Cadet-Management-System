@@ -1,4 +1,5 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
+
 const { Schema } = mongoose;
 
 const eventSchema = new Schema({
@@ -7,7 +8,7 @@ const eventSchema = new Schema({
         required: true
     },
     date: {
-        type: String,
+        type: Date,
         required: true,
     },
     startTime: {
@@ -35,7 +36,7 @@ const eventSchema = new Schema({
         required: true
     },
     postedDate: {
-        type: String,
+        type: Date,
         default: new Date().toLocaleString({ timeZone: 'Asia/Kolkata' })
     }
 })

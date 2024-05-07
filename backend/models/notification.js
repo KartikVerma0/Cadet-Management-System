@@ -1,4 +1,5 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
+
 const { Schema } = mongoose;
 
 const notificationSchema = new Schema({
@@ -24,7 +25,7 @@ const notificationSchema = new Schema({
         required: true
     },
     postedDate: {
-        type: String,
+        type: Date,
         default: new Date().toLocaleString({ timeZone: 'Asia/Kolkata' })
     }
 })
