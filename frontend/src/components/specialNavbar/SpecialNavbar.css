@@ -9,7 +9,7 @@
     z-index: 2;
 }
 
-@media screen and (max-width:620px) {
+@media screen and (max-width:750px) {
     .SpecialNavbar {
         flex-direction: column;
     }

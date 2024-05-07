@@ -10,6 +10,12 @@
     font-weight: 500;
     letter-spacing: 2px;
     margin-bottom: 0;
+    color: black;
+    display: inline-block;
+}
+
+.EventsSection h2 span {
+    margin-right: 0.5rem;
 }
 
 @media screen and (max-width:500px) {
@@ -33,5 +39,5 @@
 .EventsSection a {
     text-decoration: none;
     font-size: 1.2rem;
-    color: #0387D1;
+    color: white;
 }
