@@ -3,10 +3,13 @@ import AccountPage from "./pages/accountPage/AccountPage";
 import CampDetailsPage from "./pages/campDetailsPage/CampDetailsPage";
 import Dashboard from "./pages/dashboard/Dashboard";
 import EnrolledCadets from "./pages/enrolledCadets/EnrolledCadets";
+import EventsPage from "./pages/eventsPage/EventsPage";
 import FourOFourPage from "./pages/404Page/FourOFourPage";
 import IndexPage from "./pages/indexPage/IndexPage";
 import LoginPage from "./pages/loginPage/LoginPage";
+import NotificationsPage from "./pages/notificationsPage/NotificationsPage";
 import PendingExcusesPage from "./pages/pendingExcusesPage/PendingExcusesPage";
+import PollsPage from "./pages/pollsPage/PollsPage";
 import ProbationCadets from "./pages/probationCadetsPage/ProbationCadets";
 import ResponsesListEvent from "./pages/responseListEvent/ResponseListEvent";
 import ResponsesListPoll from "./pages/responsesListPoll/ResponsesListPoll";
@@ -38,6 +41,9 @@ function App() {
         {auth.accessToken && auth.permissions.includes(permissionsMapping.canApprovePendingExcuses) && <Route path="/pendingexcuses" element={<PendingExcusesPage />} />}
         {auth.accessToken && auth.permissions.includes(permissionsMapping.canSeeEnrolledCadets) && <Route path="/enrolled/cadets" element={<EnrolledCadets />} />}
         {auth.accessToken && auth.permissions.includes(permissionsMapping.canSeeProbationCadets) && <Route path="/enrolled/probation" element={<ProbationCadets />} />}
+        {auth.accessToken && <Route path="/events" element={<EventsPage />} />}
+        {auth.accessToken && <Route path="/polls" element={<PollsPage />} />}
+        {auth.accessToken && <Route path="/notifications" element={<NotificationsPage />} />}
         {auth.accessToken && <Route path="/account" element={<AccountPage />} />}
         {auth.accessToken && <Route path="/settings" element={<SettingsPage />} />}
         {auth.accessToken && <Route path="/studymaterial" element={<StudyMaterialPage />} />}
