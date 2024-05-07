@@ -1,33 +1,27 @@
-import PropTypes from 'prop-types'
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
-import EastIcon from '@mui/icons-material/East';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import EditIcon from '@mui/icons-material/Edit';
-import MessageModal from '../messageModal/MessageModal';
-import ExcuseModel from '../excuseModel/ExcuseModel.jsx';
-import useAxiosPrivate from '../../hooks/useAxiosPrivate.js';
-import { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom'
-
-
-//spinner component related imports
-import { spinner } from '../../hooks/useSpinner.jsx'
-import useSpinner from '../../hooks/useSpinner.jsx'
-
-import permissionsMapping from '../../permissionsMapping.js';
-
-import useAuth from '../../hooks/useAuth'
-
-import EventContext from '../../context/EventContext.jsx'
-import PollContext from '../../context/PollContext.jsx'
-import NotificationContext from '../../context/NotificationContext.jsx'
-import './Box.css'
+import "./Box.css";
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import EastIcon from "@mui/icons-material/East";
+import EditIcon from "@mui/icons-material/Edit";
+import EventContext from "../../context/EventContext.jsx";
+import ExcuseModel from "../excuseModel/ExcuseModel.jsx";
+import MessageModal from "../messageModal/MessageModal";
+import NotificationContext from "../../context/NotificationContext.jsx";
+import PollContext from "../../context/PollContext.jsx";
+import PropTypes from "prop-types";
+import permissionsMapping from "../../permissionsMapping.js";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
+import useSpinner from "../../hooks/useSpinner.jsx";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { spinner } from "../../hooks/useSpinner.jsx";
 
 export default function Box({ info, section, showResponseLink = true }) {
     const axiosPrivate = useAxiosPrivate()
 
-    let { name, date, duration, description, startTime, _id } = info;
+    let { name, date, duration, description, startTime, _id, images } = info;
     const { auth } = useAuth()
     const [hasResponded, setHasResponded] = useState(false)
     const [responseMessage, setResponseMessage] = useState('')
@@ -196,7 +190,7 @@ export default function Box({ info, section, showResponseLink = true }) {
             }
             <div className='sideways'>
                 {date && <div>
-                    <span className='label'>{section.toUpperCase()} DATE: </span><span>{date}</span>
+                    <span className='label'>{section.toUpperCase()} DATE: </span><span>{new Date(date).toLocaleDateString()}</span>
                 </div>
                 }
                 {duration && <div>
@@ -211,6 +205,16 @@ export default function Box({ info, section, showResponseLink = true }) {
             {description && <div>
                 <span className='label'>{section.toUpperCase()} DESCRIPTION: </span><span>{description}</span>
             </div>
+            }
+            {images && images.length > 0 &&
+                <>
+                    <span className="label">Attachments:</span>
+                    <div className="attachments">
+                        {images.map((image, index) => {
+                            return <span key={image._id}><Link to={image.url} target="_blank">({index + 1})</Link></span>
+                        })}
+                    </div>
+                </>
             }
 
             {auth.permissions.includes(permissionsMapping.canRespondToEvent) && (section === "events") &&
