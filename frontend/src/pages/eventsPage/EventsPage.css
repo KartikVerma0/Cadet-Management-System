@@ -1,0 +1,23 @@
+.EventsPage {
+    font-family: 'DM Sans', 'sans serif';
+}
+
+.EventsPage h1 {
+    font-size: 2.75rem;
+    font-family: 'DM Sans', 'sans serif';
+    font-weight: 400;
+    margin: 4rem 3rem 0;
+}
+
+.EventsPage .BoxCollection {
+    margin-inline: 3rem;
+    margin-top: 2rem;
+}
+
+.EventsPage .errorMessage {
+    margin-inline: 3rem;
+    font-family: 'DM Sans', 'sans serif';
+    font-size: 1rem;
+    color: var(--red);
+    text-decoration: underline wavy 1.5px red;
+}
