@@ -1,12 +1,11 @@
-import { Link } from 'react-router-dom'
-import { useEffect, useContext } from 'react'
-import useAxiosPrivate from '../../hooks/useAxiosPrivate.js'
-import BoxCollection from '../boxCollection/BoxCollection'
-import useAuth from '../../hooks/useAuth'
-
-import EventContext from '../../context/EventContext.jsx'
-
-import './EventsSection.css'
+import "./EventsSection.css";
+import BoxCollection from "../boxCollection/BoxCollection";
+import EastIcon from "@mui/icons-material/East";
+import EventContext from "../../context/EventContext.jsx";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
+import { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function EventsSection() {
     const { auth } = useAuth();
@@ -40,14 +39,18 @@ export default function EventsSection() {
 
     return (
         <div className='EventsSection'>
-            <h2>Events</h2>
+            {auth.role === 'ANO_CTO'
+                ?
+                <Link to={'/events'}><h2><span>Events</span><EastIcon /></h2></Link>
+                :
+                <h2><span>Events</span></h2>
+            }
             <p>Upcoming Events</p>
             <BoxCollection boxes={events} section="events" />
             <section>
                 <span className='font-green'>Click check mark to acknowledge your presence in the event</span>
                 <span className='font-red'>Click cross mark to mark your absence in the event</span>
             </section>
-            <Link to="/pastevents">Past Events</Link>
         </div>
     )
 }
