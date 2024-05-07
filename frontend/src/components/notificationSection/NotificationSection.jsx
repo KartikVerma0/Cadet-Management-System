@@ -1,12 +1,11 @@
-import { useContext, useEffect } from 'react'
-import useAxiosPrivate from '../../hooks/useAxiosPrivate.js'
-import BoxCollection from '../boxCollection/BoxCollection'
-
-import useAuth from '../../hooks/useAuth'
-
-import NotificationContext from '../../context/NotificationContext.jsx'
-
-import './NotificationSection.css'
+import "./NotificationSection.css";
+import BoxCollection from "../boxCollection/BoxCollection";
+import EastIcon from "@mui/icons-material/East";
+import NotificationContext from "../../context/NotificationContext.jsx";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
+import { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function NotificationSection() {
     const { auth } = useAuth();
@@ -39,7 +38,13 @@ export default function NotificationSection() {
     }, [])
     return (
         <div className='NotificationSection'>
-            <h2>Notifications</h2>
+            {auth.role === 'ANO_CTO'
+                ?
+                <Link to={'/notifications'}><h2><span>Notifications</span><EastIcon /></h2></Link>
+                :
+                <h2><span>Notifications</span></h2>
+            }
+
             <BoxCollection boxes={notifications} section="notifications" />
         </div>
     )
