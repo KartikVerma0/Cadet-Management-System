@@ -9,10 +9,31 @@
     border-radius: 0.5rem;
     font-family: 'DM Sans', 'sans serif';
     position: relative;
+    max-width: 45%;
+}
+
+@media screen and (max-width:800px) {
+    .Box {
+        max-width: 60%;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .Box {
+        max-width: 100%;
+    }
+}
+
+.Box a {
+    color: white;
 }
 
 .Box>div {
     margin-bottom: 0.75rem;
+}
+
+.Box .attachments * {
+    margin-right: 0.25rem;
 }
 
 .Box .extraOptionsBtn {
@@ -118,7 +139,6 @@
 .Box .responses {
     display: flex;
     gap: 0.5rem;
-    align-items: center;
     color: #F59191;
     text-decoration: none;
     font-size: 1.1rem;
