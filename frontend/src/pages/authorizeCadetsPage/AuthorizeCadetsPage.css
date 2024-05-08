@@ -1,0 +1,53 @@
+.AuthorizeCadetsPage {
+    font-family: 'DM Sans', 'sans serif';
+}
+
+.AuthorizeCadetsPage h1 {
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    font-family: 'DM Sans', 'sans serif';
+    font-weight: 400;
+    margin: 4rem 3rem 0;
+}
+
+.AuthorizeCadetsPage .searchCadetForm {
+    margin: 1rem 3rem;
+    width: 10rem;
+    position: relative;
+}
+
+.AuthorizeCadetsPage .searchCadetForm label {
+    display: block;
+    width: max-content;
+    margin-bottom: 0.25rem;
+}
+
+.AuthorizeCadetsPage .searchCadetForm input {
+    font-family: inherit;
+    width: 100%;
+    background-color: #ECECEC;
+    border: 0;
+    padding: 0.5rem;
+    border-radius: 5px 0 0 5px;
+}
+
+.AuthorizeCadetsPage .searchCadetForm button[type=submit] {
+    position: absolute;
+    right: -1.95rem;
+    background-color: var(--yellow);
+    border: 0;
+    padding: 0.2rem 0.4rem;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+}
+
+.AuthorizeCadetsPage main {
+    margin: 3rem;
+}
+
+.AuthorizeCadetsPage .errorMessage {
+    margin-top: 1rem;
+    color: var(--red);
+    text-decoration: underline wavy 2px var(--red);
+}
