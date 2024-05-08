@@ -34,7 +34,7 @@ export default function EnrolledCadets() {
                 }
 
                 if (response.data.success) {
-                    setEnrolledCadets(response.data.enrolledCadets)
+                    setEnrolledCadets(response.data.users)
                     setAcademicYearAnalyticalData(response.data.academicYearAnalyticalData)
                     setGenderAnalyticalData(response.data.genderAnalyticalData)
                     setWingAnalyticalData(response.data.wingAnalyticalData)

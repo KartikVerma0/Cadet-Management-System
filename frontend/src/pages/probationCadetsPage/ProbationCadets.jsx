@@ -34,7 +34,7 @@ export default function ProbationCadets() {
                 }
 
                 if (response.data.success) {
-                    setProbationCadets(response.data.probationCadets)
+                    setProbationCadets(response.data.users)
                     setAcademicYearAnalyticalData(response.data.academicYearAnalyticalData)
                     setGenderAnalyticalData(response.data.genderAnalyticalData)
                     setWingAnalyticalData(response.data.wingAnalyticalData)
