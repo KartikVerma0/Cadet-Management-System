@@ -1,0 +1,15 @@
+.PendingAccountApprovalPage main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-inline: 3rem;
+    margin-top: 5rem;
+}
+
+.PendingAccountApprovalPage .message {
+    text-align: center;
+    color: #FF3C00;
+    font-family: 'DM Sans', 'sans serif';
+    font-weight: 500;
+    font-size: 1.15rem;
+}
