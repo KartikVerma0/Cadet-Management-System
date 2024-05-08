@@ -203,7 +203,7 @@ export default function Box({ info, section, showResponseLink = true }) {
                 }
             </div>
             {description && <div>
-                <span className='label'>{section.toUpperCase()} DESCRIPTION: </span><span>{description}</span>
+                <span className='label'>{section.toUpperCase()} DESCRIPTION: </span><span style={{ whiteSpace: 'preserve-breaks' }}>{description}</span>
             </div>
             }
             {images && images.length > 0 &&
