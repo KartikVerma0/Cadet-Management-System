@@ -1,10 +1,9 @@
-import { useState } from 'react'
-import Model from '../modelComponent/Model'
-import './SpecialNavbar.css'
-import useAuth from '../../hooks/useAuth';
-import { Link } from 'react-router-dom'
-import permissionsMapping from '../../permissionsMapping';
-
+import "./SpecialNavbar.css";
+import Model from "../modelComponent/Model";
+import permissionsMapping from "../../permissionsMapping";
+import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function SpecialNavbar() {
     const [selectedButton, setSelectedButton] = useState("");
@@ -24,7 +23,9 @@ export default function SpecialNavbar() {
                     permissions.includes(permissionsMapping.canSeeEnrolledCadets) ||
                     permissions.includes(permissionsMapping.canSeeProbationCadets) ||
                     permissions.includes(permissionsMapping.canUploadStudyMaterial) ||
-                    permissions.includes(permissionsMapping.canApprovePendingExcuses)
+                    permissions.includes(permissionsMapping.canApprovePendingExcuses) ||
+                    permissions.includes(permissionsMapping.canAuthorizeWingSenior) ||
+                    permissions.includes(permissionsMapping.canAuthorizeProbationSenior)
                     ?
                     <>
                         <section className='SpecialNavbar'>
@@ -35,6 +36,8 @@ export default function SpecialNavbar() {
                             {permissions.includes(permissionsMapping.canSeeEnrolledCadets) ? <Link to="/enrolled/cadets">Enrolled Cadets</Link> : ''}
                             {permissions.includes(permissionsMapping.canSeeProbationCadets) ? <Link to="/enrolled/probation">Probation Cadets</Link> : ''}
                             {permissions.includes(permissionsMapping.canApprovePendingExcuses) ? <Link to="/pendingexcuses">Pending Excuses</Link> : ''}
+                            {permissions.includes(permissionsMapping.canAuthorizeWingSenior) ||
+                                permissions.includes(permissionsMapping.canAuthorizeProbationSenior) ? <Link to="/authorize">Authorize Cadets</Link> : ''}
                         </section>
                         {selectedButton !== "" && <Model closeButtonHandler={setSelectedButton} topic={selectedButton} />}
                     </>
