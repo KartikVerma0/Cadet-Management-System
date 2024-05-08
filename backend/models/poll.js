@@ -1,3 +1,4 @@
+import PollResponse from "./pollResponse.js";
 import mongoose from "mongoose";
 
 const { Schema } = mongoose;
@@ -28,6 +29,20 @@ const pollSchema = new Schema({
         type: Date,
         default: new Date().toLocaleString({ timeZone: 'Asia/Kolkata' })
     },
+})
+
+pollSchema.pre('deleteOne', async function (next) {
+    try {
+
+        const responses = await PollResponse.find({ pollId: this._conditions._id });
+
+        if (responses && responses.length > 0) {
+            await PollResponse.deleteMany({ pollId: this._conditions._id });
+        }
+        next()
+    } catch (err) {
+        throw new Error("Problem deleting Poll Responses before deleting Poll")
+    }
 })
 
 const Poll = mongoose.model("Poll", pollSchema);

@@ -1,10 +1,9 @@
-import express from 'express'
-
-import Event from '../models/event.js'
-import EventResponse from '../models/eventResponse.js'
-import Poll from '../models/poll.js'
-import PollResponse from '../models/pollResponse.js'
-import Notification from '../models/notification.js'
+import Event from "../models/event.js";
+import EventResponse from "../models/eventResponse.js";
+import Notification from "../models/notification.js";
+import Poll from "../models/poll.js";
+import PollResponse from "../models/pollResponse.js";
+import express from "express";
 
 const Router = express.Router();
 
@@ -14,13 +13,7 @@ Router.delete('/events', async (req, res) => {
     try {
         await Event.deleteOne({ _id: eventsId })
     } catch (err) {
-        return res.json({ success: false, message: "Problem deleting Event" }).status(500)
-    }
-
-    try {
-        await EventResponse.deleteMany({ eventId: eventsId })
-    } catch (err) {
-        return res.json({ success: false, message: "Deleted Event but Problem deleting Event Responses" }).status(500)
+        return res.json({ success: false, message: `Problem deleting Event, Error:\n ${err.message}` }).status(500)
     }
 
     return res.json({ success: true, message: "Successfully deleted Event" })
@@ -32,13 +25,7 @@ Router.delete('/polls', async (req, res) => {
     try {
         await Poll.deleteOne({ _id: pollsId })
     } catch (err) {
-        return res.json({ success: false, message: "Problem deleting Poll" }).status(500)
-    }
-
-    try {
-        await PollResponse.deleteMany({ pollId: pollsId })
-    } catch (err) {
-        return res.json({ success: false, message: "Deleted Poll but Problem deleting Poll Responses" }).status(500)
+        return res.json({ success: false, message: `Problem deleting Poll, Error:\n ${err.message}` }).status(500)
     }
 
     return res.json({ success: true, message: "Successfully deleted Poll" })
