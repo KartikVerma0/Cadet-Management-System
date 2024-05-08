@@ -1,0 +1,43 @@
+.ApproveCadetAccountPage {
+    font-family: 'DM Sans', 'sans serif';
+}
+
+.ApproveCadetAccountPage h1 {
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    font-family: 'DM Sans', 'sans serif';
+    font-weight: 400;
+    margin: 4rem 3rem 0;
+}
+
+.ApproveCadetAccountPage form {
+    margin: 1rem 3rem;
+    width: 6rem;
+}
+
+.ApproveCadetAccountPage form label {
+    display: block;
+}
+
+.ApproveCadetAccountPage form select {
+    font-family: inherit;
+    width: 100%;
+    background-color: #ECECEC;
+    border: 0;
+    padding: 0.5rem;
+}
+
+.ApproveCadetAccountPage main {
+    margin-top: 3rem;
+    margin-inline: 3rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.ApproveCadetAccountPage .errorMessage {
+    margin-inline: 0 !important;
+    margin-top: 1rem;
+    color: var(--red);
+    text-decoration: underline wavy 2px var(--red);
+}
