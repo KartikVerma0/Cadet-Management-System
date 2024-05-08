@@ -1,0 +1,81 @@
+.Box3 {
+    padding: 2rem;
+    background-image: linear-gradient(180deg, rgba(46, 48, 146, 1) 0%, rgba(14, 14, 44, 1) 100%);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    color: white;
+    border-radius: 0.5rem;
+    font-family: 'DM Sans', 'sans serif';
+    position: relative;
+    max-width: 45%;
+}
+
+@media screen and (max-width:800px) {
+    .Box3 {
+        max-width: 60%;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .Box3 {
+        max-width: 100%;
+    }
+}
+
+.Box3 .label {
+    font-size: 1.05rem;
+    font-weight: 600;
+    display: block;
+    color: var(--light-blue);
+}
+
+.Box3 .text {
+    margin-bottom: 0.35rem;
+}
+
+.ApproveCadetAccountPage .errorMessage {
+    margin-inline: 3rem;
+    margin-top: 1rem;
+    color: var(--red);
+    text-decoration: underline wavy 2px var(--red);
+}
+
+.ApproveCadetAccountPage .actions {
+    margin-top: 1rem;
+}
+
+.ApproveCadetAccountPage .actions>* {
+    width: 1.75rem;
+    aspect-ratio: 1;
+    margin-right: 0.5rem;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 1.25rem;
+}
+
+
+.ApproveCadetAccountPage .actions {
+    display: flex;
+}
+
+.ApproveCadetAccountPage .actions button:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--green);
+}
+
+.ApproveCadetAccountPage .actions button:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--red);
+}
+
+.ApproveCadetAccountPage .actions .notSelected {
+    background-color: gray !important;
+}
