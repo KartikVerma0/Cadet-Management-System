@@ -2,6 +2,7 @@ import Event from "../models/event.js";
 import Notification from "../models/notification.js";
 import Poll from "../models/poll.js";
 import express from "express";
+import getCadetsListUsingFilter from "../controllers/getCadetsListUsingFilter.js";
 import getCampData from "../controllers/getCampData.js";
 import getEventData from "../controllers/getEventData.js";
 import getPollData from "../controllers/getPollData.js";
@@ -109,6 +110,8 @@ Router.get("/pastnotifications", async (req, res) => {
 Router.get("/studymaterial", getStudyMaterial)
 
 Router.get("/camp", getCampData)
+
+Router.get("/cadets", getCadetsListUsingFilter)
 
 
 export default Router
