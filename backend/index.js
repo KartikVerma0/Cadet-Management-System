@@ -57,7 +57,7 @@ app.use("/refresh", refreshRouter)
 
 app.use(verifyJWT)
 app.use("/", dataRouter)
-app.use("/", userRouter)
+app.use("/user", userRouter)
 app.use("/create", createRouter)
 app.use("/response", responseRouter)
 app.use("/delete", deleteRouter)
