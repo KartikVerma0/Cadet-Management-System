@@ -1,0 +1,54 @@
+.Box2 {
+    padding: 1.5rem 2rem;
+    background-image: linear-gradient(180deg, rgba(46, 48, 146, 1) 0%, rgba(14, 14, 44, 1) 100%);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    color: white;
+    border-radius: 0.5rem;
+    font-family: 'EB Garamond', 'serif';
+    position: relative;
+    max-width: 45%;
+    font-size: 1.25rem;
+}
+
+@media screen and (max-width:800px) {
+    .Box2 {
+        max-width: 60%;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .Box2 {
+        max-width: 100%;
+    }
+}
+
+.Box2 .demoteBtn {
+    background-color: var(--red);
+    border: 0;
+    font-family: 'DM Sans', 'sans serif';
+    border-radius: 5px;
+    padding: 0.25rem;
+    margin-top: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.Box2 .promoteBtn {
+    background-color: var(--yellow);
+    border: 0;
+    font-family: 'DM Sans', 'sans serif';
+    border-radius: 5px;
+    padding: 0.25rem;
+    margin-top: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.Box2 .errorMessage {
+    margin-top: 1rem;
+    color: var(--red);
+    text-decoration: underline wavy 2px var(--red);
+}
