@@ -25,7 +25,8 @@ export default function SpecialNavbar() {
                     permissions.includes(permissionsMapping.canUploadStudyMaterial) ||
                     permissions.includes(permissionsMapping.canApprovePendingExcuses) ||
                     permissions.includes(permissionsMapping.canAuthorizeWingSenior) ||
-                    permissions.includes(permissionsMapping.canAuthorizeProbationSenior)
+                    permissions.includes(permissionsMapping.canAuthorizeProbationSenior) ||
+                    permissions.includes(permissionsMapping.canApproveCadetAccounts)
                     ?
                     <>
                         <section className='SpecialNavbar'>
@@ -38,6 +39,7 @@ export default function SpecialNavbar() {
                             {permissions.includes(permissionsMapping.canApprovePendingExcuses) ? <Link to="/pendingexcuses">Pending Excuses</Link> : ''}
                             {permissions.includes(permissionsMapping.canAuthorizeWingSenior) ||
                                 permissions.includes(permissionsMapping.canAuthorizeProbationSenior) ? <Link to="/authorize">Authorize Cadets</Link> : ''}
+                            {permissions.includes(permissionsMapping.canApproveCadetAccounts) ? <Link to={'/approveAccounts'}>Approve Cadet Account</Link> : ''}
                         </section>
                         {selectedButton !== "" && <Model closeButtonHandler={setSelectedButton} topic={selectedButton} />}
                     </>
