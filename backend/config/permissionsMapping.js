@@ -15,6 +15,13 @@ const permissionsMapping = {
     canSeeEnrolledCadets: 31953,
     canSeeProbationCadets: 319163,
     canUploadStudyMaterial: 3211913,
-    canApprovePendingExcuses: 31165
+    canApprovePendingExcuses: 31165,
+    canUploadAttendanceProof: 321116,
+    canMarkCadetAttendance: 31331,
+    canMarkProbationerAttendance: 313161,
+    canAuthorizeWingSenior: 312319,
+    canAuthorizeProbationSenior: 311619,
+    canDemoteWingSenior: 342319,
+    canDemoteProbationSenior: 341619
 }
 export default permissionsMapping
