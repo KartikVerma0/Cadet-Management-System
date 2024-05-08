@@ -85,22 +85,28 @@ export default function Box({ info, section, showResponseLink = true }) {
             }
 
             if (section === "polls") {
-                const newPolls = polls.filter((poll) => {
+                const newPolls = polls?.filter((poll) => {
                     return poll._id !== _id
                 })
-                setPolls(newPolls)
+                if (newPolls) {
+                    setPolls(newPolls)
+                }
             }
             else if (section === "events") {
-                const newEvents = events.filter((event) => {
+                const newEvents = events?.filter((event) => {
                     return event._id !== _id
                 })
-                setEvents(newEvents)
+                if (newEvents) {
+                    setEvents(newEvents)
+                }
             }
             else if (section === "notifications") {
-                const newNotifications = notifications.filter((notification) => {
+                const newNotifications = notifications?.filter((notification) => {
                     return notification._id !== _id
                 })
-                setNotifications(newNotifications)
+                if (newNotifications) {
+                    setNotifications(newNotifications)
+                }
             }
 
         } catch (err) {
@@ -190,7 +196,7 @@ export default function Box({ info, section, showResponseLink = true }) {
             }
             <div className='sideways'>
                 {date && <div>
-                    <span className='label'>{section.toUpperCase()} DATE: </span><span>{new Date(date).toLocaleDateString()}</span>
+                    <span className='label'>{section.toUpperCase()} DATE: (DD/MM/YYYY) </span><span>{new Date(date).toLocaleDateString('en-GB')}</span>
                 </div>
                 }
                 {duration && <div>
