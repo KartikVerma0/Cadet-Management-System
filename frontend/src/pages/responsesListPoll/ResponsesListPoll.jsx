@@ -102,7 +102,7 @@ export default function ResponsesListPoll() {
         <div className='ResponsesListPoll'>
             <Navbar loginType='logout' />
             {pollInfo && !hasErrorFetchingPoll && <Box info={pollInfo} section={'polls'} showResponseLink={false} />}
-            {hasErrorFetchingPoll && <p>{hasErrorFetchingPollMessage}</p>}
+            {hasErrorFetchingPoll && <p className="errorMessage">{hasErrorFetchingPollMessage}</p>}
             <h1>Responses:</h1>
             {!hasErrorFetchingPollResponses ?
                 <>

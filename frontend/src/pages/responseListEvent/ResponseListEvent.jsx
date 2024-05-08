@@ -102,7 +102,7 @@ export default function ResponsesListEvent() {
         <div className='ResponsesListEvent'>
             <Navbar loginType='logout' />
             {eventInfo && !hasErrorFetchingEvent && <Box info={eventInfo} section={'events'} showResponseLink={false} />}
-            {hasErrorFetchingEvent && <p>{hasErrorFetchingEventMessage}</p>}
+            {hasErrorFetchingEvent && <p className="errorMessage">{hasErrorFetchingEventMessage}</p>}
             <h1>Responses:</h1>
             {!hasErrorFetchingEventResponses ?
                 <>
