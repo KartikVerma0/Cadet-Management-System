@@ -134,14 +134,14 @@ export default function Model({ closeButtonHandler, topic }) {
             }
             for (let index = 0; index < keys.length; index++) {
                 if (topic !== "Study_Material" && files[`${index}`].type.indexOf(`image/`) === -1) {
-                    console.log("not image", files[`${index}`].name)
+                    console.error("not image", files[`${index}`].name)
                     reject(new Error("Invalid file type (only images allowed)"))
-                } else if (topic !== "Study_Material" && files[`${index}`].size > 5 * 1024 * 1024) {
-                    console.log("file too large", files[`${index}`].name);
-                    reject(new Error("File size exceeds the limit of 5 MB"));
-                } else if (topic === "Study_Material" && files[`${index}`].size > 10 * 1024 * 1024) {
-                    console.log("file too large", files[`${index}`].name);
-                    reject(new Error("File size exceeds the limit of 10 MB"));
+                } else if (topic !== "Study_Material" && files[`${index}`].size > 3 * 1024 * 1024) {
+                    console.error("file too large", files[`${index}`].name);
+                    reject(new Error("File size exceeds the limit of 3 MB"));
+                } else if (topic === "Study_Material" && files[`${index}`].size > 3 * 1024 * 1024) {
+                    console.error("file too large", files[`${index}`].name);
+                    reject(new Error("File size exceeds the limit of 3 MB"));
                 }
             }
             resolve(true)
@@ -283,7 +283,7 @@ export default function Model({ closeButtonHandler, topic }) {
                     </>
                 }
                 {!isValidFile && <p className='errorMessage'>{invalidFileError}</p>}
-                {isValidFile && topic !== "New_Camp" && <p className='errorMessage'>Note: You can upload {topic !== "Study_Material" ? 'images' : 'files'} of total {topic !== "Study_Material" ? '5' : '10'}mb</p>}
+                {isValidFile && topic !== "New_Camp" && <p className='errorMessage'>Note: You can upload {topic !== "Study_Material" ? 'images' : 'files'} of total {topic !== "Study_Material" ? '3' : '3'}mb</p>}
                 {topic !== "Study_Material" &&
                     <section className='previewImagesContainer'>
                         {previewSource.length > 0 && previewSource.map((source, index) =>
