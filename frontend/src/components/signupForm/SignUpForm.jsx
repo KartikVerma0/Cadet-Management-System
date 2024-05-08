@@ -1,10 +1,10 @@
-import { useForm } from 'react-hook-form'
-import PropTypes from 'prop-types'
-import "./SignUpForm.css"
-import { useState } from 'react'
-import axios from '../../api/axios.js'
-import Joi from 'joi'
-import { useNavigate } from 'react-router-dom'
+import "./SignUpForm.css";
+import Joi from "joi";
+import PropTypes from "prop-types";
+import axios from "../../api/axios.js";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const SignUpFormSchema = Joi.object({
     name: Joi.string().required(),
@@ -126,7 +126,7 @@ export default function SignUpForm({ role }) {
                     {faultyInput === "email" && <p className='errorMessage'>{inputError}</p>}
                 </div>
                 <div>
-                    <label htmlFor="dob">Date of Birth <span className='asterisk'>*</span></label>
+                    <label htmlFor="dob">Date of Birth (MM/DD/YYYY)<span className='asterisk'>*</span></label>
                     <input type="date" id='dob' {...register("dob")} />
                     {faultyInput === "dob" && <p className='errorMessage'>{inputError}</p>}
                 </div>
