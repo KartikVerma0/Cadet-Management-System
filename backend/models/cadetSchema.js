@@ -98,6 +98,18 @@ const cadetSchema = new Schema({
         type: [Number],
         default: [permissionsMapping.canRespondToEvent, permissionsMapping.canRespondToPoll]
     },
+    hasSpecialPermissions: {
+        type: Boolean,
+        default: false
+    },
+    isWingSenior: {
+        type: Boolean,
+        default: false
+    },
+    isProbationSenior: {
+        type: Boolean,
+        default: false
+    },
     accountApproved: {
         type: Boolean,
         required: true,
