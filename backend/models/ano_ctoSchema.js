@@ -53,7 +53,8 @@ const ano_ctoSchema = new Schema({
         permissionsMapping.canMarkProbationerAttendance,
         permissionsMapping.canAuthorizeWingSenior,
         permissionsMapping.canDemoteWingSenior,
-        permissionsMapping.canDemoteProbationSenior
+        permissionsMapping.canDemoteProbationSenior,
+        permissionsMapping.canApproveCadetAccounts
         ]
     },
     accountApproved: {
