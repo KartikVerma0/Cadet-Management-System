@@ -17,8 +17,8 @@ const PendingAccountApprovalPage = () => {
             <Navbar loginType="logout" />
             <main>
                 <Lottie options={waitLottieOptions}
-                    height={400}
-                    width={400}
+                    height={300}
+                    width={300}
                 />
                 <span className="message">
                     <p>Thank you for registering on Chitkara NCC CMS.</p>
