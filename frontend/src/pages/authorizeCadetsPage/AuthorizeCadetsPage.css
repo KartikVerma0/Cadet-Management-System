@@ -44,6 +44,9 @@
 
 .AuthorizeCadetsPage main {
     margin: 3rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .AuthorizeCadetsPage .errorMessage {
