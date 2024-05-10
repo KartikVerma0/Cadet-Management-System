@@ -1,16 +1,16 @@
-import Navbar from '../../components/navbar/Navbar'
-import SpecialNavbar from '../../components/specialNavbar/SpecialNavbar'
-import CommonInfoNavbar from '../../components/commonInfoNavbar/CommonInfoNavbar'
-import AttendanceSection from '../../components/attendanceSection/AttendanceSection'
-import EventsSection from '../../components/eventsSection/EventsSection'
-import PollSection from '../../components/pollSection/PollSection'
-import NotificationSection from '../../components/notificationSection/NotificationSection'
-import "./Dashboard.css"
-import { useLocation, Navigate } from 'react-router-dom'
-import useAuth from '../../hooks/useAuth'
-import { PollProvider } from '../../context/PollContext'
-import { EventProvider } from '../../context/EventContext'
-import { NotificationProvider } from '../../context/NotificationContext'
+import "./Dashboard.css";
+import AttendanceSection from "../../components/attendanceSection/AttendanceSection";
+import CommonInfoNavbar from "../../components/commonInfoNavbar/CommonInfoNavbar";
+import EventsSection from "../../components/eventsSection/EventsSection";
+import Navbar from "../../components/navbar/Navbar";
+import NotificationSection from "../../components/notificationSection/NotificationSection";
+import PollSection from "../../components/pollSection/PollSection";
+import SpecialNavbar from "../../components/specialNavbar/SpecialNavbar";
+import useAuth from "../../hooks/useAuth";
+import { Navigate, useLocation } from "react-router-dom";
+import { EventProvider } from "../../context/EventContext";
+import { NotificationProvider } from "../../context/NotificationContext";
+import { PollProvider } from "../../context/PollContext";
 
 export default function Dashboard() {
 
@@ -31,7 +31,8 @@ export default function Dashboard() {
                             {/* only show special navbar to people that have permissions */}
                             <SpecialNavbar />
                             <CommonInfoNavbar />
-                            <AttendanceSection />
+                            {/* Implement Attendance section */}
+                            {/* <AttendanceSection /> */}
                             <EventsSection />
                         </EventProvider>
 
