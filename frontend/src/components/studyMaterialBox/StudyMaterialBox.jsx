@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import './StudyMaterialBox.css'
+import "./StudyMaterialBox.css";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 export default function StudyMaterialBox({ title, postedBy, description, downloadUrls, position }) {
     return (
-        <div className={position % 3 === 1 ? 'redBg StudyMaterialBox' : position % 3 === 2 ? 'darkBlueBg StudyMaterialBox' : 'lightBlueBg StudyMaterialBox'}>
+        <div className={`StudyMaterialBox ${position % 3 === 1 ? 'redBg' : position % 3 === 2 ? 'darkBlueBg' : 'lightBlueBg'}`}>
             <section className='descSection'>
                 <p className='title'>{title}</p>
                 <span className='postedBy'>Posted By: {postedBy}</span>
