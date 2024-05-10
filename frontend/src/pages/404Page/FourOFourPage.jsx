@@ -1,19 +1,34 @@
-import { useNavigate } from 'react-router-dom'
+import "./FourOFourPage.css";
+import Navbar from "../../components/navbar/Navbar";
+import useAuth from "../../hooks/useAuth";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import Navbar from '../../components/navbar/Navbar'
-import './FourOFourPage.css'
-import { useEffect } from 'react'
-import useAuth from '../../hooks/useAuth'
-
+/**
+ * React component for the 404 Not Found page.
+ *
+ * Handles redirection based on user authentication status:
+ * - Logged-in users with a valid access token are redirected to the dashboard.
+ * - Non-logged-in users are redirected to the home page.
+ *
+ * Displays a 404 error message with a playful message and a short waiting period.
+ *
+ * @returns {JSX.Element} The 404 Not Found page component.
+ */
 export default function FourOFourPage() {
     const navigate = useNavigate();
     const { auth } = useAuth()
+
+    // Redirect based on authentication status after a delay
     useEffect(() => {
         const redirectTimeout = setTimeout(() => {
-            auth.accessToken ?
+            if (auth.accessToken) {
+                // Logged-in user: redirect to dashboard
                 navigate("/dashboard", { replace: true })
-                :
+            } else {
+                // Non-logged-in user: redirect to home page
                 navigate("/")
+            }
 
         }, 2000)
 

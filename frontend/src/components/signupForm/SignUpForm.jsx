@@ -6,6 +6,31 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Schema for sign up form data
+ * @type {Object}
+ * @property {string} name - User's full name (required).
+ * @property {number} mobileNumber - User's 10-digit mobile number (required).
+ * @property {string} email - User's email address (required, must be a valid email format without top-level domains).
+ * @property {Date} dob - User's date of birth (required).
+ * @property {string} [nationality] - User's nationality (optional).
+ * @property {string} [fatherName] - User's father's name (optional).
+ * @property {string} [motherName] - User's mother's name (optional).
+ * @property {string} [address] - User's residential address (optional).
+ * @property {string} [bloodGroup] - User's blood group (optional).
+ * @property {string} gender - User's gender ("M" or "F", required).
+ * @property {string} [nearestRailwayStation] - Nearest railway station to User's residence (optional).
+ * @property {string} [nearestPoliceStation] - Nearest police station to User's residence (optional).
+ * @property {string} [identificationMark1] - User's identification mark 1 (optional).
+ * @property {string} [identificationMark2] - User's identification mark 2 (optional).
+ * @property {string} [department] - User's academic department (optional).
+ * @property {number} [rollNumber] - User's roll number (optional).
+ * @property {number} [academicYear] - User's academic year (1-4, optional).
+ * @property {string} [nccUnit] - User's NCC unit (optional).
+ * @property {string} enrollmentNumber - User's unique enrollment number (required).
+ * @property {string} nccWing - User's NCC wing (required).
+ * @property {string} password - User's chosen password (required).
+ */
 const SignUpFormSchema = Joi.object({
     name: Joi.string().required(),
     mobileNumber: Joi.number()
@@ -36,24 +61,30 @@ const SignUpFormSchema = Joi.object({
     password: Joi.string().required()
 })
 
+
+/**
+ * React component for cadet sign-up form.
+ *
+ * @param {string} role - The role of the cadet signing up ("CADET", "ANO_CTO", or "PROBATION").
+ * @returns {JSX.Element} The sign-up form component.
+ */
 export default function SignUpForm({ role }) {
+    // State variables for form data, errors, and validation
     const [password, setPassword] = useState("")
     const [cnfPassword, setCnfPassword] = useState("")
     const [faultyInput, setFaultyInput] = useState("")
     const [inputError, setInputError] = useState("")
-    const [successLogin, setSuccessLogin] = useState(false)
     const [errorLogin, setErrorLogin] = useState(false)
     const { register, handleSubmit } = useForm()
-
     const navigate = useNavigate()
 
+    // Functions for form handling and validation
     const passwordStateChangeHandler = (e) => {
         setPassword(e.target.value)
     }
     const confirmPasswordStateChangeHandler = (e) => {
         setCnfPassword(e.target.value)
     }
-
     const checkUniqueEmail = async (email) => {
         const response = await axios.get(`/check?email=${email}`)
         return response.data
@@ -62,6 +93,8 @@ export default function SignUpForm({ role }) {
     const submitHandler = async (data) => {
         setFaultyInput("")
         setInputError("")
+
+        // Check for unique email
         try {
             const response = await checkUniqueEmail(data.email)
             if (!response.success) {
@@ -77,7 +110,10 @@ export default function SignUpForm({ role }) {
             return
         }
 
+        // Validate password match
         if (password !== cnfPassword) return;
+
+        // Validate form data using Joi schema
         try {
             await SignUpFormSchema.validateAsync(data)
 
@@ -88,23 +124,22 @@ export default function SignUpForm({ role }) {
             return;
         }
 
+        // Send sign-up request to server
         try {
             let response = await axios.post(`/signup/${role}`, data)
             if (response.data.success) {
                 navigate(`/login/${role}`)
-                setSuccessLogin(true)
                 setErrorLogin(false)
             } else {
                 console.error(response.data.message)
                 setErrorLogin(true)
-                setSuccessLogin(false)
             }
         } catch (e) {
             console.log(e)
             setErrorLogin(true)
-            setSuccessLogin(false)
         }
     }
+
     return (
         <div className="SignUpForm">
             <h1 className='signUpFormTitle'>SIGN UP ({role.toUpperCase()})</h1>
@@ -258,7 +293,6 @@ export default function SignUpForm({ role }) {
                     {password !== cnfPassword && <p className='errorMessage'>Passwords do not Match!</p>}
                 </div>
                 <button type='submit'>SIGN UP</button>
-                {successLogin && <p className='successMessage'>Sign Up Successfull!</p>}
                 {errorLogin && <p className='errorMessage'>Sign Up Failed!</p>}
             </form>
         </div>
