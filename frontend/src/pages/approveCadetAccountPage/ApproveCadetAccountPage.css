@@ -33,6 +33,7 @@
     margin-inline: 3rem;
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .ApproveCadetAccountPage .errorMessage {
