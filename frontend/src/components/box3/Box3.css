@@ -35,18 +35,18 @@
     margin-bottom: 0.35rem;
 }
 
-.ApproveCadetAccountPage .errorMessage {
+.Box3 .errorMessage {
     margin-inline: 3rem;
     margin-top: 1rem;
     color: var(--red);
     text-decoration: underline wavy 2px var(--red);
 }
 
-.ApproveCadetAccountPage .actions {
+.Box3 .actions {
     margin-top: 1rem;
 }
 
-.ApproveCadetAccountPage .actions>* {
+.Box3 .actions>* {
     width: 1.75rem;
     aspect-ratio: 1;
     margin-right: 0.5rem;
@@ -58,24 +58,24 @@
 }
 
 
-.ApproveCadetAccountPage .actions {
+.Box3 .actions {
     display: flex;
 }
 
-.ApproveCadetAccountPage .actions button:nth-child(1) {
+.Box3 .actions button:nth-child(1) {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--green);
 }
 
-.ApproveCadetAccountPage .actions button:nth-child(2) {
+.Box3 .actions button:nth-child(2) {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--red);
 }
 
-.ApproveCadetAccountPage .actions .notSelected {
+.Box3 .actions .notSelected {
     background-color: gray !important;
 }
