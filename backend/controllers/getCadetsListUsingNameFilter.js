@@ -1,6 +1,6 @@
 import Cadet from "../models/cadetSchema.js";
 
-export default async function getCadetsListUsingFilter(req, res) {
+export default async function getCadetsListUsingNameFilter(req, res) {
     const { filter } = req.query
     const filterRegEx = new RegExp(filter, 'i')
     let cadets = undefined;
@@ -10,7 +10,7 @@ export default async function getCadetsListUsingFilter(req, res) {
         return res.json({ success: false, message: "Server Error" }).status(500)
     }
 
-    if (cadets) {
+    if (cadets && cadets.length > 0) {
         return res.json({ success: true, cadets })
     }
 
