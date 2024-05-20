@@ -14,8 +14,9 @@ import verifyPermissions from "../middleware/verifyPermissions.js";
 const Router = express.Router();
 
 Router.post("/event", verifyPermissions(permissionsMapping.canCreateEvent), uploadImages({ folder: 'event' }), async (req, res) => {
-    const { Event_name, Event_date, start_time, Event_duration, Event_description, createdBy } = req.body;
+    const { Event_name, Event_date, start_time, Event_duration, Event_description, createdBy, Event_group } = req.body;
     const newEvent = new Event({
+        group: Event_group,
         name: Event_name,
         date: Event_date,
         startTime: start_time,
@@ -33,8 +34,9 @@ Router.post("/event", verifyPermissions(permissionsMapping.canCreateEvent), uplo
 })
 
 Router.post("/poll", verifyPermissions(permissionsMapping.canCreatePoll), uploadImages({ folder: 'poll' }), async (req, res) => {
-    const { Poll_name, Poll_description, createdBy } = req.body;
+    const { Poll_name, Poll_description, createdBy, Poll_group } = req.body;
     const newPoll = new Poll({
+        group: Poll_group,
         name: Poll_name,
         description: Poll_description,
         images: req.files,
@@ -49,8 +51,9 @@ Router.post("/poll", verifyPermissions(permissionsMapping.canCreatePoll), upload
 })
 
 Router.post("/notification", verifyPermissions(permissionsMapping.canCreateNotification), uploadImages({ folder: 'notification' }), async (req, res) => {
-    const { Notification_name, Notification_description, createdBy } = req.body;
+    const { Notification_name, Notification_description, createdBy, Notification_group } = req.body;
     const newNotification = new Notification({
+        group: Notification_group,
         name: Notification_name,
         description: Notification_description,
         images: req.files,
@@ -66,8 +69,9 @@ Router.post("/notification", verifyPermissions(permissionsMapping.canCreateNotif
 })
 
 Router.post("/study_material", verifyPermissions(permissionsMapping.canUploadStudyMaterial), uploadFiles(), async (req, res) => {
-    const { Study_Material_name, Study_Material_description, nccWing, createdBy } = req.body;
+    const { Study_Material_name, Study_Material_description, nccWing, createdBy, Study_Material_group } = req.body;
     const newStudyMaterial = new StudyMaterial({
+        group: Study_Material_group,
         name: Study_Material_name,
         description: Study_Material_description,
         nccWing,
