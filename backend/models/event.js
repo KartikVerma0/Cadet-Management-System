@@ -1,9 +1,15 @@
+import AttendanceRecordCadet from "./attendanceRecordCadet.js";
+import AttendanceRecordProbation from "./attendanceRecordProbation.js";
 import EventResponse from "./eventResponse.js";
 import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
 const eventSchema = new Schema({
+    group: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true
@@ -39,6 +45,39 @@ const eventSchema = new Schema({
     postedDate: {
         type: Date,
         default: new Date().toLocaleString({ timeZone: 'Asia/Kolkata' })
+    }
+})
+
+
+eventSchema.post('save', async function (next) {
+    const group = this.group;
+    let attendanceRecord = undefined;
+    try {
+        if (group === "cadet") {
+            attendanceRecord = await AttendanceRecordCadet.findOne({ eventID: this._id })
+            if (!attendanceRecord) {
+                const newRecord = new AttendanceRecordCadet({
+                    eventID: this._id
+                })
+
+                await newRecord.save()
+            } else {
+                next()
+            }
+        } else if (group === "probation") {
+            attendanceRecord = await AttendanceRecordProbation.findOne({ eventID: this._id })
+            if (!attendanceRecord) {
+                const newRecord = new AttendanceRecordProbation({
+                    eventID: this._id
+                })
+
+                await newRecord.save()
+            } else {
+                next()
+            }
+        }
+    } catch (error) {
+        console.log(error.message)
     }
 })
 
