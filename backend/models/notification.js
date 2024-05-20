@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const notificationSchema = new Schema({
+    group: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true

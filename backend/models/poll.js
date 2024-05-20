@@ -4,6 +4,10 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const pollSchema = new Schema({
+    group: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true
