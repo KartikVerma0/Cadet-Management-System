@@ -21,23 +21,27 @@ export default function Model({ closeButtonHandler, topic }) {
             Event_date: Joi.date().required(),
             start_time: Joi.string().required(),
             Event_duration: Joi.allow(),
-            Event_description: Joi.string().allow('').optional()
+            Event_description: Joi.string().allow('').optional(),
+            Event_group: Joi.string().required()
         })
     } else if (topic === "Poll") {
         ModelSchema = Joi.object({
             Poll_name: Joi.string().required(),
-            Poll_description: Joi.string().allow('').optional()
+            Poll_description: Joi.string().allow('').optional(),
+            Poll_group: Joi.string().required()
         })
     } else if (topic === "Notification") {
         ModelSchema = Joi.object({
             Notification_name: Joi.string().required(),
-            Notification_description: Joi.string().allow('').optional()
+            Notification_description: Joi.string().allow('').optional(),
+            Notification_group: Joi.string().required()
         })
     } else if (topic === "Study_Material") {
         ModelSchema = Joi.object({
             Study_Material_name: Joi.string().required(),
             Study_Material_description: Joi.string().allow('').optional(),
-            nccWing: Joi.string().required()
+            nccWing: Joi.string().required(),
+            Study_Material_group: Joi.string().required()
         })
     } else if (topic === "New_Camp") {
         ModelSchema = Joi.object({
@@ -264,6 +268,15 @@ export default function Model({ closeButtonHandler, topic }) {
 
                 <label htmlFor={`${topic}_description`} >{topic} description:</label>
                 <textarea name="" id={`${topic}_description`} cols="30" rows="6" {...register(`${topic}_description`)}></textarea>
+                {topic !== "New_Camp" &&
+                    <>
+                        <label htmlFor={`${topic}_group`}>Select a group:</label>
+                        <select id={`${topic}_group`}  {...register(`${topic}_group`)}>
+                            <option value="cadet">Cadets</option>
+                            <option value="probation">Probationers</option>
+                        </select>
+                    </>
+                }
                 {faultyInput === `${topic}_description` && <p className='errorMessage'>{inputError}</p>}
                 {topic === "Study_Material" &&
                     <>
