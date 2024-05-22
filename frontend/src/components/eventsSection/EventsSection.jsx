@@ -39,12 +39,9 @@ export default function EventsSection() {
 
     return (
         <div className='EventsSection'>
-            {auth.role === 'ANO_CTO'
-                ?
-                <Link to={'/events'}><h2><span>Events</span><EastIcon /></h2></Link>
-                :
-                <h2><span>Events</span></h2>
-            }
+
+            <Link to={'/events'}><h2><span>Events</span><EastIcon /></h2></Link>
+
             <p>Upcoming Events</p>
             <BoxCollection boxes={events} section="events" />
             <section>
