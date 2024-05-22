@@ -32,7 +32,7 @@ export default function Dashboard() {
                             <SpecialNavbar />
                             <CommonInfoNavbar />
                             {/* Implement Attendance section */}
-                            {/* <AttendanceSection /> */}
+                            {auth.role !== "ANO_CTO" && <AttendanceSection />}
                             <EventsSection />
                         </EventProvider>
 
