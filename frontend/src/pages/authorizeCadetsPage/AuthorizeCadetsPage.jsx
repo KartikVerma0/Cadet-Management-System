@@ -19,7 +19,6 @@ const AuthorizeCadetsPage = () => {
         hideSpinner
     } = useSpinner()
 
-
     const submitHandler = async (data) => {
         showSpinner()
 
@@ -34,6 +33,7 @@ const AuthorizeCadetsPage = () => {
             if (response.data.success) {
                 setCadets(response.data.cadets)
             } else {
+                setCadets([])
                 console.error(response.data.message)
             }
         } catch (e) {
