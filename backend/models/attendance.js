@@ -1,4 +1,5 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
+
 const { Schema } = mongoose;
 
 
@@ -11,27 +12,12 @@ const monthlyAttendanceSchema = new Schema({
             'July', 'August', 'September', 'October', 'November', 'December'
         ]
     },
-    DrillAttended: {
+    eventsAttended: {
         type: Number,
         required: true,
         default: 0
     },
-    TotalDrill: {
-        type: Number,
-        required: true,
-        default: 0
-    },
-    OtherEventsAttended: {
-        type: Number,
-        required: true,
-        default: 0
-    },
-    OtherEventsTotal: {
-        type: Number,
-        required: true,
-        default: 0
-    },
-    Attendancepercentage: {
+    TotalEvents: {
         type: Number,
         required: true,
         default: 0
@@ -55,11 +41,8 @@ const defaultMonthlyAttendanceData = [
     { month: 'December' }
 ].map(monthData => ({
     ...monthData,
-    DrillAttended: 0,
-    TotalDrill: 0,
-    OtherEventsAttended: 0,
-    OtherEventsTotal: 0,
-    Attendancepercentage: 0
+    eventsAttended: 0,
+    TotalEvents: 0
 }));
 
 const attendanceSchema = new Schema({
@@ -83,26 +66,16 @@ const attendanceSchema = new Schema({
                 default: defaultMonthlyAttendanceData,
                 required: true
             },
-            DrillAttended: {
+            TotalEvents: {
                 type: Number,
                 required: true,
                 default: 0
             },
-            OtherEventsAttended: {
+            eventsAttended: {
                 type: Number,
                 required: true,
                 default: 0
             },
-            TotalEventsAttended: {
-                type: Number,
-                required: true,
-                default: 0
-            },
-            OverallAttendancepercentage: {
-                type: Number,
-                required: true,
-                default: 0
-            }
         }
     ]
 });
