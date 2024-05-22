@@ -18,10 +18,10 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { spinner } from "../../hooks/useSpinner.jsx";
 
-export default function Box({ info, section, showResponseLink = true }) {
+export default function Box({ info, section, showResponseLink = true, showMarkAttendanceLink = true }) {
     const axiosPrivate = useAxiosPrivate()
 
-    let { name, date, duration, description, startTime, _id, images } = info;
+    let { name, date, duration, description, startTime, _id, images, group } = info;
     const { auth } = useAuth()
     const [hasResponded, setHasResponded] = useState(false)
     const [responseMessage, setResponseMessage] = useState('')
@@ -181,11 +181,11 @@ export default function Box({ info, section, showResponseLink = true }) {
                 <>
                     <div className='extraOptions'>
                         {section === "events" && (auth.permissions.includes(permissionsMapping.canDeleteEvent)) && <span className='delete' onClick={handleDeleteBox}><DeleteOutlineIcon />Delete Event</span>}
-                        {section === "events" && (auth.permissions.includes(permissionsMapping.canEditEvent)) && <span className='edit' onClick={handleEditBox}><EditIcon />Edit Event</span>}
+                        {/* {section === "events" && (auth.permissions.includes(permissionsMapping.canEditEvent)) && <span className='edit' onClick={handleEditBox}><EditIcon />Edit Event</span>} */}
                         {section === "polls" && (auth.permissions.includes(permissionsMapping.canDeletePoll)) && <span className='delete' onClick={handleDeleteBox}><DeleteOutlineIcon />Delete Poll</span>}
-                        {section === "polls" && (auth.permissions.includes(permissionsMapping.canEditPoll)) && <span className='edit' onClick={handleEditBox}><EditIcon />Edit Poll</span>}
+                        {/* {section === "polls" && (auth.permissions.includes(permissionsMapping.canEditPoll)) && <span className='edit' onClick={handleEditBox}><EditIcon />Edit Poll</span>} */}
                         {section === "notifications" && (auth.permissions.includes(permissionsMapping.canDeleteNotification)) && <span className='delete' onClick={handleDeleteBox}><DeleteOutlineIcon />Delete Notification</span>}
-                        {section === "notifications" && (auth.permissions.includes(permissionsMapping.canEditNotification)) && <span className='edit' onClick={handleEditBox}><EditIcon />Edit Notification</span>}
+                        {/* {section === "notifications" && (auth.permissions.includes(permissionsMapping.canEditNotification)) && <span className='edit' onClick={handleEditBox}><EditIcon />Edit Notification</span>} */}
                     </div>
                     {hasErrorDeleting && <MessageModal closeButtonHandler={setHasErrorDeleting} message={hasErrorDeletingMessage} hasError={hasErrorDeleting} />}
                 </>
@@ -223,7 +223,7 @@ export default function Box({ info, section, showResponseLink = true }) {
                 </>
             }
 
-            {auth.permissions.includes(permissionsMapping.canRespondToEvent) && (section === "events") &&
+            {auth.permissions.includes(permissionsMapping.canRespondToEvent) && (section === "events") && new Date() < new Date(date) &&
                 <>
                     <div className='actions'>
                         <button onClick={() => { handleResponse(true) }} className={selectedResponse !== '' ? (selectedResponse === true ? '' : 'notSelected') : 'notSelected'}><CheckIcon /></button>
@@ -232,7 +232,8 @@ export default function Box({ info, section, showResponseLink = true }) {
                     {spinnerVisible && spinner("rgba(0, 174, 239, 1)")}
                 </>
             }
-            {auth.permissions.includes(permissionsMapping.canRespondToPoll) && (section === "polls") &&
+            {
+                auth.permissions.includes(permissionsMapping.canRespondToPoll) && (section === "polls") &&
                 <>
                     <div className='actions'>
                         <button onClick={() => { handleResponse(true) }} className={selectedResponse !== '' ? (selectedResponse === true ? '' : 'notSelected') : ''}><CheckIcon /></button>
@@ -243,8 +244,11 @@ export default function Box({ info, section, showResponseLink = true }) {
             }
             {showResponseLink && auth.permissions.includes(permissionsMapping.canSeeEventResponses) && (section === "events") && <Link to={`/responses/events/${_id}`} className='responses'><span>Responses</span><EastIcon /></Link>}
             {showResponseLink && auth.permissions.includes(permissionsMapping.canSeePollResponses) && (section === "polls") && <Link to={`/responses/polls/${_id}`} className='responses'><span>Responses</span><EastIcon /></Link>}
+            {showMarkAttendanceLink && group === "cadet" && auth.permissions.includes(permissionsMapping.canMarkCadetAttendance) && (section === "events") && new Date() > new Date(date) && <Link to={`/attendance/cadets?eventId=${_id}`} className='responses'><span>Mark Attendance (cadets)</span><EastIcon /></Link>}
+            {showMarkAttendanceLink && group === "probation" && auth.permissions.includes(permissionsMapping.canMarkProbationerAttendance) && (section === "events") && new Date() > new Date(date) && <Link to={`/attendance/probation?eventId=${_id}`} className='responses'><span>Mark Attendance (probationers)</span><EastIcon /></Link>}
             {hasResponded && <MessageModal closeButtonHandler={setHasResponded} message={responseMessage} hasError={hasError} />}
-            {auth.permissions.includes(permissionsMapping.canRespondToEvent) &&
+            {
+                auth.permissions.includes(permissionsMapping.canRespondToEvent) &&
                 isExcuseModelOpen &&
                 <ExcuseModel closeButtonHandler={setIsExcuseModelOpen}
                     isExcuseSubmitted={setExcuseSubmitted}
@@ -259,8 +263,9 @@ export default function Box({ info, section, showResponseLink = true }) {
                         department: auth.department,
                         rollNumber: auth.rollNumber,
                         academicYear: auth.academicYear,
-                    }} />}
-        </div>
+                    }} />
+            }
+        </div >
     )
 }
 
