@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types'
-import Box from '../box/Box'
-import './BoxCollection.css'
+import "./BoxCollection.css";
+import Box from "../box/Box";
+import PropTypes from "prop-types";
 
 export default function BoxCollection({ boxes, section }) {
     return (
         <div className='BoxCollection'>
-            {boxes.map((box) => (
+            {boxes?.map((box) => (
                 <Box key={box._id} info={box} section={section} />
             ))}
         </div>
