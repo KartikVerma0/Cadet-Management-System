@@ -1,0 +1,52 @@
+.MarkAttendancePage {
+    overflow-x: scroll;
+}
+
+.MarkAttendancePage .Box {
+    max-width: 25%;
+    margin-inline: 3rem;
+    margin-top: 3rem;
+}
+
+@media screen and (max-width:750px) {
+    .MarkAttendancePage .Box {
+        max-width: 100%;
+    }
+}
+
+.MarkAttendancePage h1 {
+    margin-top: 2rem;
+    margin-inline: 3rem;
+    font-family: 'DM Sans', 'sans serif';
+    font-weight: 500;
+    font-size: 2.5rem;
+}
+
+.MarkAttendancePage h2 {
+    margin-top: 2rem;
+    margin-inline: 3rem;
+    font-family: 'DM Sans', 'sans serif';
+    font-weight: 500;
+    font-size: 2rem;
+}
+
+.MarkAttendancePage .redBg {
+    background: rgba(239, 28, 36, 0.1);
+}
+
+.MarkAttendancePage .darkBlueBg {
+    background: rgba(46, 48, 146, 0.1);
+}
+
+.MarkAttendancePage .lightBlueBg {
+    background: rgba(0, 174, 239, 0.1);
+}
+
+.MarkAttendancePage .errorMessage {
+    margin-inline: 3rem;
+    margin-bottom: 2rem;
+    font-family: 'DM Sans', 'sans serif';
+    font-size: 1.25rem;
+    color: var(--red);
+    text-decoration: underline wavy 1.5px red;
+}
