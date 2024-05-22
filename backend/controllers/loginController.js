@@ -1,10 +1,8 @@
-import ANO_CTO from '../models/ano_ctoSchema.js'
-import Cadet from '../models/cadetSchema.js'
-import Probationer from '../models/probationUser.js'
-
-import bcrypt from 'bcrypt'
-
-import { generateAccessToken, generateRefreshToken } from '../utils/authToken.js'
+import ANO_CTO from "../models/ano_ctoSchema.js";
+import Cadet from "../models/cadetSchema.js";
+import Probationer from "../models/probationUser.js";
+import bcrypt from "bcrypt";
+import { generateAccessToken, generateRefreshToken } from "../utils/authToken.js";
 
 export default async function loginController(req, res) {
     const { email, password } = req.body
@@ -42,6 +40,7 @@ export default async function loginController(req, res) {
             })
 
             const additionalInfo = {
+                id: ano_cto._id,
                 name: ano_cto.name,
                 mobileNumber: ano_cto.mobileNumber,
                 email: ano_cto.email,
@@ -89,6 +88,7 @@ export default async function loginController(req, res) {
             })
 
             const additionalInfo = {
+                id: cadet._id,
                 name: cadet.name,
                 mobileNumber: cadet.mobileNumber,
                 email: cadet.email,
@@ -139,6 +139,7 @@ export default async function loginController(req, res) {
             })
 
             const additionalInfo = {
+                id: probationer._id,
                 name: probationer.name,
                 mobileNumber: probationer.mobileNumber,
                 email: probationer.email, nccWing: probationer.nccWing,
