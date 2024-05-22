@@ -3,53 +3,20 @@ import * as XLSX from "xlsx";
 import Navbar from "../../components/navbar/Navbar";
 import PieChart from "../../components/pieChart/PieChart";
 import Table from "../../components/table/Table";
-import useAuth from "../../hooks/useAuth";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useGetEnrolledCadets from "../../hooks/useGetEnrolledCadets";
 import { saveAs } from "file-saver";
-import { useEffect, useState } from "react";
 
 export default function EnrolledCadets() {
-    const axiosPrivate = useAxiosPrivate()
-    const { auth } = useAuth({})
-    const [enrolledCadets, setEnrolledCadets] = useState([])
-    const [hasErrorFetchingEnrolledCadets, setHasErrorFetchingEnrolledCadets] = useState(false)
-    const [hasErrorFetchingEnrolledCadetsMessage, setHasErrorFetchingEnrolledCadetsMessage] = useState('')
 
-    const [academicYearAnalyticalData, setAcademicYearAnalyticalData] = useState([])
-    const [genderAnalyticalData, setGenderAnalyticalData] = useState([])
-    const [wingAnalyticalData, setWingAnalyticalData] = useState([])
+    const {
+        enrolledCadets,
+        academicYearAnalyticalData,
+        genderAnalyticalData,
+        wingAnalyticalData,
+        hasErrorFetchingEnrolledCadets,
+        hasErrorFetchingEnrolledCadetsMessage
+    } = useGetEnrolledCadets()
 
-    useEffect(() => {
-        const getEnrolledCadets = async () => {
-            try {
-                const response = await axiosPrivate.get('/enrolled/cadets', {
-                    headers: {
-                        Authorization: `BEARER ${auth.accessToken}`
-                    },
-                    withCredentials: true
-                })
-                if (!response) {
-                    setHasErrorFetchingEnrolledCadets(true)
-                    return
-                }
-
-                if (response.data.success) {
-                    setEnrolledCadets(response.data.users)
-                    setAcademicYearAnalyticalData(response.data.academicYearAnalyticalData)
-                    setGenderAnalyticalData(response.data.genderAnalyticalData)
-                    setWingAnalyticalData(response.data.wingAnalyticalData)
-                } else {
-                    setHasErrorFetchingEnrolledCadets(true)
-                    setHasErrorFetchingEnrolledCadetsMessage(response.data.message)
-                }
-
-            } catch (err) {
-                setHasErrorFetchingEnrolledCadets(true)
-                setHasErrorFetchingEnrolledCadetsMessage(err)
-            }
-        }
-        getEnrolledCadets()
-    }, [])
 
     const exportData = () => {
         const data = enrolledCadets.map((cadet, index) => {
