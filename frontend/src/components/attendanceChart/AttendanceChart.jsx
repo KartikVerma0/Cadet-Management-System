@@ -1,4 +1,7 @@
-import { Bar } from 'react-chartjs-2'
+import "./AttendanceChart.css";
+import PropTypes from "prop-types";
+import { Bar } from "react-chartjs-2";
+
 import {
     Chart as ChartJS,
     CategoryScale, LinearScale,
@@ -6,15 +9,19 @@ import {
     Tooltip, Legend
 } from 'chart.js'
 
-import './AttendanceChart.css'
 
 ChartJS.register(
     CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend
 )
 
-export default function AttendanceChart() {
+export default function AttendanceChart({ attendedEventsArray, totalEventsArray }) {
 
-    const data = [90, 50, 75, 95, 65, 80, 45, 70, 90, 73, 95, 85]
+    const data = []
+    for (let month = 0; month < 12; month++) {
+        if (totalEventsArray[month] > 0) {
+            data[month] = (attendedEventsArray[month] / totalEventsArray[month]) * 100
+        }
+    }
     const backgroundColor = () => {
         return data.map((attendancePercentage) => {
             if (attendancePercentage >= 75 && attendancePercentage <= 100) {
@@ -48,4 +55,9 @@ export default function AttendanceChart() {
             <Bar data={dataSet}></Bar>
         </div>
     )
+}
+
+AttendanceChart.propTypes = {
+    attendedEventsArray: PropTypes.array,
+    totalEventsArray: PropTypes.array
 }
