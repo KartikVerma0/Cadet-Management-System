@@ -1,14 +1,14 @@
-import PropTypes from 'prop-types';
-import "./Navbar.css"
-import { Link, useNavigate } from 'react-router-dom';
+import "./Navbar.css";
+import PropTypes from "prop-types";
+import axios from "../../api/axios.js";
+import useAuth from "../../hooks/useAuth.js";
+import useSpinner from "../../hooks/useSpinner.jsx";
+import { Link, useNavigate } from "react-router-dom";
+import { spinner } from "../../hooks/useSpinner.jsx";
 
 //spinner component related imports
-import { spinner } from '../../hooks/useSpinner.jsx'
-import useSpinner from '../../hooks/useSpinner.jsx'
 
-import axios from '../../api/axios.js'
 
-import useAuth from '../../hooks/useAuth.js';
 
 export default function Navbar({ loginType }) {
 
@@ -25,11 +25,11 @@ export default function Navbar({ loginType }) {
     const handleLogout = async () => {
         showSpinner()
         try {
+            setAuth({})
+            navigate("/", { replace: true })
             await axios.get(`/logout/${role}`, {
                 withCredentials: true
             })
-            setAuth({})
-            navigate("/", { replace: true })
             hideSpinner()
 
         } catch (err) {
