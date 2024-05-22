@@ -32,6 +32,7 @@ export default function AuthForm({ role, authType }) {
             if (response.data.success) {
                 const accessToken = response.data.accessToken
                 const info = {
+                    id: response.data.additionalInfo.id,
                     name: response.data.additionalInfo.name,
                     mobileNumber: response.data.additionalInfo.mobileNumber,
                     email: response.data.additionalInfo.email,
