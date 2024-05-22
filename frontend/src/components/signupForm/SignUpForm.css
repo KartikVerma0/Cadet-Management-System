@@ -71,6 +71,10 @@
     font-family: inherit;
 }
 
+.SignUpForm form input+input {
+    margin-top: 1rem;
+}
+
 .SignUpForm form textarea {
     border: 0;
     border-radius: 5px;
