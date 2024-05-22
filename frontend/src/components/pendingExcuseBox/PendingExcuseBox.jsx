@@ -1,15 +1,15 @@
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
-import { useState } from 'react'
-import useAxiosPrivate from '../../hooks/useAxiosPrivate.js';
-import MessageModal from '../messageModal/MessageModal';
+import "./PendingExcuseBox.css";
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
+import MessageModal from "../messageModal/MessageModal";
+import PropTypes from "prop-types";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
+import useSpinner from "../../hooks/useSpinner.jsx";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { spinner } from "../../hooks/useSpinner.jsx";
 
 //spinner component related imports
-import { spinner } from '../../hooks/useSpinner.jsx'
-import useSpinner from '../../hooks/useSpinner.jsx'
-import './PendingExcuseBox.css'
 
 export default function PendingExcuseBox({ excuseId, eventName, eventDate, excuseDescription, excuseBy, proofs, position, isRejected, isPending }) {
     const axiosPrivate = useAxiosPrivate()
@@ -40,9 +40,9 @@ export default function PendingExcuseBox({ excuseId, eventName, eventDate, excus
         let result = undefined;
         try {
             if (response === true) {
-                result = await axiosPrivate.post(`/excuse/approve`, data)
+                result = await axiosPrivate.put(`/excuse/approve`, data)
             } else if (response === false) {
-                result = await axiosPrivate.post(`/excuse/reject`, data)
+                result = await axiosPrivate.put(`/excuse/reject`, data)
             }
             if (result.data.success) {
                 setHasError(false)
@@ -62,7 +62,6 @@ export default function PendingExcuseBox({ excuseId, eventName, eventDate, excus
             hideSpinner()
             console.error(err.message)
         }
-
     }
 
     return (
