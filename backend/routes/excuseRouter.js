@@ -1,8 +1,8 @@
-import express from 'express'
-import permissionsMapping from '../config/permissionsMapping.js'
-import verifyPermissions from '../middleware/verifyPermissions.js'
-import Excuse from '../models/excuse.js'
-import EventResponse from '../models/eventResponse.js'
+import EventResponse from "../models/eventResponse.js";
+import Excuse from "../models/excuse.js";
+import express from "express";
+import permissionsMapping from "../config/permissionsMapping.js";
+import verifyPermissions from "../middleware/verifyPermissions.js";
 
 const Router = express.Router()
 
@@ -33,7 +33,7 @@ Router.get("/pending", async (req, res) => {
 })
 
 
-Router.post("/approve", async (req, res) => {
+Router.put("/approve", async (req, res) => {
     const { excuseId } = req.body
 
     let approvedExcuses = undefined;
@@ -68,7 +68,7 @@ Router.post("/approve", async (req, res) => {
     return res.json({ success: false, message: "No excuse found" }).status(404)
 })
 
-Router.post("/reject", async (req, res) => {
+Router.put("/reject", async (req, res) => {
     const { excuseId } = req.body
 
     let rejectedExcuses = undefined;
