@@ -1,0 +1,53 @@
+.MarkAttendanceCard {
+    margin-inline: 3rem;
+    display: flex;
+    padding: 1rem 2rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.MarkAttendanceCard .title {
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 0.35rem;
+}
+
+.MarkAttendanceCard .enrollmentNumber {
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: #858585;
+    margin-bottom: 0.35rem;
+}
+
+.MarkAttendanceCard .nccWing {
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.MarkAttendanceCard .actions>* {
+    width: 1.75rem;
+    aspect-ratio: 1;
+    margin-right: 0.5rem;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 1.25rem;
+}
+
+.MarkAttendanceCard .actions button:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--green);
+}
+
+.MarkAttendanceCard .errorMessage {
+    margin-inline: 0 !important;
+    margin-top: 1rem;
+    color: var(--red);
+    font-size: 0.85rem;
+    text-decoration: underline wavy 2px var(--red);
+}
