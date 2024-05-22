@@ -9,6 +9,7 @@ import EventsPage from "./pages/eventsPage/EventsPage";
 import FourOFourPage from "./pages/404Page/FourOFourPage";
 import IndexPage from "./pages/indexPage/IndexPage";
 import LoginPage from "./pages/loginPage/LoginPage";
+import MarkAttendancePage from "./pages/markAttendancePage/MarkAttendancePage";
 import NotificationsPage from "./pages/notificationsPage/NotificationsPage";
 import PendingAccountApprovalPage from "./pages/pendingAccountApprovalPage/PendingAccountApprovalPage";
 import PendingExcusesPage from "./pages/pendingExcusesPage/PendingExcusesPage";
@@ -38,7 +39,6 @@ function App() {
         <Route path="/signup" element={<SignUpRouterPage />} />
         <Route path="/signup/:role" element={<SignUpPage />} />
         <Route path="/notApproved" element={<PendingAccountApprovalPage />} />
-        {/* if logged in then show dashboard */}
         <Route element={auth.accountApproved ? <Outlet /> : <Navigate to={'/notApproved'} replace />} >
           <Route path="/dashboard" element={<Dashboard />} />
           {auth.accessToken && auth.permissions.includes(permissionsMapping.canSeePollResponses) && <Route path="/responses/polls/:dataId" element={<ResponsesListPoll />} />}
@@ -51,6 +51,8 @@ function App() {
             auth.permissions.includes(permissionsMapping.canAuthorizeWingSenior) ||
             auth.permissions.includes(permissionsMapping.canAuthorizeProbationSenior)
           ) && <Route path="/authorize" element={<AuthorizeCadetsPage />} />}
+          {auth.accessToken && auth.permissions.includes(permissionsMapping.canMarkCadetAttendance) && <Route path="/attendance/cadets" element={<MarkAttendancePage group="cadet" />} />}
+          {auth.accessToken && auth.permissions.includes(permissionsMapping.canMarkProbationerAttendance) && <Route path="/attendance/probation" element={<MarkAttendancePage group="probation" />} />}
           {auth.accessToken && <Route path="/events" element={<EventsPage />} />}
           {auth.accessToken && <Route path="/polls" element={<PollsPage />} />}
           {auth.accessToken && <Route path="/notifications" element={<NotificationsPage />} />}
