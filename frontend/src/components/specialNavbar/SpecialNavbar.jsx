@@ -35,7 +35,7 @@ export default function SpecialNavbar() {
 
     return (
         <>
-            {permissions.length > 0 && (
+            {auth.role !== "PROBATION" && permissions.length > 0 && (
                 <>
                     <section className="SpecialNavbar">
                         {renderButton(permissionsMapping.canCreateEvent, "Create an Event", "Event")}
