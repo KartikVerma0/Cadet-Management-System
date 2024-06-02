@@ -50,6 +50,7 @@ export default function SpecialNavbar() {
                             <Link to="/authorize">Authorize Cadets</Link>
                         ) : null}
                         {renderLink(permissionsMapping.canApproveCadetAccounts, "Approve Cadet Account", "/approveAccounts")}
+                        {renderLink(permissionsMapping.canSeeCadetDetails, "Cadet Details", "/cadets")}
                     </section>
                     {selectedButton !== "" && <Model closeButtonHandler={setSelectedButton} topic={selectedButton} />}
                 </>
