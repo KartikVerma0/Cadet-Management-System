@@ -23,6 +23,7 @@ const permissionsMapping = {
     canAuthorizeProbationSenior: 311619,
     canDemoteWingSenior: 342319,
     canDemoteProbationSenior: 341619,
-    canApproveCadetAccounts: 3131
+    canApproveCadetAccounts: 3131,
+    canSeeCadetDetails: 31934
 }
 export default permissionsMapping
