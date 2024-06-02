@@ -39,7 +39,7 @@ const MarkAttendancePage = ({ group }) => {
     })
 
     const handleStateAfterAttendance = (cadetInfo) => {
-        cadetsNotMarkedPresent.filter((cadet) => {
+        cadetsNotMarkedPresent = cadetsNotMarkedPresent.filter((cadet) => {
             return cadet._id !== cadetInfo._id
         })
 
