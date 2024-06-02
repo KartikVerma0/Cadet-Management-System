@@ -1,11 +1,16 @@
 import Cadet from "../models/cadetSchema.js";
+import Probationer from "../models/probationUser.js";
 
 export default async function getCadetsListUsingNameFilter(req, res) {
-    const { filter } = req.query
+    const { filter, group = "Cadet" } = req.query
     const filterRegEx = new RegExp(filter, 'i')
     let cadets = undefined;
     try {
-        cadets = await Cadet.find({ name: { $regex: filterRegEx } })
+        if (group === "Cadet") {
+            cadets = await Cadet.find({ name: { $regex: filterRegEx } })
+        } else if (group === "Probationer") {
+            cadets = await Probationer.find({ name: { $regex: filterRegEx } })
+        }
     } catch (err) {
         return res.json({ success: false, message: "Server Error" }).status(500)
     }
