@@ -139,11 +139,7 @@ export default function Box({ info, section, showResponseLink = true, showMarkAt
         };
         let result = undefined;
         try {
-            if (section === "polls") {
-                result = await axiosPrivate.post(`/response/${section}`, data)
-            } else if (section === "events") {
-                result = await axiosPrivate.post(`/response/${section}`, data)
-            }
+            result = await axiosPrivate.post(`/response/${section}`, data)
             if (result.data.success) {
                 setHasError(false)
                 setHasResponded(true)
