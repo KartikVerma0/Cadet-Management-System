@@ -2,6 +2,7 @@ import "./App.css";
 import AccountPage from "./pages/accountPage/AccountPage";
 import ApproveCadetAccountPage from "./pages/approveCadetAccountPage/ApproveCadetAccountPage";
 import AuthorizeCadetsPage from "./pages/authorizeCadetsPage/AuthorizeCadetsPage";
+import CadetDetailsPage from "./pages/cadetDetailsPage/CadetDetailsPage";
 import CampDetailsPage from "./pages/campDetailsPage/CampDetailsPage";
 import Dashboard from "./pages/dashboard/Dashboard";
 import EnrolledCadets from "./pages/enrolledCadets/EnrolledCadets";
@@ -53,6 +54,7 @@ function App() {
           ) && <Route path="/authorize" element={<AuthorizeCadetsPage />} />}
           {auth.accessToken && auth.permissions.includes(permissionsMapping.canMarkCadetAttendance) && <Route path="/attendance/cadets" element={<MarkAttendancePage group="cadet" />} />}
           {auth.accessToken && auth.permissions.includes(permissionsMapping.canMarkProbationerAttendance) && <Route path="/attendance/probation" element={<MarkAttendancePage group="probation" />} />}
+          {auth.accessToken && auth.permissions.includes(permissionsMapping.canSeeCadetDetails) && <Route path="/cadets" element={<CadetDetailsPage />} />}
           {auth.accessToken && <Route path="/events" element={<EventsPage />} />}
           {auth.accessToken && <Route path="/polls" element={<PollsPage />} />}
           {auth.accessToken && <Route path="/notifications" element={<NotificationsPage />} />}
